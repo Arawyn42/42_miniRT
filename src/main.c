@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:38:38 by nsalles           #+#    #+#             */
-/*   Updated: 2024/02/22 12:08:55 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/01 21:11:08 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int main(int ac, char **av)
 	mem->data = set_data(av[1]);
 	mlx_hook(mem->win->window, 17, 0L, &exit_handling, mem);
 	mlx_hook(mem->win->window, 2, 1L << 0, &user_input, mem);
-	apply_ambient_lightning(mem->data);
 	rendering(mem);
 	mlx_put_image_to_window(mem->win->mlx, mem->win->window, mem->img->image, 0, 0);
 	mlx_loop(mem->win->mlx);

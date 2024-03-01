@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/02/22 12:05:35 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 00:15:06 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@
 
 # define SCREEN_H 800
 # define SCREEN_W 1500
-# define VIEWPORT_DIST 500
-# define MAX_RAY_DEPTH 3
-# define PRECISION 0.001
+# define VIEWPORT_DIST 1
+# define DEPTH 5
+# define PRECISION 0.01
+# ifndef M_PI
+#  define M_PI 3.14159265358
+# endif
 
 typedef struct s_window
 {
@@ -79,7 +82,7 @@ typedef struct s_viewport
 typedef struct s_light
 {
     t_point	*pos;
-    double	brightness;
+    double	ratio;
     int		color;
 }	t_light;
 
@@ -114,6 +117,7 @@ typedef struct s_obj
 	t_plane			*pl;
 	t_sphere		*sp;
 	t_cylinder		*cy;
+	t_light			*light;
 	struct s_obj	*next;
 }	t_obj;
 
@@ -127,7 +131,6 @@ typedef struct s_ray
 {
 	t_point	origin;
 	t_point	dir;
-	int		depth;
 }	t_ray;
 
 typedef struct s_data
@@ -213,7 +216,7 @@ void			destroy_point(t_point *point);
 t_camera		*set_camera(t_point *pos, t_point *direction, int fov);
 void			destroy_camera(t_camera *camera);
 t_viewport		init_viewport(double fov, double distance);
-t_alight		*set_alight(double brightness, int color);
+t_alight		*set_alight(double ratio, int color);
 void			destroy_alight(t_alight *alight);
 t_light			*set_light(t_point *pos, double ratio, int color);
 void			destroy_light(t_light *light);
@@ -243,29 +246,30 @@ int				exit_handling(t_minirt *data);
 int				user_input(int keycode, t_minirt *data);
 
 /* RAYTRACING */
-// void		render(t_minirt *mem);
-// void		raytracing(t_data *data, t_image *img);
-// double		detect_shapes(t_data *data, t_image *img, t_point *ray, t_point *pixel);
-// double	    sd_sphere(t_point vect, double radius);
 t_point			get_obj_normal(t_obj *obj, t_point intersection, t_point dir);
 t_point			set_ray(t_point base[3], double x, double y, double z);
 t_point			intersection_point(t_ray ray, double distance);
 t_closest_obj	closest_intersection(t_ray ray, t_obj *objs);
 t_color			ray_trace(t_data *data, t_ray ray, int depth);
 
-/* LIGHTS */
-t_color			get_obj_color(t_obj *obj);
+/* AMBIENT LIGHTNING */
+t_point			ambient_lightning_intensity(t_data *data);
+
+/* LIGHT */
 t_point			light_intensity(t_data *data);
+
+/* LIGHT EFFECTS */
+t_color			get_obj_color(t_obj *obj);
 t_point			reflection_dir(t_point normal, t_point dir);
 t_color			reflection_color(t_color color, t_color reflective, \
 		double ratio);
-t_color			apply_light(t_data *data, t_closest_obj closest);
+t_color			apply_light(t_data *data, t_point normal, \
+		t_closest_obj closest, t_ray ray);
+
 
 /* RENDERING */
 void			rendering(t_minirt *mem);
 
-/* AMBIENT LIGHTNING */
-void			apply_ambient_lightning(t_data *data);
 
 /* DRAWING */
 void			draw_pixels(t_image *img, int x, int y, int color);

@@ -6,7 +6,7 @@
 #    By: drenassi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 14:42:11 by drenassi          #+#    #+#              #
-#    Updated: 2024/02/22 12:10:48 by drenassi         ###   ########.fr        #
+#    Updated: 2024/03/01 23:12:11 by drenassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,13 +79,11 @@ SRCS			= utils/double/ft_atod.c \
 				  init/objects_list.c \
 				  init/init_objects.c \
 				  input/input_handling.c \
-				  computations/raytracing.c \
-				  computations/ray.c \
-				  computations/ambient_lightning.c \
-				  computations/light.c \
-				  computations/reflection.c \
-				  computations/intersections.c \
-				  computations/sdf.c \
+				  raytracing/ray.c \
+				  raytracing/ambient_lightning.c \
+				  raytracing/light.c \
+				  raytracing/reflection.c \
+				  raytracing/intersections.c \
 				  rendering/draw_pixels.c \
 				  rendering/loading_display.c \
 				  rendering/rendering.c

@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:57:48 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/21 17:20:07 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/01 21:22:47 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	print_data(t_data data)
 	printf("|    Light\t|\t%.1f\t%.1f\t%.1f\t|\t\t\t|", data.light->pos->x, \
 		data.light->pos->y, data.light->pos->z);
 	printf("    #%06x\t|\t| ", data.light->color);
-	printf("   Br.: %.1f\t| \n", data.light->brightness);
+	printf("   Br.: %.1f\t| \n", data.light->ratio);
 	print_separator();
 	if (data.planes)
 		print_plane_data(data.planes);

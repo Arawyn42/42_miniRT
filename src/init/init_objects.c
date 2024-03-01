@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:52:51 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/22 10:53:08 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/01 23:09:33 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,28 @@ static void	init_objs_cy(t_data *data)
 	}
 }
 
+static void	init_objs_light(t_data *data)
+{
+	t_obj	*light_obj;
+	t_obj	*ptr;
+
+	ptr = data->objs;
+	while (ptr->next)
+		ptr = ptr->next;
+	light_obj = ft_calloc(1, sizeof(t_obj));
+	if (!light_obj)
+	{
+		print_error("Fatal error: obj struct initialization: ");
+		print_error("Out of memory\n");
+		return ;
+	}
+	light_obj->pl = NULL;
+	light_obj->sp = NULL;
+	light_obj->cy = NULL;
+	light_obj->light = data->objs->light;
+	light_obj->next = NULL;
+}
+
 /*
 *	Initializes the objects list.
 */
@@ -69,4 +91,5 @@ void	init_objs(t_data *data)
 		init_objs_sp(data);
 	if (data->cylinders)
 		init_objs_cy(data);
+	init_objs_light(data);
 }

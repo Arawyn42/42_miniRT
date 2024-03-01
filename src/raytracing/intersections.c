@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:02:56 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/22 11:35:56 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/01 23:37:52 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ double	sp_intersection(t_ray ray, t_sphere *sp)
 	double	c;
 
 	ray_to_sp = substract_vect(ray.origin, *sp->pos);
-	// printf("Intersect: %f %f %f\n", ray_to_sp.x, ray_to_sp.y, ray_to_sp.z);
 	a = vector_scalar_product(ray.dir, ray.dir);
 	b = 2 * vector_scalar_product(ray_to_sp, ray.dir);
 	c = vector_scalar_product(ray_to_sp, ray_to_sp) - sp->radius * sp->radius;

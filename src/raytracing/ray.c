@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:21:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/22 11:36:52 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/01 23:48:38 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	init_ray(t_data *data, t_ray *ray)
 {
 	ray->origin = *data->camera->pos;
 	ray->dir = *data->camera->direction;
-	ray->depth = 6;
 }
 
 /*
@@ -64,7 +63,9 @@ t_color	ray_trace(t_data *data, t_ray ray, int depth)
 		return ((t_color){0, 0, 0, 0});
 	closest_normal = get_obj_normal(closest.obj, \
 	intersection_point(ray, closest.distance), ray.dir);
-	color = apply_light(data, closest);
+	color = apply_light(data, closest_normal, closest, ray);
+	if (depth <= 0)
+		return (color);
 	ray.origin = intersection_point(ray, closest.distance);
 	ray.dir = substract_vect((t_point){0, 0, 0}, ray.dir);
 	ray.dir = reflection_dir(closest_normal, ray.dir);

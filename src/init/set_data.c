@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:58:35 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/20 14:04:30 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/01 23:23:50 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,17 @@ static void	set_line_data(char *line, t_data *data)
 	free_double_array(datas);
 }
 
+static void	set_data_null(t_data *data)
+{
+	data->a_light = NULL;
+	data->camera = NULL;
+	data->light = NULL;
+	data->planes = NULL;
+	data->spheres = NULL;
+	data->cylinders = NULL;
+	data->objs = NULL;
+}
+
 t_data	*set_data(char *file)
 {
 	char	*line;
@@ -72,6 +83,7 @@ t_data	*set_data(char *file)
 	t_data	*data;
 
 	data = ft_calloc(1, sizeof(t_data));
+	set_data_null(data);
 	fd = open(file, O_RDONLY, 666);
 	line = get_next_line(fd);
 	while (line)

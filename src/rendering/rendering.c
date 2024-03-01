@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:46:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/22 12:01:42 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 00:08:07 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ static void	render(t_data *data, t_image *img, t_point base[3])
 	color = (t_color){0, 0, 0, 0};
 	init_objs(data);
 	init_ray(data, &ray);
-	vp = init_viewport(data->camera->fov, 1);
+	vp = init_viewport(data->camera->fov, VIEWPORT_DIST);
 	pixel.x = -SCREEN_W / 2 - 1;
 	while (++pixel.x <= SCREEN_W / 2)
 	{
-		display_loading("Rendering:", -SCREEN_W / 2, pixel.x, SCREEN_W / 100);
 		pixel.y = -SCREEN_H / 2 - 1;
+		display_loading("Rendering:", -SCREEN_W / 2, pixel.x, SCREEN_W / 100);
 		while (++pixel.y <= SCREEN_H / 2)
 		{
 			ray.dir = set_ray(base, pixel.x * vp.w_ratio, \
-				pixel.y * vp.h_ratio, 1);
-			color = ray_trace(data, ray, ray.depth);
+				pixel.y * vp.h_ratio, VIEWPORT_DIST);
+			color = ray_trace(data, ray, DEPTH);
 			draw_pixels(img, SCREEN_W / 2 + pixel.x, SCREEN_H / 2 \
 				+ pixel.y, rgb_to_int(color.r, color.g, color.b));
 		}

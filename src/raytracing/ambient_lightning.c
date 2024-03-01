@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   viewport.c                                         :+:      :+:    :+:   */
+/*   ambient_lightning.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 11:23:08 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/02 00:14:12 by drenassi         ###   ########.fr       */
+/*   Created: 2024/02/19 16:07:33 by drenassi          #+#    #+#             */
+/*   Updated: 2024/03/01 23:25:27 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/*
-*	Initializes the viewport in function of the horizontal FOV and the
-*	distance from the camera's origin.
-*/
-t_viewport	init_viewport(double fov, double distance)
+t_point	ambient_lightning_intensity(t_data *data)
 {
-	t_viewport	vp;
+	t_point	res;
+	t_color	a_light;
 
-	vp.w = fabs(2 * distance * tan(fov * (M_PI / 180) / 2));
-	vp.w_ratio = vp.w / SCREEN_W;
-	vp.h = vp.w_ratio * SCREEN_H;
-	vp.h_ratio = vp.h / SCREEN_H;
-	return (vp);
+	if (!data->a_light)
+		return ((t_point){1, 1, 1});
+	a_light = int_to_rgb(data->a_light->color);
+	res.x = data->a_light->ratio * a_light.r / a_light.sum;
+	res.y = data->a_light->ratio * a_light.g / a_light.sum;
+	res.z = data->a_light->ratio * a_light.b / a_light.sum;
+	return (res);
 }

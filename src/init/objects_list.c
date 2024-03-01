@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objects.c                                          :+:      :+:    :+:   */
+/*   objects_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:45:13 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/22 10:45:46 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/01 23:08:47 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	destroy_one_obj(t_obj *obj)
 		destroy_sphere(&obj->sp);
 	if (obj->cy)
 		destroy_cylinder(&obj->cy);
+	if (obj->light)
+		destroy_light(obj->light);
 	free(obj);
 }
 
@@ -64,6 +66,7 @@ static t_obj	*new_obj(t_plane *pl, t_sphere *sp, t_cylinder *cy)
 	obj->pl = pl;
 	obj->sp = sp;
 	obj->cy = cy;
+	obj->light = NULL;
 	obj->next = NULL;
 	return (obj);
 }
