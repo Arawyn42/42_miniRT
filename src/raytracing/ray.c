@@ -6,15 +6,15 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:21:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/01 23:48:38 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:25:22 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
-*	Initialize the primary ray, starting from camera's position in camera's
-*	direction.
+ *	Initialize the primary ray, starting from camera's position in camera's
+ *	direction.
 */
 void	init_ray(t_data *data, t_ray *ray)
 {
@@ -23,7 +23,7 @@ void	init_ray(t_data *data, t_ray *ray)
 }
 
 /*
-*	Returns the ray intersection point coordinates from the ray's origin.
+ *	Returns the ray intersection point coordinates from the ray's origin.
 */
 t_point	intersection_point(t_ray ray, double distance)
 {
@@ -34,7 +34,7 @@ t_point	intersection_point(t_ray ray, double distance)
 }
 
 /*
-*	Returns the ray's direction and lenght.
+ *	Returns the ray's direction and lenght.
 */
 t_point	set_ray(t_point base[3], double x, double y, double z)
 {
@@ -47,9 +47,9 @@ t_point	set_ray(t_point base[3], double x, double y, double z)
 }
 
 /*
-*	Traces the primary ray. It will stop at the first intersection with
-*	an object, change the color of the intersection point, then reflect
-*	back in a recursive way.
+ *	Traces the primary ray. It will stop at the first intersection with
+ *	an object, change the color of the intersection point, then reflect
+ *	back in a recursive way.
 */
 t_color	ray_trace(t_data *data, t_ray ray, int depth)
 {
@@ -63,7 +63,7 @@ t_color	ray_trace(t_data *data, t_ray ray, int depth)
 		return ((t_color){0, 0, 0, 0});
 	closest_normal = get_obj_normal(closest.obj, \
 	intersection_point(ray, closest.distance), ray.dir);
-	color = apply_light(data, closest_normal, closest, ray);
+	color = light_effects(data, closest_normal, closest, ray);
 	if (depth <= 0)
 		return (color);
 	ray.origin = intersection_point(ray, closest.distance);

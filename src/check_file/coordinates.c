@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 20:43:26 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/18 12:16:56 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:03:32 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_coordinates(char *coord)
 	while (i < 3)
 	{
 		if (!check_double(vector[i]))
-		return (free_double_array(vector), 0);
+			return (free_double_array(vector), 0);
 		i++;
 	}
 	return (free_double_array(vector), 1);

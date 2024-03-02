@@ -6,21 +6,21 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:55:33 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/22 11:56:09 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:25:28 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
-*	Returns the direction of the reflected ray.
+ *	Returns the direction of the reflected ray.
 */
 t_point	reflection_dir(t_point normal, t_point dir)
 {
 	t_point		reflection;
 	double		scalar;
 
-	scalar = vector_scalar_product(dir, normal);
+	scalar = vect_dot(dir, normal);
 	reflection.x = 2 * scalar * normal.x - dir.x;
 	reflection.y = 2 * scalar * normal.y - dir.y;
 	reflection.z = 2 * scalar * normal.z - dir.z;
@@ -28,7 +28,7 @@ t_point	reflection_dir(t_point normal, t_point dir)
 }
 
 /*
-*	Returns the reflection color of a given color according to a reflect ratio.
+ *	Returns the reflection color of a given color according to a reflect ratio.
 */
 t_color	reflection_color(t_color color, t_color reflective, double ratio)
 {

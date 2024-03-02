@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:31:47 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/02 00:30:36 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:24:35 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	destroy_point(t_point *point)
 	if (!point)
 		return ;
 	free(point);
+	point = NULL;
 }
 
 /*

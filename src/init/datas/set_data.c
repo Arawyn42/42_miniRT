@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:58:35 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/01 23:23:50 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:43:22 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,20 @@
 
 void	destroy_data(t_data *data)
 {
-	destroy_alight(data->a_light);
-	destroy_camera(data->camera);
-	destroy_light(data->light);
-	destroy_plane(&data->planes);
-	destroy_sphere(&data->spheres);
-	destroy_cylinder(&data->cylinders);
+	if (data->a_light)
+		destroy_alight(data->a_light);
+	if (data->camera)
+		destroy_camera(data->camera);
+	if (data->light)
+		destroy_light(data->light);
+	if (data->planes)
+		destroy_plane(&data->planes);
+	if (data->spheres)
+		destroy_sphere(&data->spheres);
+	if (data->cylinders)
+		destroy_cylinder(&data->cylinders);
+	if (data->objs)
+		destroy_objs(&data->objs);
 	free(data);
 }
 

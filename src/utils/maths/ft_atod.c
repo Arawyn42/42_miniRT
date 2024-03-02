@@ -6,12 +6,15 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:46:36 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/18 12:26:57 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:30:07 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/*
+ *	Returns the length of the converted string from an integer.
+*/
 static int	ft_atoi_len(char *str)
 {
 	int	i;
@@ -26,6 +29,9 @@ static int	ft_atoi_len(char *str)
 	return (i);
 }
 
+/*
+ *	Returns the number of digits of an integer in base 10.
+*/
 static int	decimal_len(int n)
 {
 	int	i;
@@ -39,6 +45,9 @@ static int	decimal_len(int n)
 	return (i);
 }
 
+/*
+ *	Converts a characters string into a double and returns it.
+*/
 double	ft_atod(char *str)
 {
 	double	dec;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ambiant_lightning.c                                :+:      :+:    :+:   */
+/*   ambient_lightning.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 19:07:50 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/18 11:20:56 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:02:20 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_ratio(char *ratio)
 	return (1);
 }
 
-int check_ambiant_lightning(char **data)
+int	check_ambiant_lightning(char **data)
 {
 	static int	a_count = 0;
 

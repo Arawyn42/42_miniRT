@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/02 00:15:06 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:46:45 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define VIEWPORT_DIST 1
 # define DEPTH 5
 # define PRECISION 0.01
+# define SPECULAR_POWER 3
 # ifndef M_PI
 #  define M_PI 3.14159265358
 # endif
@@ -158,29 +159,30 @@ typedef struct s_values
 	int		half_screen_w;
 }	t_values;
 
-/* UTILS */
+/* STRING UTILS */
 int				ft_strcmp(const char *s1, const char *s2);
 double			ft_atod(char *str);
 int				double_array_len(char **array);
 void			free_double_array(char **array);
 int				print_error(char *msg);
 int				is_empty(char *line);
+
 /* MATHS UTILS */
-t_point			copy_vect(t_point vect);
-void			print_vect(t_point vect);
-double			get_vect_norm(t_point vect);
+double			vect_length(t_point vect);
 t_point			normalize_vect(t_point vect);
 t_point			add_vect(t_point vect1, t_point vect2);
 t_point			substract_vect(t_point vect1, t_point vect2);
 t_point			multiply_vect(t_point vect, double scalar);
-double			vector_scalar_product(t_point v1, t_point v2);
-t_point			vector_cross_product(t_point v1, t_point v2);
-double			vector_cos(t_point v1, t_point v2);
-double			vector_sin(t_point v1, t_point v2);
-t_point			rotate_vector(t_point vector, t_point axis, \
+t_point			divide_vect(t_point	v1, t_point v2);
+double			vect_dot(t_point v1, t_point v2);
+t_point			vect_cross_product(t_point v1, t_point v2);
+double			vect_cos(t_point v1, t_point v2);
+double			vect_sin(t_point v1, t_point v2);
+t_point			rotate_vect(t_point vector, t_point axis, \
 		double cos, double sin);
 void			rotate_base(t_point base[3], t_point direction);
 double			quadratic_min(double a, double b, double c, double min);
+
 /* COLORS UTILS */
 int				format_color(char *colors_str);
 void			display_loading(char *msg, int start, int pos, \
@@ -188,8 +190,6 @@ void			display_loading(char *msg, int start, int pos, \
 t_color			int_to_rgb(int color);
 int				rgb_to_int(int r, int g, int b);
 void			protect_colors(t_color *color);
-/* PRINT DATAS UTIL */
-void			print_data(t_data data);
 
 /* CHECK CONFIG FILE*/
 int				check_file(char *file);
@@ -205,11 +205,18 @@ int	        	check_plane(char **data);
 int         	check_sphere(char **data);
 int	        	check_cylinder(char **data);
 
-/* INIT STRUCTURES */
+/* WINDOW */
+t_minirt		*init_mem(void);
+int				exit_handling(t_minirt *mem);
 t_window		*get_window(void);
 void			destroy_window(t_window *win);
 t_image			*get_image(t_window *win);
 void			destroy_image(t_image *img, void *mlx);
+
+/* INPUTS */
+int				user_input(int keycode, t_minirt *data);
+
+/* PARAMETERS AND SHAPES STRUCTURES AND LISTS */
 t_point	    	*str_to_point(char *str);
 t_point			*set_point(double x, double y, double z);
 void			destroy_point(t_point *point);
@@ -229,21 +236,18 @@ void			destroy_sphere(t_sphere **sphere);
 void    		set_cylinder(t_cylinder **cylinder, t_point *pos_vect[2], \
         double rad_height[2], int color);
 void			destroy_cylinder(t_cylinder **cylinder);
+
+/* OBJECTS LIST */
 void			init_objs(t_data *data);
 void			set_objs(t_obj **objs, t_plane *pl, t_sphere *sp, \
 		t_cylinder *cy);
 void			destroy_objs(t_obj **obj);
 void			init_ray(t_data *data, t_ray *ray);
 
+/* DATAS STRUCTURE */
 char			**create_data_array(char *line);
 t_data			*set_data(char *file);
 void			destroy_data(t_data *data);
-
-/* EXIT */
-int				exit_handling(t_minirt *data);
-
-/* INPUTS */
-int				user_input(int keycode, t_minirt *data);
 
 /* RAYTRACING */
 t_point			get_obj_normal(t_obj *obj, t_point intersection, t_point dir);
@@ -263,18 +267,11 @@ t_color			get_obj_color(t_obj *obj);
 t_point			reflection_dir(t_point normal, t_point dir);
 t_color			reflection_color(t_color color, t_color reflective, \
 		double ratio);
-t_color			apply_light(t_data *data, t_point normal, \
+t_color			light_effects(t_data *data, t_point normal, \
 		t_closest_obj closest, t_ray ray);
-
 
 /* RENDERING */
 void			rendering(t_minirt *mem);
-
-
-/* DRAWING */
 void			draw_pixels(t_image *img, int x, int y, int color);
-
-
-/* TEST BROUILLON 2 */
 
 #endif

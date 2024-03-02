@@ -6,7 +6,7 @@
 #    By: drenassi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 14:42:11 by drenassi          #+#    #+#              #
-#    Updated: 2024/03/01 23:12:11 by drenassi         ###   ########.fr        #
+#    Updated: 2024/03/02 14:56:09 by drenassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,18 +41,18 @@ LIBFT			= libs/libft.a
 INCLUDE_PATH	= includes
 
 SRCS_PATH		= src
-SRCS			= utils/double/ft_atod.c \
-				  utils/str/ft_strcmp.c \
+
+SRCS			= utils/str/ft_strcmp.c \
 				  utils/str/double_array_len.c \
 				  utils/str/free_double_array.c \
 				  utils/str/is_empty.c \
 				  utils/str/print_error.c \
+				  utils/maths/ft_atod.c \
 				  utils/maths/vectors.c \
 				  utils/maths/vectors2.c \
 				  utils/maths/intersections.c \
 				  utils/maths/rotations.c \
-				  utils/colors.c \
-				  utils/print_data.c \
+				  utils/maths/colors.c \
 				  check_file/check_file.c \
 				  check_file/check_double.c \
 				  check_file/rgb.c \
@@ -64,26 +64,28 @@ SRCS			= utils/double/ft_atod.c \
 				  check_file/plane.c \
 				  check_file/sphere.c \
 				  check_file/cylinder.c \
-				  init/create_data_array.c \
-				  init/set_data.c \
-				  init/window.c \
-				  init/image.c \
-				  init/ambient_light.c \
-				  init/camera.c \
-				  init/viewport.c \
-				  init/light.c \
-				  init/point.c \
-				  init/sphere.c \
-				  init/cylinder.c \
-				  init/plane.c \
-				  init/objects_list.c \
-				  init/init_objects.c \
-				  input/input_handling.c \
+				  init/window/mem.c \
+				  init/window/window.c \
+				  init/window/image.c \
+				  init/window/input_handling.c \
+				  init/window/viewport.c \
+				  init/datas/create_data_array.c \
+				  init/datas/set_data.c \
+				  init/datas/objects_list.c \
+				  init/datas/init_objects.c \
+				  init/parameters/ambient_light.c \
+				  init/parameters/camera.c \
+				  init/parameters/light.c \
+				  init/parameters/point.c \
+				  init/parameters/sphere.c \
+				  init/parameters/cylinder.c \
+				  init/parameters/plane.c \
 				  raytracing/ray.c \
-				  raytracing/ambient_lightning.c \
-				  raytracing/light.c \
-				  raytracing/reflection.c \
 				  raytracing/intersections.c \
+				  light_effects/ambient_lightning.c \
+				  light_effects/light.c \
+				  light_effects/light_effects.c \
+				  light_effects/reflection.c \
 				  rendering/draw_pixels.c \
 				  rendering/loading_display.c \
 				  rendering/rendering.c

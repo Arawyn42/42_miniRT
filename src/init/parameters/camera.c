@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:29:17 by nsalles           #+#    #+#             */
-/*   Updated: 2024/02/18 12:58:26 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:35:30 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ void	destroy_camera(t_camera *camera)
 {
 	if (!camera)
 		return ;
-	destroy_point(camera->direction);
-	destroy_point(camera->pos);
+	if (camera->pos)
+		destroy_point(camera->pos);
+	if (camera->direction)
+		destroy_point(camera->direction);
 	free(camera);
+	camera = NULL;
 }
 
 /*

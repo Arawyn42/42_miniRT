@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:54:10 by nsalles           #+#    #+#             */
-/*   Updated: 2024/02/20 13:59:48 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:35:05 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ static void	destroy_one_cylinder(t_cylinder *cylinder)
 {
 	if (!cylinder)
 		return ;
-	destroy_point(cylinder->pos);
-	destroy_point(cylinder->vector);
+	if (cylinder->pos)
+		destroy_point(cylinder->pos);
+	if (cylinder->vector)
+		destroy_point(cylinder->vector);
 	free(cylinder);
+	cylinder = NULL;
 }
 
 void	destroy_cylinder(t_cylinder **cylinder)
@@ -43,7 +46,8 @@ void	destroy_cylinder(t_cylinder **cylinder)
 /*
  *	Create, set the values and return cylinder struct.
 */
-static t_cylinder	*new_cylinder(t_point *pos_vect[2], double rad_height[2], int clr)
+static t_cylinder	*new_cylinder(t_point *pos_vect[2], \
+	double rad_height[2], int clr)
 {
 	t_cylinder	*cylinder;
 

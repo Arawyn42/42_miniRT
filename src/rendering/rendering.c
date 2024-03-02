@@ -6,12 +6,15 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:46:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/02 00:08:07 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:06:06 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/*
+ *	Draws the image pixel by pixel after applying raytracing and light effects.
+*/
 static void	render(t_data *data, t_image *img, t_point base[3])
 {
 	t_ray		ray;
@@ -39,6 +42,9 @@ static void	render(t_data *data, t_image *img, t_point base[3])
 	}
 }
 
+/*
+ *	Calls the main rendering function and prints the resulting image.
+*/
 void	rendering(t_minirt *mem)
 {
 	t_point		base[3];
@@ -50,5 +56,5 @@ void	rendering(t_minirt *mem)
 	ft_bzero(mem->img->addr, 4 * SCREEN_H * SCREEN_W);
 	render(mem->data, mem->img, base);
 	mlx_put_image_to_window(mem->win->mlx, mem->win->window,
-		mem->img->image, 0, 0);	
+		mem->img->image, 0, 0);
 }

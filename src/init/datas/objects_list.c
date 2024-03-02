@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:45:13 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/01 23:08:47 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:47:02 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,8 @@ static void	destroy_one_obj(t_obj *obj)
 {
 	if (!obj)
 		return ;
-	if (obj->pl)
-		destroy_plane(&obj->pl);
-	if (obj->sp)
-		destroy_sphere(&obj->sp);
-	if (obj->cy)
-		destroy_cylinder(&obj->cy);
-	if (obj->light)
-		destroy_light(obj->light);
 	free(obj);
+	obj = NULL;
 }
 
 /*

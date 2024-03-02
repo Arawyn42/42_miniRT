@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:50:50 by nsalles           #+#    #+#             */
-/*   Updated: 2024/02/20 14:01:50 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:33:28 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	destroy_one_sphere(t_sphere *sphere)
 		return ;
 	destroy_point(sphere->pos);
 	free(sphere);
+	sphere = NULL;
 }
 
 void	destroy_sphere(t_sphere **sphere)

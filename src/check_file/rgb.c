@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:08:42 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/16 21:15:45 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:03:46 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_rgb(char *param)
 	if (commas != 2)
 		return (0);
 	i = 0;
-	while(i < (int) ft_strlen(param) && param[i] && param[i] != ' ')
+	while (i < (int) ft_strlen(param) && param[i] && param[i] != ' ')
 	{
 		j = 0;
 		while (param[j] && param[j] != ',')

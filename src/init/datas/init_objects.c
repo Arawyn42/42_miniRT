@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:52:51 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/01 23:09:33 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:17:13 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,17 @@ static void	init_objs_cy(t_data *data)
 	}
 }
 
+/*
+ *	Creates light object and adds it to the objects list.
+*/
 static void	init_objs_light(t_data *data)
 {
 	t_obj	*light_obj;
-	t_obj	*ptr;
+	t_obj	*last;
 
-	ptr = data->objs;
-	while (ptr->next)
-		ptr = ptr->next;
+	last = data->objs;
+	while (last->next)
+		last = last->next;
 	light_obj = ft_calloc(1, sizeof(t_obj));
 	if (!light_obj)
 	{
@@ -75,8 +78,9 @@ static void	init_objs_light(t_data *data)
 	light_obj->pl = NULL;
 	light_obj->sp = NULL;
 	light_obj->cy = NULL;
-	light_obj->light = data->objs->light;
+	light_obj->light = data->light;
 	light_obj->next = NULL;
+	last->next = light_obj;
 }
 
 /*
@@ -91,5 +95,6 @@ void	init_objs(t_data *data)
 		init_objs_sp(data);
 	if (data->cylinders)
 		init_objs_cy(data);
-	init_objs_light(data);
+	if (data->light)
+		init_objs_light(data);
 }

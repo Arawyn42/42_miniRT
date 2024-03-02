@@ -6,31 +6,31 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:02:56 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/01 23:37:52 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:08:33 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
-*	Returns the distance from the ray's origin to the intersection point
-*	with a plane.
+ *	Returns the distance from the ray's origin to the intersection point
+ *	with a plane.
 */
 double	pl_intersection(t_ray ray, t_plane *pl)
 {
 	double		scalar;
 	t_point		ray_to_pl;
 
-	scalar = vector_scalar_product(ray.dir, *pl->normal);
+	scalar = vect_dot(ray.dir, *pl->normal);
 	if (fabs(scalar) < PRECISION)
 		return (INFINITY);
 	ray_to_pl = substract_vect(*pl->pos, ray.origin);
-	return (vector_scalar_product(*pl->normal, ray_to_pl) / scalar);
+	return (vect_dot(*pl->normal, ray_to_pl) / scalar);
 }
 
 /*
-*	Returns the distance from the ray's origin to the intersection point
-*	with a sphere.
+ *	Returns the distance from the ray's origin to the intersection point
+ *	with a sphere.
 */
 double	sp_intersection(t_ray ray, t_sphere *sp)
 {
@@ -40,15 +40,15 @@ double	sp_intersection(t_ray ray, t_sphere *sp)
 	double	c;
 
 	ray_to_sp = substract_vect(ray.origin, *sp->pos);
-	a = vector_scalar_product(ray.dir, ray.dir);
-	b = 2 * vector_scalar_product(ray_to_sp, ray.dir);
-	c = vector_scalar_product(ray_to_sp, ray_to_sp) - sp->radius * sp->radius;
+	a = vect_dot(ray.dir, ray.dir);
+	b = 2 * vect_dot(ray_to_sp, ray.dir);
+	c = vect_dot(ray_to_sp, ray_to_sp) - sp->radius * sp->radius;
 	return (quadratic_min(a, b, c, PRECISION));
 }
 
 /*
-*	Returns the distance from the ray's origin to the intersection point
-*	with an object.
+ *	Returns the distance from the ray's origin to the intersection point
+ *	with an object.
 */
 double	obj_intersection(t_ray ray, t_obj *obj)
 {
@@ -65,7 +65,7 @@ double	obj_intersection(t_ray ray, t_obj *obj)
 }
 
 /*
-*	Returns the closest object from ray's origin and its distance from it.
+ *	Returns the closest object from ray's origin and its distance from it.
 */
 t_closest_obj	closest_intersection(t_ray ray, t_obj *objs)
 {
@@ -94,8 +94,8 @@ t_closest_obj	closest_intersection(t_ray ray, t_obj *objs)
 }
 
 /*
-*	Returns the normal vector resulting from the intersection of a ray
-*	and an object, starting from the intersection point.
+ *	Returns the normal vector resulting from the intersection of a ray
+ *	and an object, starting from the intersection point.
 */
 t_point	get_obj_normal(t_obj *obj, t_point intersection, t_point dir)
 {
@@ -104,9 +104,9 @@ t_point	get_obj_normal(t_obj *obj, t_point intersection, t_point dir)
 	if (obj->pl)
 	{
 		normal = normalize_vect(*obj->pl->normal);
-		if (vector_scalar_product(normal, dir) > 0)
+		if (vect_dot(normal, dir) > 0)
 		{
-			normal = substract_vect((t_point){0,0,0}, normal);
+			normal = substract_vect((t_point){0, 0, 0}, normal);
 			*obj->pl->normal = normal;
 		}
 	}

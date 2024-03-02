@@ -6,14 +6,14 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:58:06 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/22 11:58:26 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:25:38 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
-*	Draws a pixel in a given color at (x, y) coordinates.
+ *	Draws a pixel in a given color at (x, y) coordinates.
 */
 void	draw_pixels(t_image *img, int x, int y, int color)
 {

@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 22:01:17 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/16 22:14:57 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:03:10 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	check_identifier(char *line)
 {
 	char	**data;
 
-	
 	data = create_data_array(line);
 	if (!ft_strcmp(data[0], "A"))
 		return (free_double_array(data), 1);

@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 23:42:59 by nsalles           #+#    #+#             */
-/*   Updated: 2024/02/18 13:10:00 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:04:44 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_image	*get_image(t_window *win)
 		print_error("Fatal error: image initialization failed\n");
 		return (destroy_image(img, win->mlx), NULL);
 	}
-	img->addr = mlx_get_data_addr(img->image, &img->bits_per_pixel,\
+	img->addr = mlx_get_data_addr(img->image, &img->bits_per_pixel, \
 		&img->line_length, &img->endian);
 	if (!img->addr)
 	{

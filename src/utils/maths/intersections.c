@@ -6,15 +6,15 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:41:55 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/22 11:42:11 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:30:37 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
-*	Returns the minimum solution of the quadratic equation, or min if both
-*	values are smaller.
+ *	Returns the minimum solution of the quadratic equation, or min if both
+ *	values are smaller.
 */
 double	quadratic_min(double a, double b, double c, double min)
 {

@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:47:09 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/01 21:22:47 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:34:35 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ void	destroy_light(t_light *light)
 {
 	if (!light)
 		return ;
-	destroy_point(light->pos);
+	if (light->pos)
+		destroy_point(light->pos);
 	free(light);
+	light = NULL;
 }
 
 /*

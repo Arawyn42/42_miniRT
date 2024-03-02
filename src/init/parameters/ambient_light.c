@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:59:15 by nsalles           #+#    #+#             */
-/*   Updated: 2024/02/20 12:32:43 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:35:37 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	destroy_alight(t_alight *alight)
 	if (!alight)
 		return ;
 	free(alight);
+	alight = NULL;
 }
 
 /*
