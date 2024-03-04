@@ -6,7 +6,7 @@
 #    By: drenassi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 14:42:11 by drenassi          #+#    #+#              #
-#    Updated: 2024/03/02 14:56:09 by drenassi         ###   ########.fr        #
+#    Updated: 2024/03/04 19:16:11 by drenassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,8 @@ SRCS			= utils/str/ft_strcmp.c \
 				  init/parameters/plane.c \
 				  raytracing/ray.c \
 				  raytracing/intersections.c \
+				  raytracing/cylinder_intersection.c \
+				  raytracing/intersection_normals.c \
 				  light_effects/ambient_lightning.c \
 				  light_effects/light.c \
 				  light_effects/light_effects.c \

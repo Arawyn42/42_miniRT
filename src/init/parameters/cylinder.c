@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:54:10 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/02 15:35:05 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:26:49 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	destroy_one_cylinder(t_cylinder *cylinder)
 		return ;
 	if (cylinder->pos)
 		destroy_point(cylinder->pos);
-	if (cylinder->vector)
-		destroy_point(cylinder->vector);
+	if (cylinder->axis)
+		destroy_point(cylinder->axis);
 	free(cylinder);
 	cylinder = NULL;
 }
@@ -66,7 +66,7 @@ static t_cylinder	*new_cylinder(t_point *pos_vect[2], \
 		return (NULL);
 	}
 	cylinder->pos = pos_vect[0];
-	cylinder->vector = pos_vect[1];
+	cylinder->axis = pos_vect[1];
 	cylinder->radius = rad_height[0];
 	cylinder->height = rad_height[1];
 	cylinder->color = clr;

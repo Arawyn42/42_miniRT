@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 17:40:45 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/17 18:25:07 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:29:09 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static int	check_line(char *line)
 {
 	char	**data;
 
+	if (is_empty(line))
+		return (1);
 	data = create_data_array(line);
 	if (!ft_strcmp(data[0], "A") && !check_ambiant_lightning(data))
 		return (free_double_array(data), 0);

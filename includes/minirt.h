@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/04 15:01:11 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:15:17 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ typedef struct s_plane
 typedef struct s_cylinder
 {
     t_point				*pos;
-    t_point				*vector;
+    t_point				*axis;
     double				radius;
     double				height;
     int					color;
@@ -253,6 +253,7 @@ void			destroy_data(t_data *data);
 t_point			get_obj_normal(t_obj *obj, t_point intersection, t_point dir);
 t_point			set_ray(t_point base[3], double x, double y, double z);
 t_point			intersection_point(t_ray ray, double distance);
+double			cy_intersection(t_ray ray, t_cylinder *cylinder);
 t_closest_obj	closest_intersection(t_ray ray, t_obj *objs);
 t_color			ray_trace(t_data *data, t_ray ray, int depth);
 
