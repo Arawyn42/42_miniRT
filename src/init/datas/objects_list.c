@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:45:13 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/02 15:47:02 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:00:46 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,53 +43,31 @@ void	destroy_objs(t_obj **obj)
 }
 
 /*
-*	Creates a new object.
+ *	Creates a new object and initializes its fields to NULL;
 */
-static t_obj	*new_obj(t_plane *pl, t_sphere *sp, t_cylinder *cy)
+t_obj	*create_new_obj(void)
 {
-	t_obj	*obj;
+	t_obj	*new;
 
-	obj = ft_calloc(1, sizeof(t_obj));
-	if (!obj)
-	{
-		print_error("Fatal error: obj struct initialization: ");
-		print_error("Out of memory\n");
+	new = ft_calloc(1, sizeof(t_obj));
+	if (!new)
 		return (NULL);
-	}
-	obj->pl = pl;
-	obj->sp = sp;
-	obj->cy = cy;
-	obj->light = NULL;
-	obj->next = NULL;
-	return (obj);
+	new->pl = NULL;
+	new->sp = NULL;
+	new->cy = NULL;
+	new->light = NULL;
+	new->next = NULL;
+	return (new);
 }
 
 /*
 *	Returns the last object of the objects list.
 */
-static t_obj	*get_last_obj(t_obj *obj)
+t_obj	*get_last_obj(t_obj *obj)
 {
 	if (!obj)
 		return (NULL);
 	while (obj->next)
 		obj = obj->next;
 	return (obj);
-}
-
-/*
-*	Creates and adds an object at the end of the objects list.
-*/
-void	set_objs(t_obj **objs, t_plane *pl, t_sphere *sp, t_cylinder *cy)
-{
-	t_obj	*new;
-	t_obj	*tmp;
-
-	new = new_obj(pl, sp, cy);
-	if (!*objs)
-	{
-		*objs = new;
-		return ;
-	}
-	tmp = get_last_obj(*objs);
-	tmp->next = new;
 }

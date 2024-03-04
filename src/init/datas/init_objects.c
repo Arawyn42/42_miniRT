@@ -6,53 +6,84 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:52:51 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/02 15:17:13 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:38:23 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
-*	Fills all planes in objects list.
+*	Adds all planes in objects list.
 */
 static void	init_objs_pl(t_data *data)
 {
-	t_plane	*pl;
+	t_plane		*pl;
+	t_obj		*new_obj;
+	t_obj		*last_obj;
 
 	pl = data->planes;
 	while (pl)
 	{
-		set_objs(&data->objs, pl, NULL, NULL);
+		new_obj = create_new_obj();
+		new_obj->pl = pl;
+		if (!data->objs)
+			data->objs = new_obj;
+		else
+		{
+			last_obj = get_last_obj(data->objs);
+			last_obj->next = new_obj;
+		}
 		pl = pl->next;
 	}
 }
 
 /*
-*	Fills all spheres in objects list.
+*	Adds all spheres in objects list.
 */
 static void	init_objs_sp(t_data *data)
 {
 	t_sphere	*sp;
+	t_obj		*new_obj;
+	t_obj		*last_obj;
 
 	sp = data->spheres;
 	while (sp)
 	{
-		set_objs(&data->objs, NULL, sp, NULL);
+		new_obj = create_new_obj();
+		new_obj->sp = sp;
+		if (!data->objs)
+			data->objs = new_obj;
+		else
+		{
+			last_obj = get_last_obj(data->objs);
+			last_obj->next = new_obj;
+		}
 		sp = sp->next;
 	}
 }
 
+
 /*
-*	Fills all cylinders in objects list.
+*	Adds all cylinders in objects list.
 */
 static void	init_objs_cy(t_data *data)
 {
 	t_cylinder	*cy;
+	t_obj		*new_obj;
+	t_obj		*last_obj;
 
 	cy = data->cylinders;
 	while (cy)
 	{
-		set_objs(&data->objs, NULL, NULL, cy);
+		new_obj = create_new_obj();
+		new_obj->cy = cy;
+		if (!data->objs)
+			data->objs = new_obj;
+		else
+		{
+			last_obj = get_last_obj(data->objs);
+			last_obj->next = new_obj;
+		}
 		cy = cy->next;
 	}
 }
@@ -62,25 +93,18 @@ static void	init_objs_cy(t_data *data)
 */
 static void	init_objs_light(t_data *data)
 {
-	t_obj	*light_obj;
-	t_obj	*last;
+	t_obj	*new_obj;
+	t_obj	*last_obj;
 
-	last = data->objs;
-	while (last->next)
-		last = last->next;
-	light_obj = ft_calloc(1, sizeof(t_obj));
-	if (!light_obj)
+	new_obj = create_new_obj();
+	new_obj->light = data->light;
+	if (!data->objs)
+		data->objs = new_obj;
+	else
 	{
-		print_error("Fatal error: obj struct initialization: ");
-		print_error("Out of memory\n");
-		return ;
+		last_obj = get_last_obj(data->objs);
+		last_obj->next = new_obj;	
 	}
-	light_obj->pl = NULL;
-	light_obj->sp = NULL;
-	light_obj->cy = NULL;
-	light_obj->light = data->light;
-	light_obj->next = NULL;
-	last->next = light_obj;
 }
 
 /*

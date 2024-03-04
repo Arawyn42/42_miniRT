@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/02 14:46:45 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:01:11 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # define SCREEN_H 800
 # define SCREEN_W 1500
 # define VIEWPORT_DIST 1
-# define DEPTH 5
+# define DEPTH 3
 # define PRECISION 0.01
-# define SPECULAR_POWER 3
+# define SPECULAR_POWER 2
 # ifndef M_PI
 #  define M_PI 3.14159265358
 # endif
@@ -238,9 +238,9 @@ void    		set_cylinder(t_cylinder **cylinder, t_point *pos_vect[2], \
 void			destroy_cylinder(t_cylinder **cylinder);
 
 /* OBJECTS LIST */
+t_obj			*create_new_obj(void);
+t_obj			*get_last_obj(t_obj *obj);
 void			init_objs(t_data *data);
-void			set_objs(t_obj **objs, t_plane *pl, t_sphere *sp, \
-		t_cylinder *cy);
 void			destroy_objs(t_obj **obj);
 void			init_ray(t_data *data, t_ray *ray);
 
