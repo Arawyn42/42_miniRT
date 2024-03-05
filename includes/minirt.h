@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/04 19:15:17 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:30:38 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "../libs/libft/includes/libft.h"
 # include "../libs/minilibx-linux/mlx.h"
 
-# define SCREEN_H 800
-# define SCREEN_W 1500
+# define SCREEN_H 1080
+# define SCREEN_W 1920
 # define VIEWPORT_DIST 1
 # define DEPTH 3
 # define PRECISION 0.01
@@ -250,7 +250,7 @@ t_data			*set_data(char *file);
 void			destroy_data(t_data *data);
 
 /* RAYTRACING */
-t_point			get_obj_normal(t_obj *obj, t_point intersection, t_point dir);
+t_point			get_obj_normal(t_obj *obj, t_point intersection);
 t_point			set_ray(t_point base[3], double x, double y, double z);
 t_point			intersection_point(t_ray ray, double distance);
 double			cy_intersection(t_ray ray, t_cylinder *cylinder);

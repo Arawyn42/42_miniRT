@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:59:18 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/04 19:39:49 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:25:54 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,16 @@ static t_point	get_cylinder_normal(t_cylinder *cy, t_point intersection)
  *	Returns the normal vector resulting from the intersection of a ray
  *	and an object, starting from the intersection point.
 */
-t_point	get_obj_normal(t_obj *obj, t_point intersection, t_point dir)
+t_point	get_obj_normal(t_obj *obj, t_point intersection)
 {
 	t_point	normal;
 
+	normal = (t_point){0, 0, 0};
 	if (obj->pl)
-	{
-		normal = normalize_vect(*obj->pl->normal);
-		if (vect_dot(normal, dir) > 0)
-		{
-			normal = substract_vect((t_point){0, 0, 0}, normal);
-			*obj->pl->normal = normal;
-		}
-	}
-	if (obj->sp)
+		normal = *obj->pl->normal;
+	else if (obj->sp)
 		normal = normalize_vect(substract_vect(intersection, *obj->sp->pos));
-	if (obj->cy)
+	else if (obj->cy)
 		normal = get_cylinder_normal(obj->cy, intersection);
 	return (normal);
 }

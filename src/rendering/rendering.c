@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:46:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/02 15:06:06 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:43:21 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	render(t_data *data, t_image *img, t_point base[3])
 		while (++pixel.y <= SCREEN_H / 2)
 		{
 			ray.dir = set_ray(base, pixel.x * vp.w_ratio, \
-				pixel.y * vp.h_ratio, VIEWPORT_DIST);
+				-pixel.y * vp.h_ratio, VIEWPORT_DIST);
 			color = ray_trace(data, ray, DEPTH);
 			draw_pixels(img, SCREEN_W / 2 + pixel.x, SCREEN_H / 2 \
 				+ pixel.y, rgb_to_int(color.r, color.g, color.b));
