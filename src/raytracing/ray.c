@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:21:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/05 18:22:48 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:19:53 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ t_color	ray_trace(t_data *data, t_ray ray, int depth)
 	if (depth <= 0)
 		return (color);
 	ray.origin = intersection_point(ray, closest.distance);
-	ray.dir = substract_vect((t_point){0, 0, 0}, ray.dir);
-	ray.dir = reflection_dir(closest_normal, ray.dir);
+	ray.dir = reflection_dir(closest_normal, \
+		substract_vect((t_point){0, 0, 0}, ray.dir));
 	reflect_color = ray_trace(data, ray, depth - 1);
 	return (reflection_color(color, reflect_color, 0.1));
 }

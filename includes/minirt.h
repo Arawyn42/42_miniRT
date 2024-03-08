@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/05 18:30:38 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:35:51 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "../libs/libft/includes/libft.h"
 # include "../libs/minilibx-linux/mlx.h"
 
-# define SCREEN_H 1080
-# define SCREEN_W 1920
+# define SCREEN_H 540
+# define SCREEN_W 960
 # define VIEWPORT_DIST 1
 # define DEPTH 3
 # define PRECISION 0.01

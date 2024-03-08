@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:55:33 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/02 14:25:28 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:58:58 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_point	reflection_dir(t_point normal, t_point dir)
 	t_point		reflection;
 	double		scalar;
 
-	scalar = vect_dot(dir, normal);
+	scalar = vect_dot(normal, dir);
 	reflection.x = 2 * scalar * normal.x - dir.x;
 	reflection.y = 2 * scalar * normal.y - dir.y;
 	reflection.z = 2 * scalar * normal.z - dir.z;
