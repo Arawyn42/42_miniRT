@@ -12,14 +12,15 @@
 
 #include "minirt.h"
 
-static int	check_height(t_ray ray, t_cylinder *cy, double parameter)
+static int	check_height(t_ray ray, t_cylinder *cy, double distance)
 {
-	t_point	rc;
-	double	len;
+	t_point	center_to_point;
+	double	height;
 
-	rc = substract_vect(add_vect(ray.origin, multiply_vect(ray.dir, parameter)), *cy->pos);
-	len = 2 * fabs(vect_dot(rc, *cy->axis));
-	if (len > cy->height)
+	center_to_point = substract_vect(add_vect(ray.origin, \
+		multiply_vect(ray.dir, distance)), cy->pos);
+	height = 2 * fabs(vect_dot(center_to_point, cy->axis));
+	if (height > cy->height)
 		return (0);
 	return (1);
 }
@@ -28,34 +29,35 @@ static int	check_height(t_ray ray, t_cylinder *cy, double parameter)
 static double	height_intersection(t_ray ray, 
 	t_cylinder *cy, t_point ray_to_cy)
 {
-	double		parameter;
+	double	distance;
 	t_point	v;
 	t_point	u;
-	double		s1;
-	double		s2;
+	double	s1;
+	double	s2;
 
-	s1 = vect_dot(ray_to_cy, *cy->axis);
-	s2 = vect_dot(*cy->axis, *cy->axis);
-	v = substract_vect(ray_to_cy, multiply_vect(*cy->axis, s1 / s2));
-	s1 = vect_dot(ray.dir, *cy->axis);
-	u = substract_vect(ray.dir, multiply_vect(*cy->axis, s1 / s2));
-	parameter = quadratic_min(vect_dot(u, u), 2 * vect_dot(v, u), vect_dot(v, v) - pow(cy->radius, 2), PRECISION);
-	if (!check_height(ray, cy, parameter))
+	s1 = vect_dot(ray_to_cy, cy->axis);
+	s2 = vect_dot(cy->axis, cy->axis);
+	v = substract_vect(ray_to_cy, multiply_vect(cy->axis, s1 / s2));
+	s1 = vect_dot(ray.dir, cy->axis);
+	u = substract_vect(ray.dir, multiply_vect(cy->axis, s1 / s2));
+	distance = quadratic_min(vect_dot(u, u), 2 * vect_dot(v, u), \
+		vect_dot(v, v) - pow(cy->radius, 2), PRECISION);
+	if (!check_height(ray, cy, distance))
 		return (INFINITY);
-	return (parameter);
+	return (distance);
 }
 
 static int	check_radius(t_ray ray, t_cylinder *cy, double distance)
 {
 	t_point	center_to_point;
 	t_point	radius;
-	double		scalar;
+	double	scalar;
 
 	center_to_point = substract_vect(add_vect(ray.origin, \
-		multiply_vect(ray.dir, distance)), *cy->pos);
-	scalar = vect_dot(center_to_point, *cy->axis) \
-		/ vect_dot(*cy->axis, *cy->axis);
-	radius = substract_vect(center_to_point, multiply_vect(*cy->axis, scalar));
+		multiply_vect(ray.dir, distance)), cy->pos);
+	scalar = vect_dot(center_to_point, cy->axis) \
+		/ vect_dot(cy->axis, cy->axis);
+	radius = substract_vect(center_to_point, multiply_vect(cy->axis, scalar));
 	if (vect_length(radius) > cy->radius)
 		return (0);
 	return (1);
@@ -67,15 +69,15 @@ static double	disc_intersection(t_ray ray, t_cylinder *cy, t_point ray_to_cy)
 	double	inter2;
 	double	ray_dot_axis;
 
-	ray_dot_axis = vect_dot(ray.dir, *cy->axis);
+	ray_dot_axis = vect_dot(ray.dir, cy->axis);
 	if (fabs(ray_dot_axis) < PRECISION)
 		return (INFINITY);
 	inter1 = (cy->height - 2 * vect_dot(ray_to_cy, 
-	*cy->axis)) / (2 * ray_dot_axis);
+	cy->axis)) / (2 * ray_dot_axis);
 	if (!check_radius(ray, cy, inter1))
 		inter1 = INFINITY;
 	inter2 = (-cy->height - 2 * vect_dot(ray_to_cy, 
-	*cy->axis)) / (2 * ray_dot_axis);
+	cy->axis)) / (2 * ray_dot_axis);
 	if (!check_radius(ray, cy, inter2))
 		inter2 = INFINITY;
 	if (inter1 < inter2 && inter1 > PRECISION)
@@ -91,7 +93,7 @@ double	cy_intersection(t_ray ray, t_cylinder *cylinder)
 	double		inter2;
 	t_point		ray_to_cy;
 
-	ray_to_cy = substract_vect(ray.origin, *cylinder->pos);
+	ray_to_cy = substract_vect(ray.origin, cylinder->pos);
 	inter1 = disc_intersection(ray, cylinder, ray_to_cy);
 	inter2 = height_intersection(ray, cylinder, ray_to_cy);
 	if (inter1 < inter2 && inter1 > PRECISION)

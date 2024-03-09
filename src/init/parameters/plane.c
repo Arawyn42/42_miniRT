@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:34:37 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/02 15:27:27 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:06:07 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static void	destroy_one_plane(t_plane *plane)
 {
 	if (!plane)
 		return ;
-	destroy_point(plane->pos);
-	destroy_point(plane->normal);
 	free(plane);
 	plane = NULL;
 }
@@ -44,7 +42,7 @@ void	destroy_plane(t_plane **plane)
 /*
  *	Create, set the values and return plane struct.
 */
-static t_plane	*new_plane(t_point *pos, t_point *vector, int color)
+static t_plane	*new_plane(t_point pos, t_point vector, int color)
 {
 	t_plane	*plane;
 
@@ -53,13 +51,6 @@ static t_plane	*new_plane(t_point *pos, t_point *vector, int color)
 	{
 		print_error("Fatal error: plane struct initialization: ");
 		print_error("Out of memory\n");
-		return (NULL);
-	}
-	if (!pos || !vector)
-	{
-		free(plane);
-		destroy_point(pos);
-		destroy_point(vector);
 		return (NULL);
 	}
 	plane->pos = pos;
@@ -78,7 +69,7 @@ static t_plane	*get_last_plane(t_plane *plane)
 	return (plane);
 }
 
-void	set_plane(t_plane **plane, t_point *pos, t_point *vector, int clr)
+void	set_plane(t_plane **plane, t_point pos, t_point vector, int clr)
 {
 	t_plane	*new;
 	t_plane	*tmp;

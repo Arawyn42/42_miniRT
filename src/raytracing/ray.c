@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:21:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/08 12:19:53 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:06:37 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 */
 void	init_ray(t_data *data, t_ray *ray)
 {
-	ray->origin = *data->camera->pos;
-	ray->dir = *data->camera->direction;
+	ray->origin = data->camera->pos;
+	ray->dir = data->camera->direction;
 }
 
 /*

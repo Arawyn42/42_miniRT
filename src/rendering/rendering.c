@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:46:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/08 12:39:48 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:09:53 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	rendering(t_minirt *mem)
 	base[0] = (t_point){1, 0, 0};
 	base[1] = (t_point){0, 1, 0};
 	base[2] = (t_point){0, 0, 1};
-	rotate_base(base, *mem->data->camera->direction);
+	rotate_base(base, mem->data->camera->direction);
 	ft_bzero(mem->img->addr, 4 * SCREEN_H * SCREEN_W);
 	render(mem->data, mem->img, base);
 	mlx_put_image_to_window(mem->win->mlx, mem->win->window,

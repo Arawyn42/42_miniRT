@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:50:50 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/02 15:33:28 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:05:57 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	destroy_one_sphere(t_sphere *sphere)
 {
 	if (!sphere)
 		return ;
-	destroy_point(sphere->pos);
 	free(sphere);
 	sphere = NULL;
 }
@@ -43,7 +42,7 @@ void	destroy_sphere(t_sphere **sphere)
 /*
  *	Create, set the values and return sphere struct.
 */
-t_sphere	*new_sphere(t_point *pos, double radius, int color)
+t_sphere	*new_sphere(t_point pos, double radius, int color)
 {
 	t_sphere	*sphere;
 
@@ -52,12 +51,6 @@ t_sphere	*new_sphere(t_point *pos, double radius, int color)
 	{
 		print_error("Fatal error: sphere struct initialization: ");
 		print_error("Out of memory\n");
-		return (NULL);
-	}
-	if (!pos)
-	{
-		free(sphere);
-		destroy_point(pos);
 		return (NULL);
 	}
 	sphere->pos = pos;
@@ -76,7 +69,7 @@ static t_sphere	*get_last_sphere(t_sphere *sphere)
 	return (sphere);
 }
 
-void	set_sphere(t_sphere **sphere, t_point *pos, double radius, int color)
+void	set_sphere(t_sphere **sphere, t_point pos, double radius, int color)
 {
 	t_sphere	*new;
 	t_sphere	*tmp;

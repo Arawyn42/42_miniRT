@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:20:04 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/08 13:09:07 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:09:35 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static t_point	light_effects_intensity(t_data *data, \
 	{
 		if (objs->light)
 		{
-			p_to_l = normalize_vect(substract_vect(*objs->light->pos, inter));
+			p_to_l = normalize_vect(substract_vect(objs->light->pos, inter));
 			p_intensity = add_vect(a_light, \
 				point_intensity(*objs->light, normal, p_to_l, dir));
 			l_intensity = add_vect(a_light, light_intensity(data));
@@ -106,7 +106,7 @@ double is_in_shadow(t_data *data, t_point inter, t_obj	*obj)
 	t_closest_obj	closest;
 
 	p_to_l.origin = inter;
-	p_to_l.dir = normalize_vect(substract_vect(inter, *data->light->pos));
+	p_to_l.dir = normalize_vect(substract_vect(inter, data->light->pos));
 	closest = closest_intersection(p_to_l, data->objs);
 	if (!closest.obj || closest.obj == obj)
 		return (1);
