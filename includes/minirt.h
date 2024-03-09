@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/09 19:28:30 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:50:49 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,9 @@ double			vect_length(t_vector vect);
 t_vector		normalize_vect(t_vector vect);
 t_vector		add_vect(t_vector vect1, t_vector vect2);
 t_vector		substract_vect(t_vector vect1, t_vector vect2);
-t_vector		multiply_vect(t_vector vect, double scalar);
+t_vector		multiply_vect(t_vector	v1, t_vector v2);
 t_vector		divide_vect(t_vector	v1, t_vector v2);
+t_vector		multiply_vect_scalar(t_vector vect, double scalar);
 double			vect_dot(t_vector v1, t_vector v2);
 t_vector		vect_cross_product(t_vector v1, t_vector v2);
 double			vect_cos(t_vector v1, t_vector v2);

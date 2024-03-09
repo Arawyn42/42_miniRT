@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_normals.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:59:18 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 15:31:23 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:49:27 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static t_vector	get_cylinder_normal(t_cylinder *cy, t_vector intersection)
 			normal = substract_vect((t_vector){0, 0, 0}, cy->axis);
 	}
 	else
-		normal = substract_vect(center_to_point, multiply_vect(cy->axis, d));
-	normal = multiply_vect(normal, 1 / vect_length(normal));
+		normal = substract_vect(center_to_point, multiply_vect_scalar(cy->axis, d));
+	normal = multiply_vect_scalar(normal, 1 / vect_length(normal));
 	return (normal);
 }
 

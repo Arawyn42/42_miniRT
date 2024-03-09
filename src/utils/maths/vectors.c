@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:33:42 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 15:28:08 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:49:43 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,6 @@ t_vector	substract_vect(t_vector vect1, t_vector vect2)
 	res.x = vect1.x - vect2.x;
 	res.y = vect1.y - vect2.y;
 	res.z = vect1.z - vect2.z;
-	return (res);
-}
-
-/*
- *	Multiplies a vector by a scalar and returns the result.
-*/
-t_vector	multiply_vect(t_vector vect, double scalar)
-{
-	t_vector	res;
-
-	res.x = vect.x * scalar;
-	res.y = vect.y * scalar;
-	res.z = vect.z * scalar;
 	return (res);
 }
 

@@ -18,7 +18,7 @@ static int	check_height(t_ray ray, t_cylinder *cy, double distance)
 	double		height;
 
 	center_to_point = substract_vect(add_vect(ray.origin, \
-		multiply_vect(ray.dir, distance)), cy->pos);
+		multiply_vect_scalar(ray.dir, distance)), cy->pos);
 	height = 2 * fabs(vect_dot(center_to_point, cy->axis));
 	if (height > cy->height)
 		return (0);
@@ -36,9 +36,9 @@ static double	height_intersection(t_ray ray, \
 
 	s1 = vect_dot(ray_to_cy, cy->axis);
 	s2 = vect_dot(cy->axis, cy->axis);
-	v1 = substract_vect(ray_to_cy, multiply_vect(cy->axis, s1 / s2));
+	v1 = substract_vect(ray_to_cy, multiply_vect_scalar(cy->axis, s1 / s2));
 	s1 = vect_dot(ray.dir, cy->axis);
-	v2 = substract_vect(ray.dir, multiply_vect(cy->axis, s1 / s2));
+	v2 = substract_vect(ray.dir, multiply_vect_scalar(cy->axis, s1 / s2));
 	distance = quadratic_min(vect_dot(v2, v2), 2 * vect_dot(v1, v2), \
 		vect_dot(v1, v1) - pow(cy->radius, 2), PRECISION);
 	if (!check_height(ray, cy, distance))
@@ -53,10 +53,10 @@ static int	check_radius(t_ray ray, t_cylinder *cy, double distance)
 	double		scalar;
 
 	center_to_point = substract_vect(add_vect(ray.origin, \
-		multiply_vect(ray.dir, distance)), cy->pos);
+		multiply_vect_scalar(ray.dir, distance)), cy->pos);
 	scalar = vect_dot(center_to_point, cy->axis) \
 		/ vect_dot(cy->axis, cy->axis);
-	radius = substract_vect(center_to_point, multiply_vect(cy->axis, scalar));
+	radius = substract_vect(center_to_point, multiply_vect_scalar(cy->axis, scalar));
 	if (vect_length(radius) > cy->radius)
 		return (0);
 	return (1);

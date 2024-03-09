@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:55:33 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 18:51:14 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:53:30 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ t_vector	reflection_dir(t_vector normal, t_vector dir)
 	double		scalar;
 
 	scalar = vect_dot(normal, dir);
-	reflection.x = 2 * scalar * normal.x - dir.x;
-	reflection.y = 2 * scalar * normal.y - dir.y;
-	reflection.z = 2 * scalar * normal.z - dir.z;
+	reflection = substract_vect(multiply_vect_scalar(normal, 2 * scalar), dir);
 	return (reflection);
 }
 
