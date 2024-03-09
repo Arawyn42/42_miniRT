@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:02:56 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 15:07:12 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:35:12 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 static double	pl_intersection(t_ray ray, t_plane *pl)
 {
 	double		scalar;
-	t_point		ray_to_pl;
+	t_vector	ray_to_pl;
 
 	scalar = vect_dot(ray.dir, pl->normal);
 	if (fabs(scalar) < PRECISION)
@@ -34,10 +34,10 @@ static double	pl_intersection(t_ray ray, t_plane *pl)
 */
 static double	sp_intersection(t_ray ray, t_sphere *sp)
 {
-	t_point	ray_to_sp;
-	double	a;
-	double	b;
-	double	c;
+	t_vector	ray_to_sp;
+	double		a;
+	double		b;
+	double		c;
 
 	ray_to_sp = substract_vect(ray.origin, sp->pos);
 	a = vect_dot(ray.dir, ray.dir);

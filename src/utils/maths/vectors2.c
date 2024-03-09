@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 02:58:25 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/02 15:06:42 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:30:54 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /*
  *	Normalizes the vector and return the result.
 */
-t_point	normalize_vect(t_point vect)
+t_vector	normalize_vect(t_vector vect)
 {
-	t_point	normalized;
-	double	norm;
+	t_vector	normalized;
+	double		norm;
 
 	norm = vect_length(vect);
 	normalized.x = vect.x / norm;
@@ -30,9 +30,9 @@ t_point	normalize_vect(t_point vect)
 /*
  *	Divides a vector by another member by member and returns the result.
 */
-t_point	divide_vect(t_point	v1, t_point v2)
+t_vector	divide_vect(t_vector	v1, t_vector v2)
 {
-	t_point	res;
+	t_vector	res;
 
 	res.x = v1.x / v2.x;
 	res.y = v1.y / v2.y;

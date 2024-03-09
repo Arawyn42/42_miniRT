@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:52:51 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/04 15:38:23 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:30:13 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	init_objs_sp(t_data *data)
 	}
 }
 
-
 /*
 *	Adds all cylinders in objects list.
 */
@@ -103,7 +102,7 @@ static void	init_objs_light(t_data *data)
 	else
 	{
 		last_obj = get_last_obj(data->objs);
-		last_obj->next = new_obj;	
+		last_obj->next = new_obj;
 	}
 }
 

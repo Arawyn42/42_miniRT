@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:58:35 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 15:03:29 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:29:23 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	destroy_data(t_data *data)
 
 static void	set_line_data2(t_data *data, char **datas)
 {
-	t_point	pos_vect[2];
-	double	rad_height[2];
+	t_vector	pos_vect[2];
+	double		rad_height[2];
 
 	if (!ft_strcmp(datas[0], "pl"))
 		set_plane(&(data->planes), str_to_point(datas[1]), \

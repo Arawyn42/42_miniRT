@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:25:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/02 14:21:56 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:37:14 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /*
  *	Returns the light intensity vector.
 */
-t_point	light_intensity(t_data *data)
+t_vector	light_intensity(t_data *data)
 {
-	t_point	res;
-	t_color	light;
+	t_vector	res;
+	t_color		light;
 
 	light = int_to_rgb(data->light->color);
 	res.x = data->light->ratio * light.r / light.sum;

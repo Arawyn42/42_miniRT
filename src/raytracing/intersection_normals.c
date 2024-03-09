@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:59:18 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 15:09:15 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:31:23 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
  *	normal of the disk. If the intersection point is on the cylinder's height,
  *	it returns the normal of the axis.
 */
-static t_point	get_cylinder_normal(t_cylinder *cy, t_point intersection)
+static t_vector	get_cylinder_normal(t_cylinder *cy, t_vector intersection)
 {
-	t_point	normal;
-	double	d;
-	t_point	center_to_point;
+	t_vector	normal;
+	double		d;
+	t_vector	center_to_point;
 
 	center_to_point = substract_vect(intersection, cy->pos);
 	d = vect_dot(center_to_point, cy->axis);
@@ -31,7 +31,7 @@ static t_point	get_cylinder_normal(t_cylinder *cy, t_point intersection)
 		if (vect_dot(center_to_point, cy->axis) >= 0)
 			normal = cy->axis;
 		else
-			normal = substract_vect((t_point){0, 0, 0}, cy->axis);
+			normal = substract_vect((t_vector){0, 0, 0}, cy->axis);
 	}
 	else
 		normal = substract_vect(center_to_point, multiply_vect(cy->axis, d));
@@ -43,11 +43,11 @@ static t_point	get_cylinder_normal(t_cylinder *cy, t_point intersection)
  *	Returns the normal vector resulting from the intersection of a ray
  *	and an object, starting from the intersection point.
 */
-t_point	get_obj_normal(t_obj *obj, t_point intersection)
+t_vector	get_obj_normal(t_obj *obj, t_vector intersection)
 {
-	t_point	normal;
+	t_vector	normal;
 
-	normal = (t_point){0, 0, 0};
+	normal = (t_vector){0, 0, 0};
 	if (obj->pl)
 		normal = obj->pl->normal;
 	else if (obj->sp)

@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:21:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 15:06:37 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:31:33 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	init_ray(t_data *data, t_ray *ray)
 /*
  *	Returns the ray intersection point coordinates from the ray's origin.
 */
-t_point	intersection_point(t_ray ray, double distance)
+t_vector	intersection_point(t_ray ray, double distance)
 {
-	t_point	intersection;
+	t_vector	intersection;
 
 	intersection = add_vect(ray.origin, multiply_vect(ray.dir, distance));
 	return (intersection);
@@ -36,9 +36,9 @@ t_point	intersection_point(t_ray ray, double distance)
 /*
  *	Returns the ray's direction and lenght.
 */
-t_point	set_ray(t_point base[3], double x, double y, double z)
+t_vector	set_ray(t_vector base[3], double x, double y, double z)
 {
-	t_point	new;
+	t_vector	new;
 
 	new.x = base[0].x * x + base[1].x * y + base[2].x * z;
 	new.y = base[0].y * x + base[1].y * y + base[2].y * z;
@@ -54,7 +54,7 @@ t_point	set_ray(t_point base[3], double x, double y, double z)
 t_color	ray_trace(t_data *data, t_ray ray, int depth)
 {
 	t_closest_obj	closest;
-	t_point			closest_normal;
+	t_vector		closest_normal;
 	t_color			color;
 	t_color			reflect_color;
 
@@ -68,7 +68,7 @@ t_color	ray_trace(t_data *data, t_ray ray, int depth)
 		return (color);
 	ray.origin = intersection_point(ray, closest.distance);
 	ray.dir = reflection_dir(closest_normal, \
-		substract_vect((t_point){0, 0, 0}, ray.dir));
+		substract_vect((t_vector){0, 0, 0}, ray.dir));
 	reflect_color = ray_trace(data, ray, depth - 1);
 	return (reflection_color(color, reflect_color, 0.1));
 }

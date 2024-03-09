@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:46:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 15:09:53 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:30:33 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /*
  *	Draws the image pixel by pixel after applying raytracing and light effects.
 */
-static void	render(t_data *data, t_image *img, t_point base[3])
+static void	render(t_data *data, t_image *img, t_vector base[3])
 {
 	t_ray		ray;
-	t_point		pixel;
+	t_vector	pixel;
 	t_color		color;
 	t_viewport	vp;
 
@@ -47,11 +47,11 @@ static void	render(t_data *data, t_image *img, t_point base[3])
 */
 void	rendering(t_minirt *mem)
 {
-	t_point		base[3];
+	t_vector		base[3];
 
-	base[0] = (t_point){1, 0, 0};
-	base[1] = (t_point){0, 1, 0};
-	base[2] = (t_point){0, 0, 1};
+	base[0] = (t_vector){1, 0, 0};
+	base[1] = (t_vector){0, 1, 0};
+	base[2] = (t_vector){0, 0, 1};
 	rotate_base(base, mem->data->camera->direction);
 	ft_bzero(mem->img->addr, 4 * SCREEN_H * SCREEN_W);
 	render(mem->data, mem->img, base);

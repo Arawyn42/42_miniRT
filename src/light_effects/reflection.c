@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:55:33 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/08 11:58:58 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:37:32 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 /*
  *	Returns the direction of the reflected ray.
 */
-t_point	reflection_dir(t_point normal, t_point dir)
+t_vector	reflection_dir(t_vector normal, t_vector dir)
 {
-	t_point		reflection;
+	t_vector	reflection;
 	double		scalar;
 
 	scalar = vect_dot(normal, dir);

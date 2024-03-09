@@ -6,7 +6,7 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/09 15:02:15 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:28:14 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ typedef struct s_color
     int sum;
 }		t_color;
 
-typedef struct s_point
+typedef struct s_vector
 {
     double	x;
     double	y;
     double	z;
-}	t_point;
+}	t_vector;
 
 typedef struct s_alight
 {
@@ -67,8 +67,8 @@ typedef struct s_alight
 
 typedef struct s_camera
 {
-    t_point	pos;
-    t_point	direction;
+    t_vector	pos;
+    t_vector	direction;
     int		fov;
 }	t_camera;
 
@@ -82,14 +82,14 @@ typedef struct s_viewport
 
 typedef struct s_light
 {
-    t_point	pos;
+    t_vector	pos;
     double	ratio;
     int		color;
 }	t_light;
 
 typedef struct s_sphere
 {
-    t_point			pos;
+    t_vector			pos;
     double			radius;
     int				color;
     struct s_sphere *next;
@@ -97,16 +97,16 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-    t_point			pos;
-    t_point			normal;
+    t_vector			pos;
+    t_vector			normal;
     int				color;
 	struct s_plane	*next;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-    t_point				pos;
-    t_point				axis;
+    t_vector				pos;
+    t_vector				axis;
     double				radius;
     double				height;
     int					color;
@@ -130,8 +130,8 @@ typedef struct s_closest_obj
 
 typedef struct s_ray
 {
-	t_point	origin;
-	t_point	dir;
+	t_vector	origin;
+	t_vector	dir;
 }	t_ray;
 
 typedef struct s_data
@@ -168,19 +168,19 @@ int				print_error(char *msg);
 int				is_empty(char *line);
 
 /* MATHS UTILS */
-double			vect_length(t_point vect);
-t_point			normalize_vect(t_point vect);
-t_point			add_vect(t_point vect1, t_point vect2);
-t_point			substract_vect(t_point vect1, t_point vect2);
-t_point			multiply_vect(t_point vect, double scalar);
-t_point			divide_vect(t_point	v1, t_point v2);
-double			vect_dot(t_point v1, t_point v2);
-t_point			vect_cross_product(t_point v1, t_point v2);
-double			vect_cos(t_point v1, t_point v2);
-double			vect_sin(t_point v1, t_point v2);
-t_point			rotate_vect(t_point vector, t_point axis, \
+double			vect_length(t_vector vect);
+t_vector			normalize_vect(t_vector vect);
+t_vector			add_vect(t_vector vect1, t_vector vect2);
+t_vector			substract_vect(t_vector vect1, t_vector vect2);
+t_vector			multiply_vect(t_vector vect, double scalar);
+t_vector			divide_vect(t_vector	v1, t_vector v2);
+double			vect_dot(t_vector v1, t_vector v2);
+t_vector			vect_cross_product(t_vector v1, t_vector v2);
+double			vect_cos(t_vector v1, t_vector v2);
+double			vect_sin(t_vector v1, t_vector v2);
+t_vector			rotate_vect(t_vector vector, t_vector axis, \
 		double cos, double sin);
-void			rotate_base(t_point base[3], t_point direction);
+void			rotate_base(t_vector base[3], t_vector direction);
 double			quadratic_min(double a, double b, double c, double min);
 
 /* COLORS UTILS */
@@ -217,21 +217,21 @@ void			destroy_image(t_image *img, void *mlx);
 int				user_input(int keycode, t_minirt *data);
 
 /* PARAMETERS AND SHAPES STRUCTURES AND LISTS */
-t_point	    	str_to_point(char *str);
-t_camera		*set_camera(t_point pos, t_point direction, int fov);
+t_vector	    	str_to_point(char *str);
+t_camera		*set_camera(t_vector pos, t_vector direction, int fov);
 void			destroy_camera(t_camera *camera);
 t_viewport		init_viewport(double fov, double distance);
 t_alight		*set_alight(double ratio, int color);
 void			destroy_alight(t_alight *alight);
-t_light			*set_light(t_point pos, double ratio, int color);
+t_light			*set_light(t_vector pos, double ratio, int color);
 void			destroy_light(t_light *light);
-void    		set_plane(t_plane **plane, t_point pos, \
-		t_point vector, int color);
+void    		set_plane(t_plane **plane, t_vector pos, \
+		t_vector vector, int color);
 void	    	destroy_plane(t_plane **plane);
-void			set_sphere(t_sphere **sphere, t_point pos, \
+void			set_sphere(t_sphere **sphere, t_vector pos, \
         double radius, int color);
 void			destroy_sphere(t_sphere **sphere);
-void    		set_cylinder(t_cylinder **cylinder, t_point pos_vect[2], \
+void    		set_cylinder(t_cylinder **cylinder, t_vector pos_vect[2], \
         double rad_height[2], int color);
 void			destroy_cylinder(t_cylinder **cylinder);
 
@@ -248,25 +248,25 @@ t_data			*set_data(char *file);
 void			destroy_data(t_data *data);
 
 /* RAYTRACING */
-t_point			get_obj_normal(t_obj *obj, t_point intersection);
-t_point			set_ray(t_point base[3], double x, double y, double z);
-t_point			intersection_point(t_ray ray, double distance);
+t_vector			get_obj_normal(t_obj *obj, t_vector intersection);
+t_vector			set_ray(t_vector base[3], double x, double y, double z);
+t_vector			intersection_point(t_ray ray, double distance);
 double			cy_intersection(t_ray ray, t_cylinder *cylinder);
 t_closest_obj	closest_intersection(t_ray ray, t_obj *objs);
 t_color			ray_trace(t_data *data, t_ray ray, int depth);
 
 /* AMBIENT LIGHTNING */
-t_point			ambient_lightning_intensity(t_data *data);
+t_vector			ambient_lightning_intensity(t_data *data);
 
 /* LIGHT */
-t_point			light_intensity(t_data *data);
+t_vector			light_intensity(t_data *data);
 
 /* LIGHT EFFECTS */
 t_color			get_obj_color(t_obj *obj);
-t_point			reflection_dir(t_point normal, t_point dir);
+t_vector			reflection_dir(t_vector normal, t_vector dir);
 t_color			reflection_color(t_color color, t_color reflective, \
 		double ratio);
-t_color			light_effects(t_data *data, t_point normal, \
+t_color			light_effects(t_data *data, t_vector normal, \
 		t_closest_obj closest, t_ray ray);
 
 /* RENDERING */

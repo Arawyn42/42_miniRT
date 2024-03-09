@@ -6,13 +6,13 @@
 /*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:00:20 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/08 12:44:09 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:28:08 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// int	is_in_shadow(t_data	*data, t_ray dir, t_point point)
+// int	is_in_shadow(t_data	*data, t_ray dir, t_vector point)
 // {
 // 	t_closest_obj	closest;
 // 	t_ray			ray_from_point;
