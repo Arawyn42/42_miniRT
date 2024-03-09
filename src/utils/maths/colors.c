@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:34:53 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/02 15:07:14 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:24:52 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,16 @@ t_color	get_obj_color(t_obj *obj)
 */
 void	protect_colors(t_color *color)
 {
-	if (color->r > 255)
+	if (color->r < 0)
+		color->r = 0;
+	else if (color->r > 255)
 		color->r = 255;
-	if (color->g > 255)
+	if (color->g < 0)
+		color->g = 0;
+	else if (color->g > 255)
 		color->g = 255;
-	if (color->b > 255)
+	if (color->b < 0)
+		color->b = 0;
+	else if (color->b > 255)
 		color->b = 255;
 }
