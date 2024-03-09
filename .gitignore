@@ -1,0 +1,6 @@
+.vscode/
+libs/libft.a
+libs/libft/objs/
+libs/minilibx.a
+miniRT
+objs/
