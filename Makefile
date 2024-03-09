@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: drenassi <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 14:42:11 by drenassi          #+#    #+#              #
-#    Updated: 2024/03/04 19:16:11 by drenassi         ###   ########.fr        #
+#    Updated: 2024/03/09 16:37:04 by drenassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCS			= utils/str/ft_strcmp.c \
 				  utils/maths/rotations.c \
 				  utils/maths/colors.c \
 				  check_file/check_file.c \
+				  check_file/check_int.c \
 				  check_file/check_double.c \
 				  check_file/rgb.c \
 				  check_file/coordinates.c \
@@ -71,6 +72,7 @@ SRCS			= utils/str/ft_strcmp.c \
 				  init/window/viewport.c \
 				  init/datas/create_data_array.c \
 				  init/datas/set_data.c \
+				  init/datas/set_data_shapes.c \
 				  init/datas/objects_list.c \
 				  init/datas/init_objects.c \
 				  init/parameters/ambient_light.c \

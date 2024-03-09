@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   identifier.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 22:01:17 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/02 15:03:10 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 17:23:08 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/*
+ *	Returns 1 if a line starts with an existing identifier, 0 if not.
+*/
 int	check_identifier(char *line)
 {
 	char	**data;

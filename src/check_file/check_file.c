@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 17:40:45 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/04 19:29:09 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 17:16:58 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/*
+ *	Returns 1 if the file extension is correct (.rt), 0 if not.
+*/
 static int	check_extension(char *file)
 {
 	int		len;
@@ -31,6 +34,9 @@ static int	check_extension(char *file)
 	return (1);
 }
 
+/*
+ *	Returns 1 if the given line has a correct format, 0 if not.
+*/
 static int	check_line(char *line)
 {
 	char	**data;
@@ -53,6 +59,9 @@ static int	check_line(char *line)
 	return (free_double_array(data), 1);
 }
 
+/*
+ *	Returns 1 if the given file has a correct format, 0 if not.
+*/
 int	check_file(char *file)
 {
 	char	*line;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:34:37 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/09 15:28:08 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:44:09 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	destroy_plane(t_plane **plane)
 /*
  *	Create, set the values and return plane struct.
 */
-static t_plane	*new_plane(t_vector pos, t_vector vector, int color)
+static t_plane	*new_plane(t_vector pos_normal[2], double csr[3])
 {
 	t_plane	*plane;
 
@@ -53,9 +53,11 @@ static t_plane	*new_plane(t_vector pos, t_vector vector, int color)
 		print_error("Out of memory\n");
 		return (NULL);
 	}
-	plane->pos = pos;
-	plane->normal = vector;
-	plane->color = color;
+	plane->pos = pos_normal[0];
+	plane->normal = pos_normal[1];
+	plane->color = csr[0];
+	plane->specular = csr[1];
+	plane->reflect = csr[2];
 	plane->next = NULL;
 	return (plane);
 }
@@ -69,12 +71,12 @@ static t_plane	*get_last_plane(t_plane *plane)
 	return (plane);
 }
 
-void	set_plane(t_plane **plane, t_vector pos, t_vector vector, int clr)
+void	set_plane(t_plane **plane, t_vector pos_normal[2], double csr[3])
 {
 	t_plane	*new;
 	t_plane	*tmp;
 
-	new = new_plane(pos, vector, clr);
+	new = new_plane(pos_normal, csr);
 	if (!*plane)
 	{
 		*plane = new;

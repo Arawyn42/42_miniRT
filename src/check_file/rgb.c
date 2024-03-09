@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   rgb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:08:42 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/02 15:03:46 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 17:21:29 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/*
+ *	Returns 1 if the input string has a color format of the form 255,255,255
+ *	of 0 if not.
+*/
 int	check_rgb(char *param)
 {
 	int		i;

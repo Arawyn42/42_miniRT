@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:02:56 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 15:35:12 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:45:08 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,30 +65,44 @@ static double	obj_intersection(t_ray ray, t_obj *obj)
 }
 
 /*
+ *	Returns the specular power of an object.
+*/
+static double	get_obj_specular(t_obj *obj)
+{
+	if (obj->pl)
+		return (obj->pl->specular);
+	else if (obj->sp)
+		return (obj->sp->specular);
+	else if (obj->cy)
+		return (obj->cy->specular);
+	return (DEFAULT_SPECULAR_POWER);
+}
+
+/*
  *	Returns the closest object from ray's origin and its distance from it.
 */
 t_closest_obj	closest_intersection(t_ray ray, t_obj *objs)
 {
 	double			distance;
-	double			closest_distance;
 	t_obj			*obj;
-	t_obj			*closest;
 	t_closest_obj	res;
 
-	closest = NULL;
-	closest_distance = INFINITY;
+	res.obj = NULL;
+	res.distance = INFINITY;
+	res.specular = DEFAULT_SPECULAR_POWER;
+	res.reflect = DEFAULT_REFLECT_RATIO;
 	obj = objs;
 	while (obj)
 	{
 		distance = obj_intersection(ray, obj);
-		if (distance > PRECISION && distance < closest_distance)
+		if (distance > PRECISION && distance < res.distance)
 		{
-			closest_distance = distance;
-			closest = obj;
+			res.obj = obj;
+			res.distance = distance;
+			res.specular = get_obj_specular(obj);
+			res.reflect = get_obj_reflect_ratio(obj);
 		}
 		obj = obj->next;
 	}
-	res.obj = closest;
-	res.distance = closest_distance;
 	return (res);
 }

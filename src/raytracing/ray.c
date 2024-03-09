@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:21:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 15:31:33 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:22:24 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ t_color	ray_trace(t_data *data, t_ray ray, int depth)
 	ray.dir = reflection_dir(closest_normal, \
 		substract_vect((t_vector){0, 0, 0}, ray.dir));
 	reflect_color = ray_trace(data, ray, depth - 1);
-	return (reflection_color(color, reflect_color, 0.1));
+	return (reflection_color(color, reflect_color, closest.reflect));
 }

@@ -3,19 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:13:12 by drenassi          #+#    #+#             */
-/*   Updated: 2024/02/18 11:22:26 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:33:35 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/*
+ *	Second part of the check_cylinder function.
+*/
+static int	check_cylinder2(char **data)
+{
+	if (data[6] && (!check_double(data[6]) \
+		|| ft_atod(data[6]) < 0.0 || ft_atod(data[6]) > 1000.0))
+	{
+		print_error("Error: Cylinder: Specular power must be a ");
+		print_error("double in range [0.0-1000.0]. Example: 200\n");
+		return (0);
+	}
+	if (data[6] && data[7] && (!check_double(data[7]) \
+		|| ft_atod(data[7]) < 0.0 || ft_atod(data[7]) > 1.0))
+	{
+		print_error("Error: Cylinder: Reflect ratio must be in range ");
+		print_error("[0.0,1.0]. Example: 0.6\n");
+		return (0);
+	}
+	return (1);
+}
+
+/*
+ *	Returns 1 if the given line has the correct format for cylinder descriptor,
+ *	0 if not.
+*/
 int	check_cylinder(char **data)
 {
-	if (double_array_len(data) != 6)
-		return (print_error("Error: Cylinder needs 5 arguments.\n"));
+	int	len;
+
+	len = double_array_len(data);
+	if (len < 6 || len > 8)
+		return (print_error("Error: Cylinder needs 5-7 arguments.\n"));
 	if (!check_coordinates(data[1]))
 		return (print_error("Error: Cylinder: Wrong coordinates.\n"));
 	if (!check_orientation_vector(data[2]))
@@ -31,5 +60,7 @@ int	check_cylinder(char **data)
 		print_error("must be in range [0-255]. Example: 255,255,255\n");
 		return (0);
 	}
+	if (!check_cylinder2(data))
+		return (0);
 	return (1);
 }

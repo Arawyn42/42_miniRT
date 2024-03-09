@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:54:10 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/09 15:28:08 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:03:28 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void	destroy_cylinder(t_cylinder **cylinder)
 /*
  *	Create, set the values and return cylinder struct.
 */
-static t_cylinder	*new_cylinder(t_vector pos_vect[2], \
-	double rad_height[2], int clr)
+static t_cylinder	*new_cylinder(t_vector pos_axis[2], double dhcsr[5])
 {
 	t_cylinder	*cylinder;
 
@@ -54,11 +53,13 @@ static t_cylinder	*new_cylinder(t_vector pos_vect[2], \
 		print_error("Out of memory\n");
 		return (NULL);
 	}
-	cylinder->pos = pos_vect[0];
-	cylinder->axis = pos_vect[1];
-	cylinder->radius = rad_height[0];
-	cylinder->height = rad_height[1];
-	cylinder->color = clr;
+	cylinder->pos = pos_axis[0];
+	cylinder->axis = pos_axis[1];
+	cylinder->radius = dhcsr[0];
+	cylinder->height = dhcsr[1];
+	cylinder->color = (int)dhcsr[2];
+	cylinder->specular = dhcsr[3];
+	cylinder->reflect = dhcsr[4];
 	cylinder->next = NULL;
 	return (cylinder);
 }
@@ -72,13 +73,13 @@ static t_cylinder	*get_last_cylinder(t_cylinder *cylinder)
 	return (cylinder);
 }
 
-void	set_cylinder(t_cylinder **cylinder, t_vector pos_vect[2], \
-	double diam_height[2], int clr)
+void	set_cylinder(t_cylinder **cylinder, t_vector pos_axis[2], \
+	double dhcsr[5])
 {
 	t_cylinder	*new;
 	t_cylinder	*tmp;
 
-	new = new_cylinder(pos_vect, diam_height, clr);
+	new = new_cylinder(pos_axis, dhcsr);
 	if (!*cylinder)
 	{
 		*cylinder = new;
