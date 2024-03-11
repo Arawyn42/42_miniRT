@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/09 19:50:49 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/11 01:01:31 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,7 +262,8 @@ t_vector		get_obj_normal(t_obj *obj, t_vector intersection);
 t_vector		set_ray(t_vector base[3], double x, double y, double z);
 t_vector		intersection_point(t_ray ray, double distance);
 double			cy_intersection(t_ray ray, t_cylinder *cylinder);
-t_closest_obj	closest_intersection(t_ray ray, t_obj *objs);
+double			obj_intersection(t_ray ray, t_obj *obj);
+t_closest_obj	closest_intersection(t_data *data, t_ray ray);
 t_color			ray_trace(t_data *data, t_ray ray, int depth);
 
 /* AMBIENT LIGHTNING */
@@ -279,6 +280,7 @@ t_color			reflection_color(t_color color, t_color reflective, \
 		double ratio);
 t_color			light_effects(t_data *data, t_vector normal, \
 		t_closest_obj closest, t_ray ray);
+int				is_in_shadow(t_data *data, t_vector point);
 
 /* RENDERING */
 void			rendering(t_minirt *mem);

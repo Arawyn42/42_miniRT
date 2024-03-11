@@ -6,7 +6,7 @@
 #    By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 14:42:11 by drenassi          #+#    #+#              #
-#    Updated: 2024/03/09 16:37:04 by drenassi         ###   ########.fr        #
+#    Updated: 2024/03/10 23:36:23 by drenassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ SRCS			= utils/str/ft_strcmp.c \
 				  light_effects/light.c \
 				  light_effects/light_effects.c \
 				  light_effects/reflection.c \
+				  light_effects/shadow.c \
 				  rendering/draw_pixels.c \
 				  rendering/loading_display.c \
 				  rendering/rendering.c

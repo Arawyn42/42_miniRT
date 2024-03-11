@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:02:56 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 18:45:08 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/10 22:29:59 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static double	sp_intersection(t_ray ray, t_sphere *sp)
  *	Returns the distance from the ray's origin to the intersection point
  *	with an object.
 */
-static double	obj_intersection(t_ray ray, t_obj *obj)
+double	obj_intersection(t_ray ray, t_obj *obj)
 {
 	if (!obj)
 		return (INFINITY);
@@ -81,7 +81,7 @@ static double	get_obj_specular(t_obj *obj)
 /*
  *	Returns the closest object from ray's origin and its distance from it.
 */
-t_closest_obj	closest_intersection(t_ray ray, t_obj *objs)
+t_closest_obj	closest_intersection(t_data *data, t_ray ray)
 {
 	double			distance;
 	t_obj			*obj;
@@ -91,7 +91,7 @@ t_closest_obj	closest_intersection(t_ray ray, t_obj *objs)
 	res.distance = INFINITY;
 	res.specular = DEFAULT_SPECULAR_POWER;
 	res.reflect = DEFAULT_REFLECT_RATIO;
-	obj = objs;
+	obj = data->objs;
 	while (obj)
 	{
 		distance = obj_intersection(ray, obj);

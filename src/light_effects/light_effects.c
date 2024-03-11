@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:20:04 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 19:57:28 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:45:57 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,16 +109,20 @@ t_color	light_effects(t_data *data, t_vector normal, \
 	t_vector	intensity;
 	t_vector	inter;
 	t_vector	normal_dir[2];
+	double		shadow;
 
-	normal_dir[0] = normal;
-	normal_dir[1] = substract_vect((t_vector){0, 0, 0}, ray.dir);
 	inter = intersection_point(ray, closest.distance);
 	obj_color = get_obj_color(closest.obj);
+	shadow = 1;
+	if (is_in_shadow(data, inter))
+		shadow = data->light->ratio;
+	normal_dir[0] = normal;
+	normal_dir[1] = substract_vect((t_vector){0, 0, 0}, ray.dir);
 	intensity = light_effects_intensity(data, normal_dir, \
 		inter, closest.specular);
-	color.r = obj_color.r * intensity.x;
-	color.g = obj_color.g * intensity.y;
-	color.b = obj_color.b * intensity.z;
+	color.r = obj_color.r * intensity.x * shadow;
+	color.g = obj_color.g * intensity.y * shadow;
+	color.b = obj_color.b * intensity.z * shadow;
 	color.sum = color.r + color.g + color.b;
 	protect_colors(&color);
 	return (color);
