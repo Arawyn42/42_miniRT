@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:50:50 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/09 18:05:34 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:29:07 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	destroy_sphere(t_sphere **sphere)
 /*
  *	Create, set the values and return sphere struct.
 */
-t_sphere	*new_sphere(t_vector pos, double rcsr[4])
+t_sphere	*new_sphere(t_vector pos, double rcr[3])
 {
 	t_sphere	*sphere;
 
@@ -54,10 +54,9 @@ t_sphere	*new_sphere(t_vector pos, double rcsr[4])
 		return (NULL);
 	}
 	sphere->pos = pos;
-	sphere->radius = rcsr[0];
-	sphere->color = (int)rcsr[1];
-	sphere->specular = rcsr[2];
-	sphere->reflect = rcsr[3];
+	sphere->radius = rcr[0];
+	sphere->color = (int)rcr[1];
+	sphere->reflect = rcr[2];
 	sphere->next = NULL;
 	return (sphere);
 }
@@ -71,12 +70,12 @@ static t_sphere	*get_last_sphere(t_sphere *sphere)
 	return (sphere);
 }
 
-void	set_sphere(t_sphere **sphere, t_vector pos, double rcsr[4])
+void	set_sphere(t_sphere **sphere, t_vector pos, double rcr[3])
 {
 	t_sphere	*new;
 	t_sphere	*tmp;
 
-	new = new_sphere(pos, rcsr);
+	new = new_sphere(pos, rcr);
 	if (!*sphere)
 	{
 		*sphere = new;

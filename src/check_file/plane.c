@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:09:21 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 18:32:04 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:34:42 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,7 @@
 int	check_plane2(char **data)
 {
 	if (data[4] && (!check_double(data[4]) \
-		|| ft_atod(data[4]) < 0.0 || ft_atod(data[4]) > 1000.0))
-	{
-		print_error("Error: Plane: Specular power must be a ");
-		print_error("double in range [0.0-1000.0]. Example: 200\n");
-		return (0);
-	}
-	if (data[4] && data[5] && (!check_double(data[5]) \
-		|| ft_atod(data[5]) < 0.0 || ft_atod(data[5]) > 1.0))
+		|| ft_atod(data[4]) < 0.0 || ft_atod(data[4]) > 1.0))
 	{
 		print_error("Error: Plane: Reflect ratio must be in range ");
 		print_error("[0.0,1.0]. Example: 0.6\n");
@@ -43,8 +36,8 @@ int	check_plane(char **data)
 	int	len;
 
 	len = double_array_len(data);
-	if (len < 4 || len > 6)
-		return (print_error("Error: Plane needs 3-5 arguments.\n"));
+	if (len < 4 || len > 5)
+		return (print_error("Error: Plane needs 3 or 4 arguments.\n"));
 	if (!check_coordinates(data[1]))
 		return (print_error("Error: Plane: Wrong coordinates.\n"));
 	if (!check_orientation_vector(data[2]))

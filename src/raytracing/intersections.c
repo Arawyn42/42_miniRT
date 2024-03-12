@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:02:56 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/10 22:29:59 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:32:30 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,6 @@ double	obj_intersection(t_ray ray, t_obj *obj)
 }
 
 /*
- *	Returns the specular power of an object.
-*/
-static double	get_obj_specular(t_obj *obj)
-{
-	if (obj->pl)
-		return (obj->pl->specular);
-	else if (obj->sp)
-		return (obj->sp->specular);
-	else if (obj->cy)
-		return (obj->cy->specular);
-	return (DEFAULT_SPECULAR_POWER);
-}
-
-/*
  *	Returns the closest object from ray's origin and its distance from it.
 */
 t_closest_obj	closest_intersection(t_data *data, t_ray ray)
@@ -89,7 +75,6 @@ t_closest_obj	closest_intersection(t_data *data, t_ray ray)
 
 	res.obj = NULL;
 	res.distance = INFINITY;
-	res.specular = DEFAULT_SPECULAR_POWER;
 	res.reflect = DEFAULT_REFLECT_RATIO;
 	obj = data->objs;
 	while (obj)
@@ -99,7 +84,6 @@ t_closest_obj	closest_intersection(t_data *data, t_ray ray)
 		{
 			res.obj = obj;
 			res.distance = distance;
-			res.specular = get_obj_specular(obj);
 			res.reflect = get_obj_reflect_ratio(obj);
 		}
 		obj = obj->next;

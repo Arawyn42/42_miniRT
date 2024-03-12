@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/11 01:01:31 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:49:56 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@
 # include "../libs/libft/includes/libft.h"
 # include "../libs/minilibx-linux/mlx.h"
 
-# define SCREEN_H 540
-# define SCREEN_W 960
+# define SCREEN_H 810
+# define SCREEN_W 1440
 # define VIEWPORT_DIST 1
 # define DEPTH 3
 # define PRECISION 0.01
-# define DEFAULT_SPECULAR_POWER -1.0
 # define DEFAULT_REFLECT_RATIO 0.0
 # ifndef M_PI
 #  define M_PI 3.14159265358
@@ -93,7 +92,6 @@ typedef struct s_sphere
 	double			radius;
 	int				color;
 	double			reflect;
-	double			specular;
 	struct s_sphere	*next;
 }			t_sphere;
 
@@ -103,7 +101,6 @@ typedef struct s_plane
 	t_vector		normal;
 	int				color;
 	double			reflect;
-	double			specular;
 	struct s_plane	*next;
 }			t_plane;
 
@@ -115,7 +112,6 @@ typedef struct s_cylinder
 	double				height;
 	int					color;
 	double				reflect;
-	double				specular;
 	struct s_cylinder	*next;
 }			t_cylinder;
 
@@ -132,7 +128,6 @@ typedef struct s_closest_obj
 {
 	t_obj	*obj;
 	double	distance;
-	double	specular;
 	double	reflect;
 }			t_closest_obj;
 
@@ -236,12 +231,12 @@ void			destroy_alight(t_alight *alight);
 t_light			*set_light(t_vector pos, double ratio, int color);
 void			destroy_light(t_light *light);
 void			set_plane(t_plane **plane, t_vector pos_normal[2], \
-		double csr[3]);
+		double cr[2]);
 void			destroy_plane(t_plane **plane);
-void			set_sphere(t_sphere **sphere, t_vector pos, double rcsr[4]);
+void			set_sphere(t_sphere **sphere, t_vector pos, double rcr[3]);
 void			destroy_sphere(t_sphere **sphere);
 void			set_cylinder(t_cylinder **cylinder, t_vector pos_axis[2], \
-		double dhcsr[5]);
+		double dhcr[4]);
 void			destroy_cylinder(t_cylinder **cylinder);
 
 /* OBJECTS LIST */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:54:10 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/09 18:03:28 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:01:37 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	destroy_cylinder(t_cylinder **cylinder)
 /*
  *	Create, set the values and return cylinder struct.
 */
-static t_cylinder	*new_cylinder(t_vector pos_axis[2], double dhcsr[5])
+static t_cylinder	*new_cylinder(t_vector pos_axis[2], double dhcr[4])
 {
 	t_cylinder	*cylinder;
 
@@ -55,11 +55,10 @@ static t_cylinder	*new_cylinder(t_vector pos_axis[2], double dhcsr[5])
 	}
 	cylinder->pos = pos_axis[0];
 	cylinder->axis = pos_axis[1];
-	cylinder->radius = dhcsr[0];
-	cylinder->height = dhcsr[1];
-	cylinder->color = (int)dhcsr[2];
-	cylinder->specular = dhcsr[3];
-	cylinder->reflect = dhcsr[4];
+	cylinder->radius = dhcr[0];
+	cylinder->height = dhcr[1];
+	cylinder->color = (int)dhcr[2];
+	cylinder->reflect = dhcr[3];
 	cylinder->next = NULL;
 	return (cylinder);
 }
@@ -74,12 +73,12 @@ static t_cylinder	*get_last_cylinder(t_cylinder *cylinder)
 }
 
 void	set_cylinder(t_cylinder **cylinder, t_vector pos_axis[2], \
-	double dhcsr[5])
+	double dhcr[4])
 {
 	t_cylinder	*new;
 	t_cylinder	*tmp;
 
-	new = new_cylinder(pos_axis, dhcsr);
+	new = new_cylinder(pos_axis, dhcr);
 	if (!*cylinder)
 	{
 		*cylinder = new;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:13:12 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 18:33:35 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:35:02 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,9 @@
 */
 static int	check_cylinder2(char **data)
 {
+	
 	if (data[6] && (!check_double(data[6]) \
-		|| ft_atod(data[6]) < 0.0 || ft_atod(data[6]) > 1000.0))
-	{
-		print_error("Error: Cylinder: Specular power must be a ");
-		print_error("double in range [0.0-1000.0]. Example: 200\n");
-		return (0);
-	}
-	if (data[6] && data[7] && (!check_double(data[7]) \
-		|| ft_atod(data[7]) < 0.0 || ft_atod(data[7]) > 1.0))
+		|| ft_atod(data[6]) < 0.0 || ft_atod(data[6]) > 1.0))
 	{
 		print_error("Error: Cylinder: Reflect ratio must be in range ");
 		print_error("[0.0,1.0]. Example: 0.6\n");
@@ -43,8 +37,8 @@ int	check_cylinder(char **data)
 	int	len;
 
 	len = double_array_len(data);
-	if (len < 6 || len > 8)
-		return (print_error("Error: Cylinder needs 5-7 arguments.\n"));
+	if (len < 6 || len > 7)
+		return (print_error("Error: Cylinder needs 5 or 6 arguments.\n"));
 	if (!check_coordinates(data[1]))
 		return (print_error("Error: Cylinder: Wrong coordinates.\n"));
 	if (!check_orientation_vector(data[2]))

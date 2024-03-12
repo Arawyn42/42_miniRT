@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:34:37 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/09 18:44:09 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:02:22 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	destroy_plane(t_plane **plane)
 /*
  *	Create, set the values and return plane struct.
 */
-static t_plane	*new_plane(t_vector pos_normal[2], double csr[3])
+static t_plane	*new_plane(t_vector pos_normal[2], double cr[2])
 {
 	t_plane	*plane;
 
@@ -55,9 +55,8 @@ static t_plane	*new_plane(t_vector pos_normal[2], double csr[3])
 	}
 	plane->pos = pos_normal[0];
 	plane->normal = pos_normal[1];
-	plane->color = csr[0];
-	plane->specular = csr[1];
-	plane->reflect = csr[2];
+	plane->color = cr[0];
+	plane->reflect = cr[1];
 	plane->next = NULL;
 	return (plane);
 }
@@ -71,12 +70,12 @@ static t_plane	*get_last_plane(t_plane *plane)
 	return (plane);
 }
 
-void	set_plane(t_plane **plane, t_vector pos_normal[2], double csr[3])
+void	set_plane(t_plane **plane, t_vector pos_normal[2], double cr[2])
 {
 	t_plane	*new;
 	t_plane	*tmp;
 
-	new = new_plane(pos_normal, csr);
+	new = new_plane(pos_normal, cr);
 	if (!*plane)
 	{
 		*plane = new;
