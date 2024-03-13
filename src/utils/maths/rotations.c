@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotations.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:30:15 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 15:31:04 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/13 21:08:11 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_vector	vect_cross_product(t_vector v1, t_vector v2)
 {
 	t_vector	res;
 
-	res.x = v2.y * v1.z - v1.y * v2.z;
-	res.y = v2.z * v1.x - v1.z * v2.x;
-	res.z = v2.x * v1.y - v1.x * v2.y;
+	res.x = v1.y * v2.z - v1.z * v2.y;
+	res.y = v1.z * v2.x - v1.x * v2.z;
+	res.z = v1.x * v2.y - v1.y * v2.x;
 	return (res);
 }
 
@@ -38,8 +38,13 @@ double	vect_cos(t_vector v1, t_vector v2)
 */
 double	vect_sin(t_vector v1, t_vector v2)
 {
-	return (vect_length(vect_cross_product(v1, v2)) \
-		/ (vect_length(v1) * vect_length(v2)));
+	double	sinus;
+
+	sinus = vect_length(vect_cross_product(v1, v2)) \
+		/ (vect_length(v1) * vect_length(v2));
+	if (vect_dot(v1, v2) >= 0)
+		return (sinus);
+	return (-sinus);
 }
 
 /*
@@ -71,9 +76,9 @@ void	rotate_base(t_vector base[3], t_vector direction)
 	double		cos;
 	double		sin;
 
-	axis = vect_cross_product(normalize_vect(direction), base[2]);
-	cos = vect_cos(normalize_vect(direction), base[2]);
-	sin = vect_sin(normalize_vect(direction), base[2]);
+	axis = normalize_vect(vect_cross_product(base[2], direction));
+	cos = vect_cos(base[2], direction);
+	sin = vect_sin(base[2], direction);
 	base[0] = rotate_vect(base[0], axis, cos, sin);
 	base[1] = rotate_vect(base[1], axis, cos, sin);
 	base[2] = rotate_vect(base[2], axis, cos, sin);

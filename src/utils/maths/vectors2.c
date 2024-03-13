@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 02:58:25 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/09 19:51:16 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:39:41 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_vector	normalize_vect(t_vector vect)
 	double		norm;
 
 	norm = vect_length(vect);
+	if (!norm)
+		return ((t_vector){0, 0, 0});
 	normalized.x = vect.x / norm;
 	normalized.y = vect.y / norm;
 	normalized.z = vect.z / norm;
