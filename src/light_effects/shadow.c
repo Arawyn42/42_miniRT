@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:00:20 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/11 00:03:56 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/15 21:18:11 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	is_in_shadow(t_data *data, t_vector point)
 	double			l_distance;
 	t_closest_obj	closest;
 
+	if (!data->light)
+		return (0);
 	p_to_l.origin = point;
 	p_to_l.dir = normalize_vect(substract_vect(data->light->pos, point));
 	l_distance = vect_length(substract_vect(data->light->pos, point));

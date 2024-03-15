@@ -6,7 +6,7 @@
 /*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:20:04 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/12 16:50:00 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/15 21:19:10 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ static double	specular_intensity(t_vector p_to_l, t_vector normal, \
 {
 	t_vector	reflect;
 	double		scalar;
+	double		intensity;
 
 	if (closest.obj->pl || closest.reflect > 0)
 		return (0);
 	reflect = reflection_dir(normal, p_to_l);
 	scalar = vect_dot(reflect, dir);
-	if (scalar > 0)
-		return (pow(scalar, 30) * 10);
+	intensity = fabs(pow(scalar, 30) * 0.002);
+	if (scalar > PRECISION && intensity > PRECISION)
+		return (intensity);
 	return (0);
 }
 
@@ -114,7 +116,7 @@ t_color	light_effects(t_data *data, t_vector normal, \
 	inter = intersection_point(ray, closest.distance);
 	obj_color = get_obj_color(closest.obj);
 	shadow = 1;
-	if (is_in_shadow(data, inter))
+	if (closest.reflect < PRECISION && is_in_shadow(data, inter))
 		shadow = data->light->ratio;
 	normal_dir[0] = normal;
 	normal_dir[1] = substract_vect((t_vector){0, 0, 0}, ray.dir);
