@@ -6,7 +6,7 @@
 /*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:20:04 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/15 21:19:10 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/15 21:48:59 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ t_color	light_effects(t_data *data, t_vector normal, \
 	inter = intersection_point(ray, closest.distance);
 	obj_color = get_obj_color(closest.obj);
 	shadow = 1;
-	if (closest.reflect < PRECISION && is_in_shadow(data, inter))
-		shadow = data->light->ratio;
+	if (is_in_shadow(data, inter))
+		shadow = fmin(data->light->ratio * (1 + closest.reflect), 1);
 	normal_dir[0] = normal;
 	normal_dir[1] = substract_vect((t_vector){0, 0, 0}, ray.dir);
 	intensity = light_effects_intensity(data, normal_dir, \
