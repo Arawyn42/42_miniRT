@@ -6,12 +6,15 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 10:16:26 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/16 13:16:33 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/16 13:25:25 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/*
+ *	Returns the hard shadow intensity.
+*/
 double	shadow_effects(t_data *data, t_vector inter, t_closest_obj closest)
 {
 	t_light	*light;
