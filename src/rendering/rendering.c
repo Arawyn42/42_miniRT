@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:46:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 15:30:33 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/16 10:56:27 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	render(t_data *data, t_image *img, t_vector base[3])
 	t_viewport	vp;
 
 	color = (t_color){0, 0, 0, 0};
-	init_objs(data);
 	init_ray(data, &ray);
 	vp = init_viewport(data->camera->fov, VIEWPORT_DIST);
 	pixel.x = -SCREEN_W / 2 - 1;

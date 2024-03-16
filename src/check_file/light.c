@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 17:31:10 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 17:22:32 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/16 09:43:22 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,8 @@ static int	check_ratio(char *ratio)
 */
 int	check_light(char **data)
 {
-	static int	l_count = 0;
 	int			len;
 
-	l_count++;
-	if (l_count > 1)
-		return (print_error("Error: Too much Lights.\n"));
 	len = double_array_len(data);
 	if (len != 4)
 		return (print_error("Error: Light needs 4 arguments.\n"));

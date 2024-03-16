@@ -56,7 +56,8 @@ static int	check_radius(t_ray ray, t_cylinder *cy, double distance)
 		multiply_vect_scalar(ray.dir, distance)), cy->pos);
 	scalar = vect_dot(center_to_point, cy->axis) \
 		/ vect_dot(cy->axis, cy->axis);
-	radius = substract_vect(center_to_point, multiply_vect_scalar(cy->axis, scalar));
+	radius = substract_vect(center_to_point, \
+		multiply_vect_scalar(cy->axis, scalar));
 	if (vect_length(radius) > cy->radius)
 		return (0);
 	return (1);
@@ -101,20 +102,3 @@ double	cy_intersection(t_ray ray, t_cylinder *cylinder)
 		return (inter2);
 	return (INFINITY);
 }
-
-// double	cy_intersection(t_ray ray, t_cylinder *cylinder)
-// {
-// 	double	a;
-// 	double	b;
-// 	double	c;
-// 	t_vector	r_to_c;
-
-// 	r_to_c = substract_vect(*cylinder->pos, ray.origin);
-// 	a = vect_dot(ray.dir, ray.dir) - pow(vect_dot(ray.dir, *cylinder->axis), 2);
-// 	b = 2 * (vect_dot(ray.dir, r_to_c) - vect_dot(ray.dir,
-//	*cylinder->axis) * vect_dot(r_to_c, *cylinder->axis));
-// 	c = vect_dot(r_to_c, r_to_c) - pow(vect_dot(r_to_c, 
-//	*cylinder->axis), 2) - cylinder->radius * cylinder->radius;
-// 	printf("res cy = %f\n", quadratic_min(a, b, c, PRECISION));
-// 	return (quadratic_min(a, b, c, PRECISION));
-// }

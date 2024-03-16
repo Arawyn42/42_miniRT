@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 02:58:25 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/13 20:39:41 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/16 10:42:43 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vector	normalize_vect(t_vector vect)
 }
 
 /*
- *	Divides a vector by another member by member and returns the result.
+ *	Multiplies a vector by another member by member and returns the result.
 */
 t_vector	multiply_vect(t_vector	v1, t_vector v2)
 {

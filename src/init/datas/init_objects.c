@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:52:51 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 15:30:13 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/16 10:41:05 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,17 +92,23 @@ static void	init_objs_cy(t_data *data)
 */
 static void	init_objs_light(t_data *data)
 {
+	t_light	*light;
 	t_obj	*new_obj;
 	t_obj	*last_obj;
 
-	new_obj = create_new_obj();
-	new_obj->light = data->light;
-	if (!data->objs)
-		data->objs = new_obj;
-	else
+	light = data->light;
+	while (light)
 	{
-		last_obj = get_last_obj(data->objs);
-		last_obj->next = new_obj;
+		new_obj = create_new_obj();
+		new_obj->light = light;
+		if (!data->objs)
+			data->objs = new_obj;
+		else
+		{
+			last_obj = get_last_obj(data->objs);
+			last_obj->next = new_obj;
+		}
+		light = light->next;
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:21:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/11 18:04:15 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/16 12:48:11 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_vector	intersection_point(t_ray ray, double distance)
 {
 	t_vector	intersection;
 
-	intersection = add_vect(ray.origin, multiply_vect_scalar(ray.dir, distance));
+	intersection = add_vect(ray.origin, \
+		multiply_vect_scalar(ray.dir, distance));
 	return (intersection);
 }
 

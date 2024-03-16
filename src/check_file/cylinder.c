@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:13:12 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/11 17:35:02 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/16 12:41:51 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 */
 static int	check_cylinder2(char **data)
 {
-	
 	if (data[6] && (!check_double(data[6]) \
 		|| ft_atod(data[6]) < 0.0 || ft_atod(data[6]) > 1.0))
 	{

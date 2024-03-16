@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/12 16:49:56 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/16 11:31:09 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,10 @@ typedef struct s_viewport
 
 typedef struct s_light
 {
-	t_vector	pos;
-	double		ratio;
-	int			color;
+	t_vector		pos;
+	double			ratio;
+	int				color;
+	struct s_light	*next;
 }			t_light;
 
 typedef struct s_sphere
@@ -228,8 +229,9 @@ void			destroy_camera(t_camera *camera);
 t_viewport		init_viewport(double fov, double distance);
 t_alight		*set_alight(double ratio, int color);
 void			destroy_alight(t_alight *alight);
-t_light			*set_light(t_vector pos, double ratio, int color);
-void			destroy_light(t_light *light);
+void			set_light(t_light **light, t_vector pos, \
+		double ratio, int color);
+void			destroy_lights(t_light **light);
 void			set_plane(t_plane **plane, t_vector pos_normal[2], \
 		double cr[2]);
 void			destroy_plane(t_plane **plane);
@@ -265,7 +267,7 @@ t_color			ray_trace(t_data *data, t_ray ray, int depth);
 t_vector		ambient_lightning_intensity(t_data *data);
 
 /* LIGHT */
-t_vector		light_intensity(t_data *data);
+t_vector		light_intensity(t_data *data, t_light light);
 
 /* LIGHT EFFECTS */
 t_color			get_obj_color(t_obj *obj);
@@ -275,7 +277,9 @@ t_color			reflection_color(t_color color, t_color reflective, \
 		double ratio);
 t_color			light_effects(t_data *data, t_vector normal, \
 		t_closest_obj closest, t_ray ray);
-int				is_in_shadow(t_data *data, t_vector point);
+int				is_in_shadow(t_data *data, t_vector point, t_light light);
+double			shadow_effects(t_data *data, t_vector inter, \
+		t_closest_obj closest);
 
 /* RENDERING */
 void			rendering(t_minirt *mem);

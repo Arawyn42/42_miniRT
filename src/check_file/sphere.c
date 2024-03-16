@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:01:28 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/11 17:34:51 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/16 12:41:28 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int	check_sphere2(char **data)
 {
 	if (data[4] && (!check_double(data[4]) || ft_atod(data[4]) < 0.0
-		|| ft_atod(data[4]) > 1.0))
+			|| ft_atod(data[4]) > 1.0))
 	{
 		print_error("Error: Sphere: Reflect ratio must be in range ");
 		print_error("[0.0,1.0]. Example: 0.6\n");

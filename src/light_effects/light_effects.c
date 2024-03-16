@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_effects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:20:04 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/15 21:48:59 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/16 12:48:48 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,27 +77,29 @@ static t_vector	point_intensity(t_light light, t_vector normal_dir[2], \
 static t_vector	light_effects_intensity(t_data *data, \
 	t_vector normal_dir[2], t_vector inter, t_closest_obj closest)
 {
-	t_vector	a_light;
 	t_vector	p_intensity;
 	t_vector	l_intensity;
 	t_vector	p_to_l;
 	t_obj		*objs;
+	t_vector	intensity;
 
-	a_light = ambient_lightning_intensity(data);
+	intensity = (t_vector){1, 1, 1};
 	objs = data->objs;
 	while (objs)
 	{
 		if (objs->light)
 		{
 			p_to_l = normalize_vect(substract_vect(objs->light->pos, inter));
-			p_intensity = add_vect(a_light, \
+			p_intensity = add_vect(ambient_lightning_intensity(data), \
 				point_intensity(*objs->light, normal_dir, p_to_l, closest));
-			l_intensity = add_vect(a_light, light_intensity(data));
-			return (divide_vect(p_intensity, l_intensity));
+			l_intensity = add_vect(ambient_lightning_intensity(data), \
+				light_intensity(data, *objs->light));
+			intensity = multiply_vect(intensity, \
+				divide_vect(p_intensity, l_intensity));
 		}
 		objs = objs->next;
 	}
-	return ((t_vector){1, 1, 1});
+	return (intensity);
 }
 
 /*
@@ -109,19 +111,16 @@ t_color	light_effects(t_data *data, t_vector normal, \
 	t_color		obj_color;
 	t_color		color;
 	t_vector	intensity;
-	t_vector	inter;
 	t_vector	normal_dir[2];
 	double		shadow;
 
-	inter = intersection_point(ray, closest.distance);
 	obj_color = get_obj_color(closest.obj);
-	shadow = 1;
-	if (is_in_shadow(data, inter))
-		shadow = fmin(data->light->ratio * (1 + closest.reflect), 1);
+	shadow = shadow_effects(data, intersection_point(ray, \
+		closest.distance), closest);
 	normal_dir[0] = normal;
 	normal_dir[1] = substract_vect((t_vector){0, 0, 0}, ray.dir);
 	intensity = light_effects_intensity(data, normal_dir, \
-		inter, closest);
+		intersection_point(ray, closest.distance), closest);
 	color.r = obj_color.r * intensity.x * shadow;
 	color.g = obj_color.g * intensity.y * shadow;
 	color.b = obj_color.b * intensity.z * shadow;

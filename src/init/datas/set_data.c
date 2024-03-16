@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:58:35 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 18:11:47 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/16 10:56:34 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	destroy_data(t_data *data)
 	if (data->camera)
 		destroy_camera(data->camera);
 	if (data->light)
-		destroy_light(data->light);
+		destroy_lights(&data->light);
 	if (data->planes)
 		destroy_plane(&data->planes);
 	if (data->spheres)
@@ -49,6 +49,21 @@ static void	set_data_null(t_data *data)
 }
 
 /*
+ *	Sets all datas for a light.
+*/
+static void	set_data_light(t_data *data, char **datas)
+{
+	t_vector	pos;
+	double		ratio;
+	int			color;
+
+	pos = str_to_point(datas[1]);
+	ratio = ft_atod(datas[2]);
+	color = format_color(datas[3]);
+	set_light(&(data->light), pos, ratio, color);
+}
+
+/*
  *	Sets all datas from a given line.
 */
 static void	set_line_data(char *line, t_data *data)
@@ -67,8 +82,7 @@ static void	set_line_data(char *line, t_data *data)
 		data->camera = set_camera(str_to_point(datas[1]), \
 			str_to_point(datas[2]), ft_atoi(datas[3]));
 	else if (!ft_strcmp(datas[0], "L"))
-		data->light = set_light(str_to_point(datas[1]), \
-			ft_atod(datas[2]), format_color(datas[3]));
+		set_data_light(data, datas);
 	else
 		set_data_shapes(data, datas);
 	free_double_array(datas);
@@ -93,5 +107,6 @@ t_data	*set_data(char *file)
 		free(line);
 		line = get_next_line(fd);
 	}
+	init_objs(data);
 	return (close(fd), data);
 }
