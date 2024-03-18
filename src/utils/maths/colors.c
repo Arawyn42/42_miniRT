@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:34:53 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/09 19:24:52 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:16:07 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ t_color	get_obj_color(t_obj *obj)
 		return (int_to_rgb(obj->sp->color));
 	else if (obj->cy)
 		return (int_to_rgb(obj->cy->color));
+	else if (obj->co)
+		return (int_to_rgb(obj->co->color));
 	else if (obj->light)
 		return (int_to_rgb(obj->light->color));
 	else

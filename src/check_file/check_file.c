@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 17:40:45 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 17:16:58 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:45:38 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static int	check_line(char *line)
 	if (!ft_strcmp(data[0], "sp") && !check_sphere(data))
 		return (free_double_array(data), 0);
 	if (!ft_strcmp(data[0], "cy") && !check_cylinder(data))
+		return (free_double_array(data), 0);
+	if (!ft_strcmp(data[0], "co") && !check_cone(data))
 		return (free_double_array(data), 0);
 	return (free_double_array(data), 1);
 }

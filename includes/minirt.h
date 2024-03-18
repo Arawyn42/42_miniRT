@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/16 11:31:09 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 00:46:00 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,23 @@ typedef struct s_cylinder
 	struct s_cylinder	*next;
 }			t_cylinder;
 
+typedef struct s_cone
+{
+	t_vector		pos;
+	t_vector		axis;
+	double			radius;
+	double			height;
+	int				color;
+	double			reflect;
+	struct s_cone	*next;
+}			t_cone;
+
 typedef struct s_obj
 {
 	t_plane			*pl;
 	t_sphere		*sp;
 	t_cylinder		*cy;
+	t_cone			*co;
 	t_light			*light;
 	struct s_obj	*next;
 }			t_obj;
@@ -143,10 +155,11 @@ typedef struct s_data
 	t_alight	*a_light;
 	t_camera	*camera;
 	t_light		*light;
-	t_sphere	*spheres;
 	t_plane		*planes;
-	t_obj		*objs;
+	t_sphere	*spheres;
 	t_cylinder	*cylinders;
+	t_cone		*cones;
+	t_obj		*objs;
 }			t_data;
 
 typedef struct s_minirt
@@ -155,13 +168,6 @@ typedef struct s_minirt
 	t_image		*img;
 	t_data		*data;
 }			t_minirt;
-
-typedef struct s_values
-{
-	double	farest_obj;
-	int		half_screen_h;
-	int		half_screen_w;
-}			t_values;
 
 /* STRING UTILS */
 int				ft_strcmp(const char *s1, const char *s2);
@@ -186,7 +192,7 @@ double			vect_sin(t_vector v1, t_vector v2);
 t_vector		rotate_vect(t_vector vector, t_vector axis, \
 		double cos, double sin);
 void			rotate_base(t_vector base[3], t_vector direction);
-double			quadratic_min(double a, double b, double c, double min);
+double			quadratic(double a, double b, double c, int sol);
 
 /* COLORS UTILS */
 int				format_color(char *colors_str);
@@ -210,6 +216,7 @@ int				check_light(char **data);
 int				check_plane(char **data);
 int				check_sphere(char **data);
 int				check_cylinder(char **data);
+int				check_cone(char **data);
 
 /* WINDOW */
 t_minirt		*init_mem(void);
@@ -223,7 +230,7 @@ void			destroy_image(t_image *img, void *mlx);
 int				user_input(int keycode, t_minirt *data);
 
 /* PARAMETERS AND SHAPES STRUCTURES AND LISTS */
-t_vector		str_to_point(char *str);
+t_vector		str_to_vect(char *str);
 t_camera		*set_camera(t_vector pos, t_vector direction, int fov);
 void			destroy_camera(t_camera *camera);
 t_viewport		init_viewport(double fov, double distance);
@@ -240,11 +247,14 @@ void			destroy_sphere(t_sphere **sphere);
 void			set_cylinder(t_cylinder **cylinder, t_vector pos_axis[2], \
 		double dhcr[4]);
 void			destroy_cylinder(t_cylinder **cylinder);
+void			set_cone(t_cone **cone, t_vector pos_axis[2], double rhcr[4]);
+void			destroy_cone(t_cone **cone);
 
 /* OBJECTS LIST */
 t_obj			*create_new_obj(void);
 t_obj			*get_last_obj(t_obj *obj);
 void			init_objs(t_data *data);
+void			init_objs_cone(t_data *data);
 void			destroy_objs(t_obj **obj);
 void			init_ray(t_data *data, t_ray *ray);
 
@@ -259,6 +269,7 @@ t_vector		get_obj_normal(t_obj *obj, t_vector intersection);
 t_vector		set_ray(t_vector base[3], double x, double y, double z);
 t_vector		intersection_point(t_ray ray, double distance);
 double			cy_intersection(t_ray ray, t_cylinder *cylinder);
+double			cone_intersection(t_ray ray, t_cone *co);
 double			obj_intersection(t_ray ray, t_obj *obj);
 t_closest_obj	closest_intersection(t_data *data, t_ray ray);
 t_color			ray_trace(t_data *data, t_ray ray, int depth);
@@ -267,7 +278,7 @@ t_color			ray_trace(t_data *data, t_ray ray, int depth);
 t_vector		ambient_lightning_intensity(t_data *data);
 
 /* LIGHT */
-t_vector		light_intensity(t_data *data, t_light light);
+t_vector		light_intensity(t_light light);
 
 /* LIGHT EFFECTS */
 t_color			get_obj_color(t_obj *obj);

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:54:10 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/11 18:01:37 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:16:12 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
- *	Cylinder struct destroyer.
+ *	Frees and sets to null a cylinder node.
 */
 static void	destroy_one_cylinder(t_cylinder *cylinder)
 {
@@ -23,6 +23,9 @@ static void	destroy_one_cylinder(t_cylinder *cylinder)
 	cylinder = NULL;
 }
 
+/*
+ *	Destroys all cylinders and frees the cylinders list.
+*/
 void	destroy_cylinder(t_cylinder **cylinder)
 {
 	t_cylinder	*tmp;
@@ -40,7 +43,7 @@ void	destroy_cylinder(t_cylinder **cylinder)
 }
 
 /*
- *	Create, set the values and return cylinder struct.
+ *	Creates, sets the values and returns a cylinder structure.
 */
 static t_cylinder	*new_cylinder(t_vector pos_axis[2], double dhcr[4])
 {
@@ -63,6 +66,9 @@ static t_cylinder	*new_cylinder(t_vector pos_axis[2], double dhcr[4])
 	return (cylinder);
 }
 
+/*
+ *	Returns the last node of the cylinders list.
+*/
 static t_cylinder	*get_last_cylinder(t_cylinder *cylinder)
 {
 	if (!cylinder)
@@ -72,6 +78,9 @@ static t_cylinder	*get_last_cylinder(t_cylinder *cylinder)
 	return (cylinder);
 }
 
+/*
+ *	Adds and sets a cylinder at the end of the cylinders list.
+*/
 void	set_cylinder(t_cylinder **cylinder, t_vector pos_axis[2], \
 	double dhcr[4])
 {

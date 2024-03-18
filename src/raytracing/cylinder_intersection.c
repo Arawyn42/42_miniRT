@@ -39,8 +39,8 @@ static double	height_intersection(t_ray ray, \
 	v1 = substract_vect(ray_to_cy, multiply_vect_scalar(cy->axis, s1 / s2));
 	s1 = vect_dot(ray.dir, cy->axis);
 	v2 = substract_vect(ray.dir, multiply_vect_scalar(cy->axis, s1 / s2));
-	distance = quadratic_min(vect_dot(v2, v2), 2 * vect_dot(v1, v2), \
-		vect_dot(v1, v1) - pow(cy->radius, 2), PRECISION);
+	distance = quadratic(vect_dot(v2, v2), 2 * vect_dot(v1, v2), \
+		vect_dot(v1, v1) - pow(cy->radius, 2), 0);
 	if (!check_height(ray, cy, distance))
 		return (INFINITY);
 	return (distance);

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:29:17 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/09 15:28:08 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 15:14:25 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
- *	Camera struct destroyer.
+ *	Camera structure destroyer.
 */
 void	destroy_camera(t_camera *camera)
 {
@@ -24,7 +24,7 @@ void	destroy_camera(t_camera *camera)
 }
 
 /*
- *	Create, set the values and return camera struct.
+ *	Creates, sets the values and returns a camera structure.
 */
 t_camera	*set_camera(t_vector pos, t_vector direction, int fov)
 {

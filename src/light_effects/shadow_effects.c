@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 10:16:26 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/16 13:25:25 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:23:19 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ double	shadow_effects(t_data *data, t_vector inter, t_closest_obj closest)
 	while (light)
 	{
 		if (is_in_shadow(data, inter, *light))
-			shadow = fmin(fmax(0.6, (1 - light->ratio)) * (1 + closest.reflect), 1);
+			shadow = fmin(fmax(0.6, (1 - light->ratio)) * fmin(1 + closest.reflect, 1.55), 1);
 		if (shadow < max_shadow)
 		{
 			if (max_shadow == 1)

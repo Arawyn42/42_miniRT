@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   point.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:31:47 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/09 15:29:03 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 15:01:53 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vector	str_to_point(char *str)
+t_vector	str_to_vect(char *str)
 {
 	char		**split;
 	t_vector	point;

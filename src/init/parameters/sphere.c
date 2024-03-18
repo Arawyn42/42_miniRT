@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:50:50 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/11 17:29:07 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:18:49 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
- *	Sphere struct destroyer.
+ *	Frees and sets to null a sphere node.
 */
 static void	destroy_one_sphere(t_sphere *sphere)
 {
@@ -23,6 +23,9 @@ static void	destroy_one_sphere(t_sphere *sphere)
 	sphere = NULL;
 }
 
+/*
+ *	Destroys all spheres and frees the spheres list.
+*/
 void	destroy_sphere(t_sphere **sphere)
 {
 	t_sphere	*tmp;
@@ -40,7 +43,7 @@ void	destroy_sphere(t_sphere **sphere)
 }
 
 /*
- *	Create, set the values and return sphere struct.
+ *	Creates, sets the values and returns a sphere structure.
 */
 t_sphere	*new_sphere(t_vector pos, double rcr[3])
 {
@@ -61,6 +64,9 @@ t_sphere	*new_sphere(t_vector pos, double rcr[3])
 	return (sphere);
 }
 
+/*
+ *	Returns the last node of the spheres list.
+*/
 static t_sphere	*get_last_sphere(t_sphere *sphere)
 {
 	if (!sphere)
@@ -70,6 +76,9 @@ static t_sphere	*get_last_sphere(t_sphere *sphere)
 	return (sphere);
 }
 
+/*
+ *	Adds and sets a sphere at the end of the spheres list.
+*/
 void	set_sphere(t_sphere **sphere, t_vector pos, double rcr[3])
 {
 	t_sphere	*new;

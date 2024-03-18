@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:52:51 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/16 10:41:05 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:45:29 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ void	init_objs(t_data *data)
 		init_objs_sp(data);
 	if (data->cylinders)
 		init_objs_cy(data);
+	if (data->cones)
+		init_objs_cone(data);
 	if (data->light)
 		init_objs_light(data);
 }

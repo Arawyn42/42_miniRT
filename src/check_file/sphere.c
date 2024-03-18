@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:01:28 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/16 12:41:28 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 15:00:04 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	Second part of the check_sphere function.
 */
-int	check_sphere2(char **data)
+static int	check_sphere2(char **data)
 {
 	if (data[4] && (!check_double(data[4]) || ft_atod(data[4]) < 0.0
 			|| ft_atod(data[4]) > 1.0))

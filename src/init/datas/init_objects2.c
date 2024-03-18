@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.c                                            :+:      :+:    :+:   */
+/*   init_objects2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 13:25:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/17 20:02:50 by drenassi         ###   ########.fr       */
+/*   Created: 2024/03/17 15:25:07 by drenassi          #+#    #+#             */
+/*   Updated: 2024/03/17 20:50:44 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
- *	Returns the light intensity vector.
+*	Adds all cones in objects list.
 */
-t_vector	light_intensity(t_light light)
+void	init_objs_cone(t_data *data)
 {
-	t_vector	res;
-	t_color		l;
+	t_cone		*cones;
+	t_obj		*new_obj;
+	t_obj		*last_obj;
 
-	l = int_to_rgb(light.color);
-	res.x = light.ratio * l.r / l.sum;
-	res.y = light.ratio * l.g / l.sum;
-	res.z = light.ratio * l.b / l.sum;
-	return (res);
+	cones = data->cones;
+	while (cones)
+	{
+		new_obj = create_new_obj();
+		new_obj->co = cones;
+		if (!data->objs)
+			data->objs = new_obj;
+		else
+		{
+			last_obj = get_last_obj(data->objs);
+			last_obj->next = new_obj;
+		}
+		cones = cones->next;
+	}
 }

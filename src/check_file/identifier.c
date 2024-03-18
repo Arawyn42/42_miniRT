@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 22:01:17 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 17:23:08 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:18:41 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ int	check_identifier(char *line)
 		return (free_double_array(data), 1);
 	else if (!ft_strcmp(data[0], "cy"))
 		return (free_double_array(data), 1);
+	else if (!ft_strcmp(data[0], "co"))
+		return (free_double_array(data), 1);
 	print_error("Error: Wrong identifier. List of valid identifiers:\n");
 	print_error("A for Ambient lightning;\nC for Camera;\nL for Light;\n");
 	print_error("sp for Sphere;\npl for Plane;\ncy for Cylinder.\n");
+	print_error("co for Cone.\n");
 	return (free_double_array(data), 0);
 }

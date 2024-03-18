@@ -6,7 +6,7 @@
 #    By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 14:42:11 by drenassi          #+#    #+#              #
-#    Updated: 2024/03/16 13:26:07 by drenassi         ###   ########.fr        #
+#    Updated: 2024/03/17 23:13:55 by drenassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRCS			= utils/str/ft_strcmp.c \
 				  check_file/plane.c \
 				  check_file/sphere.c \
 				  check_file/cylinder.c \
+				  check_file/cone.c \
 				  init/window/mem.c \
 				  init/window/window.c \
 				  init/window/image.c \
@@ -75,16 +76,19 @@ SRCS			= utils/str/ft_strcmp.c \
 				  init/datas/set_data_shapes.c \
 				  init/datas/objects_list.c \
 				  init/datas/init_objects.c \
+				  init/datas/init_objects2.c \
 				  init/parameters/ambient_light.c \
 				  init/parameters/camera.c \
 				  init/parameters/light.c \
 				  init/parameters/point.c \
+				  init/parameters/plane.c \
 				  init/parameters/sphere.c \
 				  init/parameters/cylinder.c \
-				  init/parameters/plane.c \
+				  init/parameters/cone.c \
 				  raytracing/ray.c \
 				  raytracing/intersections.c \
 				  raytracing/cylinder_intersection.c \
+				  raytracing/cone_intersection.c \
 				  raytracing/intersection_normals.c \
 				  light_effects/ambient_lightning.c \
 				  light_effects/light.c \

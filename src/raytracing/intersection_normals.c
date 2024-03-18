@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:59:18 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/16 12:42:17 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 22:18:51 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,21 @@ static t_vector	get_cylinder_normal(t_cylinder *cy, t_vector intersection)
 	else
 		normal = substract_vect(center_to_point, \
 			multiply_vect_scalar(cy->axis, d));
-	normal = multiply_vect_scalar(normal, 1 / vect_length(normal));
+	normal = normalize_vect(normal);
+	return (normal);
+}
+
+static t_vector	get_cone_normal(t_cone *cone, t_vector p)
+{
+	t_vector	normal;
+	double		r;
+
+	r = sqrt((p.x - cone->pos.x) * (p.x - cone->pos.x) \
+		+ (p.z - cone->pos.z) * (p.z - cone->pos.z));
+    normal.x = p.x - cone->pos.x;
+	normal.y = r * cone->radius / cone->height;
+	normal.y = p.z - cone->pos.z;
+	normal = normalize_vect(normal);
 	return (normal);
 }
 
@@ -55,5 +69,7 @@ t_vector	get_obj_normal(t_obj *obj, t_vector intersection)
 		normal = normalize_vect(substract_vect(intersection, obj->sp->pos));
 	else if (obj->cy)
 		normal = get_cylinder_normal(obj->cy, intersection);
+	else if (obj->co)
+		normal = get_cone_normal(obj->co, intersection);
 	return (normal);
 }

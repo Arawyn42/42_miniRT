@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:34:37 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/11 18:02:22 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:17:14 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
- *	Plane struct destroyer.
+ *	Frees and sets to null a plane node.
 */
 static void	destroy_one_plane(t_plane *plane)
 {
@@ -23,6 +23,9 @@ static void	destroy_one_plane(t_plane *plane)
 	plane = NULL;
 }
 
+/*
+ *	Destroys all planes and frees the planes list.
+*/
 void	destroy_plane(t_plane **plane)
 {
 	t_plane	*tmp;
@@ -40,7 +43,7 @@ void	destroy_plane(t_plane **plane)
 }
 
 /*
- *	Create, set the values and return plane struct.
+ *	Creates, sets the values and returns a plane structure.
 */
 static t_plane	*new_plane(t_vector pos_normal[2], double cr[2])
 {
@@ -61,6 +64,9 @@ static t_plane	*new_plane(t_vector pos_normal[2], double cr[2])
 	return (plane);
 }
 
+/*
+ *	Returns the last node of the planes list.
+*/
 static t_plane	*get_last_plane(t_plane *plane)
 {
 	if (!plane)
@@ -70,6 +76,9 @@ static t_plane	*get_last_plane(t_plane *plane)
 	return (plane);
 }
 
+/*
+ *	Adds and sets a plane at the end of the planes list.
+*/
 void	set_plane(t_plane **plane, t_vector pos_normal[2], double cr[2])
 {
 	t_plane	*new;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:09:21 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/11 17:34:42 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:00:00 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	Second part of the check_plane function.
 */
-int	check_plane2(char **data)
+static int	check_plane2(char **data)
 {
 	if (data[4] && (!check_double(data[4]) \
 		|| ft_atod(data[4]) < 0.0 || ft_atod(data[4]) > 1.0))

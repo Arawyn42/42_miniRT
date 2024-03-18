@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:58:35 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/16 10:56:34 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:31:10 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	destroy_data(t_data *data)
 		destroy_sphere(&data->spheres);
 	if (data->cylinders)
 		destroy_cylinder(&data->cylinders);
+	if (data->cones)
+		destroy_cone(&data->cones);
 	if (data->objs)
 		destroy_objs(&data->objs);
 	free(data);
@@ -45,6 +47,7 @@ static void	set_data_null(t_data *data)
 	data->planes = NULL;
 	data->spheres = NULL;
 	data->cylinders = NULL;
+	data->cones = NULL;
 	data->objs = NULL;
 }
 
@@ -57,7 +60,7 @@ static void	set_data_light(t_data *data, char **datas)
 	double		ratio;
 	int			color;
 
-	pos = str_to_point(datas[1]);
+	pos = str_to_vect(datas[1]);
 	ratio = ft_atod(datas[2]);
 	color = format_color(datas[3]);
 	set_light(&(data->light), pos, ratio, color);
@@ -79,8 +82,8 @@ static void	set_line_data(char *line, t_data *data)
 		data->a_light = set_alight(ft_atod(datas[1]), \
 			format_color(datas[2]));
 	else if (!ft_strcmp(datas[0], "C"))
-		data->camera = set_camera(str_to_point(datas[1]), \
-			str_to_point(datas[2]), ft_atoi(datas[3]));
+		data->camera = set_camera(str_to_vect(datas[1]), \
+			str_to_vect(datas[2]), ft_atoi(datas[3]));
 	else if (!ft_strcmp(datas[0], "L"))
 		set_data_light(data, datas);
 	else

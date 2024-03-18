@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:45:13 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/04 15:00:46 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:51:02 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_obj	*create_new_obj(void)
 	new->pl = NULL;
 	new->sp = NULL;
 	new->cy = NULL;
+	new->co = NULL;
 	new->light = NULL;
 	new->next = NULL;
 	return (new);

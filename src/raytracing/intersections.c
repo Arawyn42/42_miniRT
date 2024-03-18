@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:02:56 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/11 17:32:30 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/18 00:46:43 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static double	sp_intersection(t_ray ray, t_sphere *sp)
 	a = vect_dot(ray.dir, ray.dir);
 	b = 2 * vect_dot(ray_to_sp, ray.dir);
 	c = vect_dot(ray_to_sp, ray_to_sp) - sp->radius * sp->radius;
-	return (quadratic_min(a, b, c, PRECISION));
+	return (quadratic(a, b, c, 0));
 }
 
 /*
@@ -60,8 +60,9 @@ double	obj_intersection(t_ray ray, t_obj *obj)
 		return (sp_intersection(ray, obj->sp));
 	else if (obj->cy)
 		return (cy_intersection(ray, obj->cy));
-	else
-		return (INFINITY);
+	else if (obj->co)
+		return (cone_intersection(ray, obj->co));
+	return (INFINITY);
 }
 
 /*

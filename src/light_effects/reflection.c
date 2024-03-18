@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:55:33 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/09 19:53:30 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:16:29 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ double	get_obj_reflect_ratio(t_obj *obj)
 		return (obj->sp->reflect);
 	else if (obj->cy)
 		return (obj->cy->reflect);
+	else if (obj->co)
+		return (obj->co->reflect);
 	return (DEFAULT_REFLECT_RATIO);
 }
 

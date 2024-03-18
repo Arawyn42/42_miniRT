@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:20:04 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/16 12:48:48 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:03:11 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static t_vector	light_effects_intensity(t_data *data, \
 			p_intensity = add_vect(ambient_lightning_intensity(data), \
 				point_intensity(*objs->light, normal_dir, p_to_l, closest));
 			l_intensity = add_vect(ambient_lightning_intensity(data), \
-				light_intensity(data, *objs->light));
+				light_intensity(*objs->light));
 			intensity = multiply_vect(intensity, \
 				divide_vect(p_intensity, l_intensity));
 		}
