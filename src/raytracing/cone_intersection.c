@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:31:00 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/18 01:04:55 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:26:20 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,15 @@ static double	cone_disc_intersection(t_ray ray, t_cone *co)
 
 static double	cone_intersection_result(t_cone *co, double s[4], double t[3])
 {
-	if ((s[2] > 0 || fabs(s[2]) > co->height)
-		&& (s[3] > 0 || fabs(s[3]) > co->height))
-		return (INFINITY);
-	if (t[2] < INFINITY && t[2] > PRECISION)
-	{
-		if (t[2] < t[1])
-			return (t[2]);
-		else if (t[1] > PRECISION)
-			return (t[1]);
-	}
-	return (t[0]);
+	double	sol;
+
+	if (s[2] > 0 || fabs(s[2]) > co->height)
+		t[0] = INFINITY;
+	if (s[3] > 0 || fabs(s[3]) > co->height)
+		t[1] = INFINITY;
+	sol = fmin(fmin(t[0], t[1]), t[2]);
+	if (sol > PRECISION)
+		return (sol);
 	return (INFINITY);
 }
 

@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:08:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/17 20:51:17 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:55:30 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	set_data_cylinder(t_data *data, char **datas)
 	double		dhcr[5];
 
 	pos_axis[0] = str_to_vect(datas[1]);
-	pos_axis[1] = str_to_vect(datas[2]);
+	pos_axis[1] = normalize_vect(str_to_vect(datas[2]));
 	dhcr[0] = ft_atod(datas[3]) / 2;
 	dhcr[1] = ft_atod(datas[4]);
 	dhcr[2] = format_color(datas[5]);
@@ -74,7 +74,7 @@ static void	set_data_cone(t_data *data, char **datas)
 	double		rhcr[4];
 
 	pos_axis[0] = str_to_vect(datas[1]);
-	pos_axis[1] = str_to_vect(datas[2]);
+	pos_axis[1] = normalize_vect(str_to_vect(datas[2]));
 	rhcr[0] = ft_atod(datas[3]) / 2;
 	rhcr[1] = ft_atod(datas[4]);
 	rhcr[2] = format_color(datas[5]);

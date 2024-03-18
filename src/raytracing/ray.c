@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:21:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/16 12:48:11 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:59:48 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	init_ray(t_data *data, t_ray *ray)
 {
 	ray->origin = data->camera->pos;
-	ray->dir = data->camera->direction;
+	ray->dir = normalize_vect(data->camera->direction);
 }
 
 /*

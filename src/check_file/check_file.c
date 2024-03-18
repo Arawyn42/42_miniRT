@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 17:40:45 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/17 20:45:38 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:36:14 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ int	check_file(char *file)
 	line = get_next_line(fd);
 	while (line)
 	{
+		if (line[0] == '#')
+		{
+			free(line);
+			line = get_next_line(fd);
+		}
 		if ((!is_empty(line) && !check_identifier(line)) || !check_line(line))
 			return (close(fd), free(line), 0);
 		free(line);
