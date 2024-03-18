@@ -6,11 +6,34 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 10:16:26 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/17 14:23:19 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 02:31:15 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/*
+ *	Returns 1 if the point is on the surface of the cone, 0 if not.
+*/
+int	is_on_cone(t_cone co, t_vector p)
+{
+	t_vector	c;
+	double		dist;
+	double		disk_dist;
+
+	c = add_vect(co.pos, multiply_vect_scalar(co.axis, co.height));
+	if (fabs(vect_dot(substract_vect(c, p), co.axis)) < PRECISION \
+		&& vect_length(substract_vect(c, p)) <= co.radius)
+		return (1);
+	dist = vect_dot(substract_vect(p, co.pos), co.axis);
+	if (dist <= 0 || dist > co.height)
+		return (0);
+	disk_dist = vect_length(substract_vect(substract_vect(p, co.pos), \
+		multiply_vect_scalar(co.axis, dist)));
+	if (disk_dist <= dist * co.radius / co.height + PRECISION)
+		return (1);
+	return (0);
+}
 
 /*
  *	Returns the hard shadow intensity.

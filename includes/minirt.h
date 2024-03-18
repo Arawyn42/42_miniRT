@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/18 00:46:00 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 02:16:38 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,6 +289,7 @@ t_color			reflection_color(t_color color, t_color reflective, \
 t_color			light_effects(t_data *data, t_vector normal, \
 		t_closest_obj closest, t_ray ray);
 int				is_in_shadow(t_data *data, t_vector point, t_light light);
+int				is_on_cone(t_cone co, t_vector p);
 double			shadow_effects(t_data *data, t_vector inter, \
 		t_closest_obj closest);
 

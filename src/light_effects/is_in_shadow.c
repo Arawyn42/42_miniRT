@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shadow.c                                           :+:      :+:    :+:   */
+/*   is_in_shadow.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:00:20 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/16 12:49:12 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 02:32:02 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	is_on_obj(t_obj obj, t_vector point)
 	else if (obj.sp && is_on_sphere(*obj.sp, point))
 		return (1);
 	else if (obj.cy && is_on_cylinder(*obj.cy, point))
+		return (1);
+	else if (obj.co && is_on_cone(*obj.co, point))
 		return (1);
 	else if (obj.light)
 		return (1);

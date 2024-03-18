@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:59:18 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/17 22:18:51 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 02:09:50 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,21 @@ static t_vector	get_cylinder_normal(t_cylinder *cy, t_vector intersection)
 	return (normal);
 }
 
-static t_vector	get_cone_normal(t_cone *cone, t_vector p)
+static t_vector	get_cone_normal(t_cone *co, t_vector p)
 {
 	t_vector	normal;
-	double		r;
+	t_vector	c;
+	t_vector	proj;
+	double		tan2;
+	double		d;
 
-	r = sqrt((p.x - cone->pos.x) * (p.x - cone->pos.x) \
-		+ (p.z - cone->pos.z) * (p.z - cone->pos.z));
-    normal.x = p.x - cone->pos.x;
-	normal.y = r * cone->radius / cone->height;
-	normal.y = p.z - cone->pos.z;
-	normal = normalize_vect(normal);
+	c = add_vect(co->pos, multiply_vect_scalar(co->axis, co->height));
+	if (fabs(vect_dot(substract_vect(c, p), co->axis)) < PRECISION)
+		return (co->axis);
+	tan2 = co->radius * co->radius / (co->height * co->height);
+	d = vect_length(substract_vect(p, co->pos)) * sqrt(1 + tan2);
+	proj = add_vect(p, multiply_vect_scalar(co->axis, d));
+	normal = normalize_vect(substract_vect(p, proj));
 	return (normal);
 }
 
