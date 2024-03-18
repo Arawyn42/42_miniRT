@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:46:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/18 21:09:08 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 21:45:03 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,9 @@
 */
 static void	render_no_thread(t_minirt *mem)
 {
-	t_ray		ray;
 	t_vector	pixel;
 	t_color		color;
-	t_viewport	vp;
 
-	init_ray(mem->data, &ray);
-	vp = init_viewport(mem->data->camera->fov, VIEWPORT_DIST);
 	pixel.x = mem->start.x - 1;
 	while (++pixel.x <= mem->end.x)
 	{
@@ -31,9 +27,9 @@ static void	render_no_thread(t_minirt *mem)
 		display_loading("Rendering:", -SCREEN_W / 2, pixel.x, SCREEN_W / 100);
 		while (++pixel.y <= mem->end.y)
 		{
-			ray.dir = set_ray(mem->base, pixel.x * vp.w_ratio, \
-				-pixel.y * vp.h_ratio, VIEWPORT_DIST);
-			color = ray_trace(mem->data, ray, DEPTH);
+			mem->data->ray.dir = set_ray(mem->base, pixel.x *  mem->vp.w_ratio, \
+				-pixel.y *  mem->vp.h_ratio, VIEWPORT_DIST);
+			color = ray_trace(mem->data, mem->data->ray, DEPTH);
 			draw_pixels(mem->img, SCREEN_W / 2 + pixel.x, SCREEN_H / 2 \
 				+ pixel.y, rgb_to_int(color.r, color.g, color.b));
 		}
@@ -43,25 +39,22 @@ static void	render_no_thread(t_minirt *mem)
 static void	*render_threads(void *args)
 {
 	t_minirt	*mem;
-	t_ray		ray;
 	t_vector	pixel;
 	t_color		color;
-	t_viewport	vp;
 
 	mem = (t_minirt *)args;
-	init_ray(mem->data, &ray);
-	vp = init_viewport(mem->data->camera->fov, VIEWPORT_DIST);
 	pixel.x = mem->start.x - 1;
 	while (++pixel.x <= mem->end.x)
 	{
 		pixel.y = mem->start.y - 1;
 		if (mem->start.y < -SCREEN_H / 2 + 1)
-			display_loading("Rendering:", -SCREEN_W / 2, pixel.x, SCREEN_W / 100);
+			display_loading("Rendering:", -SCREEN_W / 2, \
+				pixel.x, SCREEN_W / 100);
 		while (++pixel.y <= mem->end.y)
 		{
-			ray.dir = set_ray(mem->base, pixel.x * vp.w_ratio, 
-				-pixel.y * vp.h_ratio, VIEWPORT_DIST);
-			color = ray_trace(mem->data, ray, DEPTH);
+			mem->data->ray.dir = set_ray(mem->base, pixel.x * mem->vp.w_ratio,
+				-pixel.y *  mem->vp.h_ratio, VIEWPORT_DIST);
+			color = ray_trace(mem->data, mem->data->ray, DEPTH);
 			draw_pixels(mem->img, SCREEN_W / 2 + pixel.x, SCREEN_H / 2 
 				+ pixel.y, rgb_to_int(color.r, color.g, color.b));
 		}
@@ -107,7 +100,7 @@ static void	launch_threads(t_minirt *mem, int threads, char *file)
 */
 void	rendering(t_minirt *mem, int threads, char *file)
 {
-	ft_bzero(mem->img->addr, 4 * SCREEN_H * SCREEN_W);
+	ft_bzero(mem->img->addr, SCREEN_H * SCREEN_W);
 	mlx_hook(mem->win->window, 17, 0L, &exit_handling, mem);
 	mlx_hook(mem->win->window, 2, 1L << 0, &user_input, mem);
 	rotate_base(mem->base, mem->data->camera->direction);

@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:58:35 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/17 21:31:10 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 21:14:35 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ t_data	*set_data(char *file)
 		line = get_next_line(fd);
 	}
 	init_objs(data);
+	init_ray(data, &data->ray);
 	return (close(fd), data);
 }

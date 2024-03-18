@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/18 21:08:04 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 21:16:59 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,12 +161,14 @@ typedef struct s_data
 	t_cylinder	*cylinders;
 	t_cone		*cones;
 	t_obj		*objs;
+	t_ray		ray;
 }			t_data;
 
 typedef struct s_minirt
 {
 	t_window	*win;
 	t_image		*img;
+	t_viewport	vp;
 	t_data		*data;
 	t_vector	base[3];
 	t_vector	start;

@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:41:34 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/18 21:08:29 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 21:18:00 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ t_minirt	*set_minirt(char *file)
 	if (!mem->img)
 		exit_handling(mem);
 	mem->data = set_data(file);
+	mem->vp = init_viewport(mem->data->camera->fov, VIEWPORT_DIST);
 	return (mem);
 }
