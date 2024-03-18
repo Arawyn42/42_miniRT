@@ -6,7 +6,7 @@
 #    By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 14:42:11 by drenassi          #+#    #+#              #
-#    Updated: 2024/03/17 23:13:55 by drenassi         ###   ########.fr        #
+#    Updated: 2024/03/18 17:49:29 by drenassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,15 +15,16 @@
 ################################################################################
 
 
-NAME		= miniRT
-CC 			= cc
-CFLAGS		= -Wall -Werror -Wextra
-DEBUG_FLAGS = -g3
-MLXFLAGS	= -Imlx -lX11 -lXext
-MATH_FLAGS	= -lm
-AUTHOR		= drenassi
-DATE		= 09/11/2023
-NOVISU 		= 0 # 1 = no progress bar usefull when tty is not available
+NAME			= miniRT
+CC 				= cc
+CFLAGS			= -Wall -Werror -Wextra
+DEBUG_FLAGS 	= -g3
+MLXFLAGS		= -Imlx -lX11 -lXext
+MATH_FLAGS		= -lm
+PTHREAD_FLAGS	= -pthread
+AUTHOR			= drenassi
+DATE			= 09/11/2023
+NOVISU 			= 0 # 1 = no progress bar usefull when tty is not available
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
@@ -53,6 +54,7 @@ SRCS			= utils/str/ft_strcmp.c \
 				  utils/maths/intersections.c \
 				  utils/maths/rotations.c \
 				  utils/maths/colors.c \
+				  check_file/check_args.c \
 				  check_file/check_file.c \
 				  check_file/check_int.c \
 				  check_file/check_double.c \
@@ -330,7 +332,7 @@ setup:
 ################################## NAME'S RULE #################################
 $(NAME):	${OBJS} ${OBJ_MAIN} ${LIBFT} ${MLX}
 			@$(call display_progress_bar)
-			@$(call run_and_test,$(CC) $(CFLAGS) $(DEBUG_FLAGS) -I$(INCLUDE_PATH) -o $@ ${OBJS} ${OBJ_MAIN} ${LIBFT} ${MLX} $(MLXFLAGS) $(MATH_FLAGS))
+			@$(call run_and_test,$(CC) $(CFLAGS) $(DEBUG_FLAGS) -I$(INCLUDE_PATH) -o $@ ${OBJS} ${OBJ_MAIN} ${LIBFT} ${MLX} $(MLXFLAGS) $(MATH_FLAGS) $(PTHREAD_FLAGS))
 			@printf "\33[2K\r\n"
 
 ################################# OBJECTS' RULE ################################

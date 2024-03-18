@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/18 02:16:38 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/18 21:08:04 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <math.h>
+# include <pthread.h>
 # include "../libs/libft/includes/libft.h"
 # include "../libs/minilibx-linux/mlx.h"
 
@@ -167,6 +168,9 @@ typedef struct s_minirt
 	t_window	*win;
 	t_image		*img;
 	t_data		*data;
+	t_vector	base[3];
+	t_vector	start;
+	t_vector	end;
 }			t_minirt;
 
 /* STRING UTILS */
@@ -203,6 +207,7 @@ int				rgb_to_int(int r, int g, int b);
 void			protect_colors(t_color *color);
 
 /* CHECK CONFIG FILE*/
+int				check_args(int ac, char **av, int *threads);
 int				check_file(char *file);
 int				check_identifier(char *line);
 int				check_int(char *n);
@@ -219,7 +224,7 @@ int				check_cylinder(char **data);
 int				check_cone(char **data);
 
 /* WINDOW */
-t_minirt		*init_mem(void);
+t_minirt		*set_minirt(char *file);
 int				exit_handling(t_minirt *mem);
 t_window		*get_window(void);
 void			destroy_window(t_window *win);
@@ -294,7 +299,7 @@ double			shadow_effects(t_data *data, t_vector inter, \
 		t_closest_obj closest);
 
 /* RENDERING */
-void			rendering(t_minirt *mem);
+void			rendering(t_minirt *mem, int threads, char *file);
 void			draw_pixels(t_image *img, int x, int y, int color);
 
 #endif
