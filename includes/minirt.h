@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/19 05:36:53 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:53:44 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,16 +165,6 @@ typedef struct s_minirt
 	t_vector	end;
 }			t_minirt;
 
-typedef struct s_th
-{
-	t_image		*img;
-	t_viewport	*vp;
-	t_data		*data;
-	t_vector	start;
-	t_vector	end;
-}			t_th;
-
-
 /* STRING UTILS */
 int				ft_strcmp(const char *s1, const char *s2);
 double			ft_atod(char *str);
@@ -293,7 +283,7 @@ double			shadow_effects(t_obj *objs, t_vector inter, \
 		t_closest_obj closest);
 
 /* RENDERING */
-void			rendering(t_minirt *mem, int threads, char *file);
+void			rendering(t_minirt *mem, int threads);
 void			draw_pixels(t_image *img, int x, int y, int color);
 
 #endif

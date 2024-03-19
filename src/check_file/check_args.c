@@ -6,12 +6,15 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:39:06 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/18 17:42:09 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:57:39 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/*
+ *	Returns 1 if the program's parameters are corrects. Returns 0 if not.
+*/
 int	check_args(int ac, char **av, int *threads)
 {
 	if (ac < 2 || ac > 3)
@@ -25,9 +28,10 @@ int	check_args(int ac, char **av, int *threads)
 	*threads = 0;
 	if (ac == 3)
 	{
-		if (!check_int(av[2]) || ft_atoi(av[2]) < 0)
+		if (!check_int(av[2]) || ft_atoi(av[2]) < 0 || ft_atoi(av[2]) > SCREEN_H)
 		{
 			print_error("Error: Second argument must be a positive integer.");
+			print_error(" There can't be more threads than the screen height.\n");
 			return (0);
 		}
 		*threads = ft_atoi(av[2]);

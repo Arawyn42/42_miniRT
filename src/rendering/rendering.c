@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:46:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/19 04:44:09 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:58:37 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ static void	render_no_thread(t_minirt *mem)
 	}
 }
 
+/*
+ *	Rendering routine for threads.
+*/
 static void	*render_threads(void *args)
 {
 	t_minirt	*mem;
@@ -62,6 +65,9 @@ static void	*render_threads(void *args)
 	return (NULL);
 }
 
+/*
+ *	Sets datas for each thread.
+*/
 static t_minirt	set_datas_thread(t_minirt *mem, int i, int threads)
 {
 	t_minirt	data;
@@ -74,13 +80,15 @@ static t_minirt	set_datas_thread(t_minirt *mem, int i, int threads)
 	return (data);
 }
 
-static void	launch_threads(t_minirt *mem, int threads, char *file)
+/*
+ *	Creates and executes all threads.
+*/
+static void	launch_threads(t_minirt *mem, int threads)
 {
 	pthread_t	*th;
 	t_minirt	*data;
 	int			i;
 
-	(void) file;
 	th = ft_calloc(threads, sizeof(pthread_t));
 	data = ft_calloc(threads, sizeof(t_minirt));
 	i = -1;
@@ -98,7 +106,7 @@ static void	launch_threads(t_minirt *mem, int threads, char *file)
 /*
  *	Calls the main rendering function and prints the resulting image.
 */
-void	rendering(t_minirt *mem, int threads, char *file)
+void	rendering(t_minirt *mem, int threads)
 {
 	mlx_hook(mem->win.window, 17, 0L, &exit_handling, mem);
 	mlx_hook(mem->win.window, 2, 1L << 0, &user_input, mem);
@@ -106,7 +114,7 @@ void	rendering(t_minirt *mem, int threads, char *file)
 	if (!threads)
 		render_no_thread(mem);
 	else
-		launch_threads(mem, threads, file);
+		launch_threads(mem, threads);
 	mlx_put_image_to_window(mem->win.mlx, \
 		mem->win.window, mem->img.image, 0, 0);
 	mlx_loop(mem->win.mlx);
