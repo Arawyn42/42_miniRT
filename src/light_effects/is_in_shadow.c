@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:00:20 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/18 02:32:02 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 04:40:50 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ int	is_in_shadow(t_data *data, t_vector point, t_light light)
 	double			l_distance;
 	t_closest_obj	closest;
 
-	if (!data->light)
-		return (0);
 	p_to_l.origin = point;
 	p_to_l.dir = normalize_vect(substract_vect(light.pos, point));
 	l_distance = vect_length(substract_vect(light.pos, point));

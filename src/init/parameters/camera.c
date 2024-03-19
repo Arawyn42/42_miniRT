@@ -6,39 +6,21 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:29:17 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/18 14:58:11 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 02:56:26 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
- *	Camera structure destroyer.
-*/
-void	destroy_camera(t_camera *camera)
-{
-	if (!camera)
-		return ;
-	free(camera);
-	camera = NULL;
-}
-
-/*
  *	Creates, sets the values and returns a camera structure.
 */
-t_camera	*set_camera(t_vector pos, t_vector direction, int fov)
+t_camera	set_camera(t_vector pos, t_vector direction, int fov)
 {
-	t_camera	*camera;
+	t_camera	camera;
 
-	camera = ft_calloc(1, sizeof(t_camera));
-	if (!camera)
-	{
-		print_error("Fatal error: camera struct initialization: ");
-		print_error("Out of memory\n");
-		return (NULL);
-	}
-	camera->pos = pos;
-	camera->direction = normalize_vect(direction);
-	camera->fov = fov;
+	camera.pos = pos;
+	camera.direction = normalize_vect(direction);
+	camera.fov = fov;
 	return (camera);
 }

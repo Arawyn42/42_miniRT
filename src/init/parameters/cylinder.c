@@ -6,54 +6,23 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:54:10 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/17 15:16:12 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 04:36:02 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
- *	Frees and sets to null a cylinder node.
-*/
-static void	destroy_one_cylinder(t_cylinder *cylinder)
-{
-	if (!cylinder)
-		return ;
-	free(cylinder);
-	cylinder = NULL;
-}
-
-/*
- *	Destroys all cylinders and frees the cylinders list.
-*/
-void	destroy_cylinder(t_cylinder **cylinder)
-{
-	t_cylinder	*tmp;
-
-	if (!cylinder)
-		return ;
-	tmp = *cylinder;
-	while (*cylinder)
-	{
-		tmp = (*cylinder)->next;
-		destroy_one_cylinder(*cylinder);
-		*cylinder = tmp;
-	}
-	cylinder = NULL;
-}
-
-/*
  *	Creates, sets the values and returns a cylinder structure.
 */
-static t_cylinder	*new_cylinder(t_vector pos_axis[2], double dhcr[4])
+t_cylinder	*create_cylinder(t_vector pos_axis[2], double dhcr[4])
 {
 	t_cylinder	*cylinder;
 
 	cylinder = ft_calloc(1, sizeof(t_cylinder));
 	if (!cylinder)
 	{
-		print_error("Fatal error: cylinder struct initialization: ");
-		print_error("Out of memory\n");
+		print_error("Error: Cylinder: Calloc error.\n");
 		return (NULL);
 	}
 	cylinder->pos = pos_axis[0];
@@ -62,37 +31,24 @@ static t_cylinder	*new_cylinder(t_vector pos_axis[2], double dhcr[4])
 	cylinder->height = dhcr[1];
 	cylinder->color = (int)dhcr[2];
 	cylinder->reflect = dhcr[3];
-	cylinder->next = NULL;
 	return (cylinder);
 }
 
 /*
- *	Returns the last node of the cylinders list.
+*	Adds a cylinder into the objects list.
 */
-static t_cylinder	*get_last_cylinder(t_cylinder *cylinder)
+void	add_cylinder(t_data *data, t_cylinder *cylinder)
 {
-	if (!cylinder)
-		return (NULL);
-	while (cylinder->next)
-		cylinder = cylinder->next;
-	return (cylinder);
-}
+	t_obj		*new_obj;
+	t_obj		*last_obj;
 
-/*
- *	Adds and sets a cylinder at the end of the cylinders list.
-*/
-void	set_cylinder(t_cylinder **cylinder, t_vector pos_axis[2], \
-	double dhcr[4])
-{
-	t_cylinder	*new;
-	t_cylinder	*tmp;
-
-	new = new_cylinder(pos_axis, dhcr);
-	if (!*cylinder)
+	new_obj = create_new_obj();
+	new_obj->cy = cylinder;
+	if (!data->objs)
+		data->objs = new_obj;
+	else
 	{
-		*cylinder = new;
-		return ;
+		last_obj = get_last_obj(data->objs);
+		last_obj->next = new_obj;
 	}
-	tmp = get_last_cylinder(*cylinder);
-	tmp->next = new;
 }

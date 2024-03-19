@@ -6,7 +6,7 @@
 #    By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 14:42:11 by drenassi          #+#    #+#              #
-#    Updated: 2024/03/18 17:49:29 by drenassi         ###   ########.fr        #
+#    Updated: 2024/03/19 04:50:18 by drenassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS			= utils/str/ft_strcmp.c \
 				  utils/str/free_double_array.c \
 				  utils/str/is_empty.c \
 				  utils/str/print_error.c \
+				  utils/maths/str_to_point.c \
 				  utils/maths/ft_atod.c \
 				  utils/maths/vectors.c \
 				  utils/maths/vectors2.c \
@@ -77,12 +78,9 @@ SRCS			= utils/str/ft_strcmp.c \
 				  init/datas/set_data.c \
 				  init/datas/set_data_shapes.c \
 				  init/datas/objects_list.c \
-				  init/datas/init_objects.c \
-				  init/datas/init_objects2.c \
 				  init/parameters/ambient_light.c \
 				  init/parameters/camera.c \
 				  init/parameters/light.c \
-				  init/parameters/point.c \
 				  init/parameters/plane.c \
 				  init/parameters/sphere.c \
 				  init/parameters/cylinder.c \

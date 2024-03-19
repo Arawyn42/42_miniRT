@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 10:16:26 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/18 14:48:10 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 04:42:50 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,29 @@ int	is_on_cone(t_cone co, t_vector p)
 */
 double	shadow_effects(t_data *data, t_vector inter, t_closest_obj closest)
 {
-	t_light	*light;
+	t_obj	*obj;
 	double	shadow;
 	double	max_shadow;
 
 	shadow = 1;
 	max_shadow = 1;
-	light = data->light;
-	while (light)
+	obj = data->objs;
+	while (obj)
 	{
-		if (is_in_shadow(data, inter, *light))
-			shadow = fmin(fmax(0.6, (1 - light->ratio)) * fmin(1 + closest.reflect, 1.55), 1);
-		if (shadow < max_shadow)
+		if (obj->light)
 		{
-			if (max_shadow == 1)
-				max_shadow = shadow;
-			else
-				max_shadow = (shadow + max_shadow) / 2;
+			if (is_in_shadow(data, inter, *obj->light))
+				shadow = fmin(fmax(0.6, (1 - obj->light->ratio)) \
+					* fmin(1 + closest.reflect, 1.55), 1);
+			if (shadow < max_shadow)
+			{
+				if (max_shadow == 1)
+					max_shadow = shadow;
+				else
+					max_shadow = (shadow + max_shadow) / 2;
+			}
 		}
-		light = light->next;
+		obj = obj->next;
 	}
 	return (max_shadow);
 }

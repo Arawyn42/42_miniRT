@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:46:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/18 21:45:03 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 04:44:09 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static void	render_no_thread(t_minirt *mem)
 		display_loading("Rendering:", -SCREEN_W / 2, pixel.x, SCREEN_W / 100);
 		while (++pixel.y <= mem->end.y)
 		{
-			mem->data->ray.dir = set_ray(mem->base, pixel.x *  mem->vp.w_ratio, \
+			mem->data.ray.dir = set_ray(mem->data.base, pixel.x *  mem->vp.w_ratio, \
 				-pixel.y *  mem->vp.h_ratio, VIEWPORT_DIST);
-			color = ray_trace(mem->data, mem->data->ray, DEPTH);
-			draw_pixels(mem->img, SCREEN_W / 2 + pixel.x, SCREEN_H / 2 \
+			color = ray_trace(&mem->data, mem->data.ray, DEPTH);
+			draw_pixels(&mem->img, SCREEN_W / 2 + pixel.x, SCREEN_H / 2 \
 				+ pixel.y, rgb_to_int(color.r, color.g, color.b));
 		}
 	}
@@ -52,10 +52,10 @@ static void	*render_threads(void *args)
 				pixel.x, SCREEN_W / 100);
 		while (++pixel.y <= mem->end.y)
 		{
-			mem->data->ray.dir = set_ray(mem->base, pixel.x * mem->vp.w_ratio,
+			mem->data.ray.dir = set_ray(mem->data.base, pixel.x * mem->vp.w_ratio,
 				-pixel.y *  mem->vp.h_ratio, VIEWPORT_DIST);
-			color = ray_trace(mem->data, mem->data->ray, DEPTH);
-			draw_pixels(mem->img, SCREEN_W / 2 + pixel.x, SCREEN_H / 2 
+			color = ray_trace(&mem->data,mem->data.ray, DEPTH);
+			draw_pixels(&mem->img, SCREEN_W / 2 + pixel.x, SCREEN_H / 2 
 				+ pixel.y, rgb_to_int(color.r, color.g, color.b));
 		}
 	}
@@ -100,15 +100,14 @@ static void	launch_threads(t_minirt *mem, int threads, char *file)
 */
 void	rendering(t_minirt *mem, int threads, char *file)
 {
-	ft_bzero(mem->img->addr, SCREEN_H * SCREEN_W);
-	mlx_hook(mem->win->window, 17, 0L, &exit_handling, mem);
-	mlx_hook(mem->win->window, 2, 1L << 0, &user_input, mem);
-	rotate_base(mem->base, mem->data->camera->direction);
+	mlx_hook(mem->win.window, 17, 0L, &exit_handling, mem);
+	mlx_hook(mem->win.window, 2, 1L << 0, &user_input, mem);
+	rotate_base(mem->data.base, mem->data.camera.direction);
 	if (!threads)
 		render_no_thread(mem);
 	else
 		launch_threads(mem, threads, file);
-	mlx_put_image_to_window(mem->win->mlx, \
-		mem->win->window, mem->img->image, 0, 0);
-	mlx_loop(mem->win->mlx);
+	mlx_put_image_to_window(mem->win.mlx, \
+		mem->win.window, mem->img.image, 0, 0);
+	mlx_loop(mem->win.mlx);
 }

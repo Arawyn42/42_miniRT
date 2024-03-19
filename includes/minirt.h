@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/18 21:16:59 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 04:40:02 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ typedef struct s_light
 	t_vector		pos;
 	double			ratio;
 	int				color;
-	struct s_light	*next;
 }			t_light;
 
 typedef struct s_sphere
@@ -94,7 +93,6 @@ typedef struct s_sphere
 	double			radius;
 	int				color;
 	double			reflect;
-	struct s_sphere	*next;
 }			t_sphere;
 
 typedef struct s_plane
@@ -103,7 +101,6 @@ typedef struct s_plane
 	t_vector		normal;
 	int				color;
 	double			reflect;
-	struct s_plane	*next;
 }			t_plane;
 
 typedef struct s_cylinder
@@ -114,7 +111,6 @@ typedef struct s_cylinder
 	double				height;
 	int					color;
 	double				reflect;
-	struct s_cylinder	*next;
 }			t_cylinder;
 
 typedef struct s_cone
@@ -125,7 +121,6 @@ typedef struct s_cone
 	double			height;
 	int				color;
 	double			reflect;
-	struct s_cone	*next;
 }			t_cone;
 
 typedef struct s_obj
@@ -153,24 +148,19 @@ typedef struct s_ray
 
 typedef struct s_data
 {
-	t_alight	*a_light;
-	t_camera	*camera;
-	t_light		*light;
-	t_plane		*planes;
-	t_sphere	*spheres;
-	t_cylinder	*cylinders;
-	t_cone		*cones;
+	t_alight	a_light;
+	t_camera	camera;
 	t_obj		*objs;
 	t_ray		ray;
+	t_vector	base[3];
 }			t_data;
 
 typedef struct s_minirt
 {
-	t_window	*win;
-	t_image		*img;
+	t_window	win;
+	t_image		img;
 	t_viewport	vp;
-	t_data		*data;
-	t_vector	base[3];
+	t_data		data;
 	t_vector	start;
 	t_vector	end;
 }			t_minirt;
@@ -184,6 +174,7 @@ int				print_error(char *msg);
 int				is_empty(char *line);
 
 /* MATHS UTILS */
+t_vector		str_to_vect(char *str);
 double			vect_length(t_vector vect);
 t_vector		normalize_vect(t_vector vect);
 t_vector		add_vect(t_vector vect1, t_vector vect2);
@@ -228,47 +219,38 @@ int				check_cone(char **data);
 /* WINDOW */
 t_minirt		*set_minirt(char *file);
 int				exit_handling(t_minirt *mem);
-t_window		*get_window(void);
+int				init_window(t_window *win);
 void			destroy_window(t_window *win);
-t_image			*get_image(t_window *win);
+int				init_image(t_image *img, t_window win);
 void			destroy_image(t_image *img, void *mlx);
 
 /* INPUTS */
 int				user_input(int keycode, t_minirt *data);
 
-/* PARAMETERS AND SHAPES STRUCTURES AND LISTS */
-t_vector		str_to_vect(char *str);
-t_camera		*set_camera(t_vector pos, t_vector direction, int fov);
-void			destroy_camera(t_camera *camera);
+/* INIT AMBIANT LIGHTNING, CAMERA AND VIEWPORT */
+t_alight		set_alight(double ratio, int color);
+t_camera		set_camera(t_vector pos, t_vector direction, int fov);
 t_viewport		init_viewport(double fov, double distance);
-t_alight		*set_alight(double ratio, int color);
-void			destroy_alight(t_alight *alight);
-void			set_light(t_light **light, t_vector pos, \
-		double ratio, int color);
-void			destroy_lights(t_light **light);
-void			set_plane(t_plane **plane, t_vector pos_normal[2], \
-		double cr[2]);
-void			destroy_plane(t_plane **plane);
-void			set_sphere(t_sphere **sphere, t_vector pos, double rcr[3]);
-void			destroy_sphere(t_sphere **sphere);
-void			set_cylinder(t_cylinder **cylinder, t_vector pos_axis[2], \
-		double dhcr[4]);
-void			destroy_cylinder(t_cylinder **cylinder);
-void			set_cone(t_cone **cone, t_vector pos_axis[2], double rhcr[4]);
-void			destroy_cone(t_cone **cone);
 
 /* OBJECTS LIST */
 t_obj			*create_new_obj(void);
 t_obj			*get_last_obj(t_obj *obj);
-void			init_objs(t_data *data);
-void			init_objs_cone(t_data *data);
+t_light			*create_light(t_vector pos, double ratio, int color);
+void			add_light(t_data *data, t_light *light);
+t_plane			*create_plane(t_vector pos_normal[2], double cr[2]);
+void			add_plane(t_data *data, t_plane *plane);
+t_sphere		*create_sphere(t_vector pos, double rcr[3]);
+void			add_sphere(t_data *data, t_sphere *sphere);
+t_cylinder		*create_cylinder(t_vector pos_axis[2], double dhcr[4]);
+void			add_cylinder(t_data *data, t_cylinder *cylinder);
+t_cone			*create_cone(t_vector pos_axis[2], double rhcr[4]);
+void			add_cone(t_data *data, t_cone *cone);
 void			destroy_objs(t_obj **obj);
-void			init_ray(t_data *data, t_ray *ray);
 
 /* DATAS STRUCTURE */
 char			**create_data_array(char *line);
 void			set_data_shapes(t_data *data, char **datas);
-t_data			*set_data(char *file);
+t_data			set_data(char *file);
 void			destroy_data(t_data *data);
 
 /* RAYTRACING */

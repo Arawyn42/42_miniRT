@@ -6,86 +6,46 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:47:09 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/16 10:06:24 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 04:33:05 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
- *	Light struct destroyer.
+ *	Creates, sets the values and returns a light struct.
 */
-static void	destroy_one_light(t_light *light)
-{
-	if (!light)
-		return ;
-	free(light);
-	light = NULL;
-}
-
-/*
- *	Lights struct destroyer.
-*/
-void	destroy_lights(t_light **light)
-{
-	t_light	*tmp;
-
-	if (!light || !(*light))
-		return ;
-	tmp = *light;
-	while (*light)
-	{
-		tmp = (*light)->next;
-		destroy_one_light(*light);
-		*light = tmp;
-	}
-	light = NULL;
-}
-
-/*
- *	Create, set the values and return light struct.
-*/
-static t_light	*new_light(t_vector pos, double ratio, int color)
+t_light	*create_light(t_vector pos, double ratio, int color)
 {
 	t_light	*light;
 
 	light = ft_calloc(1, sizeof(t_light));
 	if (!light)
 	{
-		print_error("Fatal error: light struct initialization: ");
-		print_error("Out of memory\n");
+		print_error("Error: Light: Calloc error.\n");
 		return (NULL);
 	}
 	light->pos = pos;
 	light->ratio = ratio;
 	light->color = color;
-	light->next = NULL;
-	return (light);
-}
-
-static t_light	*get_last_light(t_light *light)
-{
-	if (!light)
-		return (NULL);
-	while (light->next)
-		light = light->next;
 	return (light);
 }
 
 /*
- *	Creates, sets the values and returns light struct.
+ *	Adds a light into the objects list.
 */
-void	set_light(t_light **light, t_vector pos, double ratio, int color)
+void	add_light(t_data *data, t_light *light)
 {
-	t_light	*new;
-	t_light	*tmp;
+	t_obj	*new_obj;
+	t_obj	*last_obj;
 
-	new = new_light(pos, ratio, color);
-	if (!*light)
+	new_obj = create_new_obj();
+	new_obj->light = light;
+	if (!data->objs)
+		data->objs = new_obj;
+	else
 	{
-		*light = new;
-		return ;
+		last_obj = get_last_obj(data->objs);
+		last_obj->next = new_obj;
 	}
-	tmp = get_last_light(*light);
-	tmp->next = new;
 }

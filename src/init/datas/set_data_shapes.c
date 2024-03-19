@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:08:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/18 14:55:30 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 04:21:08 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	set_data_plane(t_data *data, char **datas)
 	cr[1] = DEFAULT_REFLECT_RATIO;
 	if (datas[4])
 		cr[1] = ft_atod(datas[4]);
-	set_plane(&(data->planes), pos_normal, cr);
+	add_plane(data, create_plane(pos_normal, cr));
 }
 
 /*
@@ -43,7 +43,7 @@ static void	set_data_sphere(t_data *data, char **datas)
 	rcs[2] = DEFAULT_REFLECT_RATIO;
 	if (datas[4])
 		rcs[2] = ft_atod(datas[4]);
-	set_sphere(&(data->spheres), pos, rcs);
+	add_sphere(data, create_sphere(pos, rcs));
 }
 
 /*
@@ -62,7 +62,7 @@ static void	set_data_cylinder(t_data *data, char **datas)
 	dhcr[3] = DEFAULT_REFLECT_RATIO;
 	if (datas[6])
 		dhcr[3] = ft_atod(datas[6]);
-	set_cylinder(&(data->cylinders), pos_axis, dhcr);
+	add_cylinder(data, create_cylinder(pos_axis, dhcr));
 }
 
 /*
@@ -81,7 +81,7 @@ static void	set_data_cone(t_data *data, char **datas)
 	rhcr[3] = DEFAULT_REFLECT_RATIO;
 	if (datas[6])
 		rhcr[3] = ft_atod(datas[6]);
-	set_cone(&(data->cones), pos_axis, rhcr);
+	add_cone(data, create_cone(pos_axis, rhcr));
 }
 
 /*

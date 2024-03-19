@@ -6,21 +6,11 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:21:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/18 14:59:48 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 04:26:07 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-/*
- *	Initialize the primary ray, starting from camera's position in camera's
- *	direction.
-*/
-void	init_ray(t_data *data, t_ray *ray)
-{
-	ray->origin = data->camera->pos;
-	ray->dir = normalize_vect(data->camera->direction);
-}
 
 /*
  *	Returns the ray intersection point coordinates from the ray's origin.
