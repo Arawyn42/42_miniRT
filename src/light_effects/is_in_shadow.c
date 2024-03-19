@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:00:20 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/19 04:40:50 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 05:08:58 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	is_on_obj(t_obj obj, t_vector point)
 /*
  *	Returns 1 if the point is in the shadow of an object, 0 if not.
 */
-int	is_in_shadow(t_data *data, t_vector point, t_light light)
+int	is_in_shadow(t_obj *obj, t_vector point, t_light light)
 {
 	t_ray			p_to_l;
 	double			l_distance;
@@ -97,7 +97,7 @@ int	is_in_shadow(t_data *data, t_vector point, t_light light)
 	p_to_l.origin = point;
 	p_to_l.dir = normalize_vect(substract_vect(light.pos, point));
 	l_distance = vect_length(substract_vect(light.pos, point));
-	closest = closest_intersection(data, p_to_l);
+	closest = closest_intersection(obj, p_to_l);
 	if (!closest.obj || closest.obj->pl || closest.obj->light)
 		return (0);
 	if (closest.distance >= l_distance || is_on_obj(*closest.obj, point))

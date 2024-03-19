@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:07:33 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/19 02:59:22 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 05:12:58 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 /*
  *	Returns the ambient lightning intensity vector.
 */
-t_vector	ambient_lightning_intensity(t_data *data)
+t_vector	ambient_lightning_intensity(t_alight a_light)
 {
 	t_vector	res;
-	t_color		a_light;
+	t_color		al;
 
-	a_light = int_to_rgb(data->a_light.color);
-	res.x = data->a_light.ratio * a_light.r / a_light.sum;
-	res.y = data->a_light.ratio * a_light.g / a_light.sum;
-	res.z = data->a_light.ratio * a_light.b / a_light.sum;
+	al = int_to_rgb(a_light.color);
+	res.x = a_light.ratio * al.r / al.sum;
+	res.y = a_light.ratio * al.g / al.sum;
+	res.z = a_light.ratio * al.b / al.sum;
 	return (res);
 }

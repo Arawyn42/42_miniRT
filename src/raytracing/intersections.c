@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:02:56 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/18 00:46:43 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 05:07:59 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ double	obj_intersection(t_ray ray, t_obj *obj)
 /*
  *	Returns the closest object from ray's origin and its distance from it.
 */
-t_closest_obj	closest_intersection(t_data *data, t_ray ray)
+t_closest_obj	closest_intersection(t_obj *objs, t_ray ray)
 {
 	double			distance;
 	t_obj			*obj;
@@ -77,7 +77,7 @@ t_closest_obj	closest_intersection(t_data *data, t_ray ray)
 	res.obj = NULL;
 	res.distance = INFINITY;
 	res.reflect = DEFAULT_REFLECT_RATIO;
-	obj = data->objs;
+	obj = objs;
 	while (obj)
 	{
 		distance = obj_intersection(ray, obj);

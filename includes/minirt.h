@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/19 04:40:02 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/19 05:36:53 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,16 @@ typedef struct s_minirt
 	t_vector	end;
 }			t_minirt;
 
+typedef struct s_th
+{
+	t_image		*img;
+	t_viewport	*vp;
+	t_data		*data;
+	t_vector	start;
+	t_vector	end;
+}			t_th;
+
+
 /* STRING UTILS */
 int				ft_strcmp(const char *s1, const char *s2);
 double			ft_atod(char *str);
@@ -260,11 +270,11 @@ t_vector		intersection_point(t_ray ray, double distance);
 double			cy_intersection(t_ray ray, t_cylinder *cylinder);
 double			cone_intersection(t_ray ray, t_cone *co);
 double			obj_intersection(t_ray ray, t_obj *obj);
-t_closest_obj	closest_intersection(t_data *data, t_ray ray);
+t_closest_obj	closest_intersection(t_obj *objs, t_ray ray);
 t_color			ray_trace(t_data *data, t_ray ray, int depth);
 
 /* AMBIENT LIGHTNING */
-t_vector		ambient_lightning_intensity(t_data *data);
+t_vector		ambient_lightning_intensity(t_alight a_light);
 
 /* LIGHT */
 t_vector		light_intensity(t_light light);
@@ -277,9 +287,9 @@ t_color			reflection_color(t_color color, t_color reflective, \
 		double ratio);
 t_color			light_effects(t_data *data, t_vector normal, \
 		t_closest_obj closest, t_ray ray);
-int				is_in_shadow(t_data *data, t_vector point, t_light light);
+int				is_in_shadow(t_obj *obj, t_vector point, t_light light);
 int				is_on_cone(t_cone co, t_vector p);
-double			shadow_effects(t_data *data, t_vector inter, \
+double			shadow_effects(t_obj *objs, t_vector inter, \
 		t_closest_obj closest);
 
 /* RENDERING */
