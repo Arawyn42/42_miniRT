@@ -6,7 +6,7 @@
 /*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:20:04 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/20 19:58:09 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/21 01:37:25 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,23 @@ static double	diffuse_intensity(t_vector normal, t_vector p_to_l)
  *	intersection point.
 */
 static double	specular_intensity(t_vector p_to_l, t_vector normal, \
-	t_vector dir, t_closest_obj closest)
+	t_closest_obj closest)
 {
-	t_vector	reflect;
 	double		scalar;
-	double		intensity;
+	double		power;
+	double		specular;
 
-	if (closest.obj->pl || closest.reflect > 0)
+	power = 200;
+	specular = 0.5;
+	if (closest.obj->pl)
+	{
+		power = 100;
+		specular = 0.5;
+	}
+	scalar = vect_dot(normal, p_to_l);
+	if (scalar < 0.75)
 		return (0);
-	reflect = reflection_dir(normal, p_to_l);
-	scalar = vect_dot(reflect, dir);
-	intensity = fabs(pow(scalar, 30) * 0.002);
-	// printf("specular = %f\n", intensity);
-	if (scalar > PRECISION && intensity > PRECISION)
-		return (intensity);
-	return (0);
+	return (pow(scalar, power) * specular);
 }
 
 /*
@@ -60,13 +62,14 @@ static t_vector	point_intensity(t_light light, t_vector normal_dir[2], \
 	t_vector	intensity;
 	t_color		light_color;
 	double		ratio;
+	double		specular;
 
 	light_color = int_to_rgb(light.color);
-	ratio = light.ratio * (diffuse_intensity(normal_dir[0], p_to_l) \
-		+ specular_intensity(p_to_l, normal_dir[0], normal_dir[1], closest));
-	intensity.x = ratio * light_color.r / light_color.sum;
-	intensity.y = ratio * light_color.g / light_color.sum;
-	intensity.z = ratio * light_color.b / light_color.sum;
+	ratio = light.ratio * diffuse_intensity(normal_dir[0], p_to_l);
+	specular = specular_intensity(p_to_l, normal_dir[0], closest);
+	intensity.x = ratio * light_color.r / light_color.sum + specular;
+	intensity.y = ratio * light_color.g / light_color.sum + specular;
+	intensity.z = ratio * light_color.b / light_color.sum + specular;
 	return (intensity);
 }
 
