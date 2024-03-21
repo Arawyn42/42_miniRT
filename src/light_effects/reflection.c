@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:55:33 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/17 21:16:29 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:57:52 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,16 @@ t_vector	reflection_dir(t_vector normal, t_vector dir)
 /*
  *	Returns the reflection color of a given color according to a reflect ratio.
 */
-t_color	reflection_color(t_color color, t_color reflective, double ratio)
+t_color	reflection_color(t_color color, t_color reflective, double ratio, double cap)
 {
 	t_color	res;
 	double	r;
 
-	r = ratio * 0.75;
+	if (cap > 1)
+		cap = 1;
+	else if (cap < 0)
+		cap = 0;
+	r = ratio * cap;
 	res.r = color.r * (1.0 - r) + reflective.r * r;
 	res.g = color.g * (1.0 - r) + reflective.g * r;
 	res.b = color.b * (1.0 - r) + reflective.b * r;

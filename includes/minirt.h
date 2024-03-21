@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/21 17:04:02 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:45:15 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define DEPTH 5
 # define PRECISION 0.01
 # define DEFAULT_REFLECT_RATIO 0.0
+# define ANTI_ALIASING 0.8
 # ifndef M_PI
 #  define M_PI 3.14159265358
 # endif
@@ -279,7 +280,7 @@ int				is_in_shadow(t_obj *obj, t_vector point, t_light light);
 double			get_obj_reflect_ratio(t_obj *obj);
 t_vector		reflection_dir(t_vector normal, t_vector dir);
 t_color			reflection_color(t_color color, t_color reflective, \
-		double ratio);
+		double ratio, double cap);
 
 /* LIGHT EFFECTS */
 t_color			get_obj_color(t_obj *obj);
@@ -300,7 +301,9 @@ t_vector		get_obj_normal(t_obj *obj, t_vector intersection, t_ray ray);
 t_color			ray_trace(t_data *data, t_ray ray, int depth);
 
 /********************************* RENDERING **********************************/
-void			rendering(t_minirt *mem, int threads);
 void			draw_pixels(t_image *img, int x, int y, int color);
+t_color			get_pixel_color(t_image img, int x, int y);
+void			anti_aliasing(t_minirt *mem, double ratio);
+void			rendering(t_minirt *mem, int threads);
 
 #endif
