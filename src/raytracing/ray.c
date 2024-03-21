@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:21:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/19 05:08:38 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/21 13:51:51 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_color	ray_trace(t_data *data, t_ray ray, int depth)
 	if (!closest.obj)
 		return ((t_color){0, 0, 0, 0});
 	inter = intersection_point(ray, closest.distance);
-	closest_normal = get_obj_normal(closest.obj, inter);
+	closest_normal = get_obj_normal(closest.obj, inter, ray);
 	color = light_effects(data, closest_normal, closest, ray);
 	if (depth <= 0 || closest.reflect <= 0)
 		return (color);

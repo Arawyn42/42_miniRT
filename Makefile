@@ -6,7 +6,7 @@
 #    By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 14:42:11 by drenassi          #+#    #+#              #
-#    Updated: 2024/03/19 04:51:50 by drenassi         ###   ########.fr        #
+#    Updated: 2024/03/21 14:36:45 by drenassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,10 +92,12 @@ SRCS			= utils/str/ft_strcmp.c \
 				  raytracing/intersection_normals.c \
 				  light_effects/ambient_lightning.c \
 				  light_effects/light.c \
+				  light_effects/diffuse.c \
+				  light_effects/specular.c \
 				  light_effects/light_effects.c \
 				  light_effects/reflection.c \
 				  light_effects/is_in_shadow.c \
-				  light_effects/shadow_effects.c \
+				  light_effects/is_on_obj.c \
 				  rendering/draw_pixels.c \
 				  rendering/loading_display.c \
 				  rendering/rendering.c

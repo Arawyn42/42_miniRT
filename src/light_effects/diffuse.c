@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.c                                            :+:      :+:    :+:   */
+/*   diffuse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 13:25:40 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/21 14:42:27 by drenassi         ###   ########.fr       */
+/*   Created: 2024/03/21 12:26:17 by drenassi          #+#    #+#             */
+/*   Updated: 2024/03/21 13:23:39 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
- *	Returns the light intensity vector according to the lambertian surface
- *	reflection property of the object material.
+ *	Returns the diffuse intensity, which is the scalar product between
+ *	the vector from light position to the intersection point and
+ *	the normal vector at the intersection point.
 */
-t_vector	light_intensity(t_light light, double lambertian)
+t_vector	diffuse_intensity(t_vector normal, t_vector p_to_l, t_vector light)
 {
-	t_vector	res;
-	t_color		l;
+	t_vector	diffuse;
+	double		ratio;
 
-	l = int_to_rgb(light.color);
-	res.x = lambertian * 3 * light.ratio * l.r / l.sum;
-	res.y = lambertian * 3 * light.ratio * l.g / l.sum;
-	res.z = lambertian * 3 * light.ratio * l.b / l.sum;
-	return (res);
+	ratio = fmax(vect_dot(p_to_l, normal), 0);
+	diffuse = multiply_vect_scalar(light, ratio);
+	return (diffuse);
 }

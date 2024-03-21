@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/19 14:53:44 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:12:40 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@
 # define SCREEN_H 810
 # define SCREEN_W 1440
 # define VIEWPORT_DIST 1
-# define DEPTH 3
+# define DEPTH 6
 # define PRECISION 0.01
 # define DEFAULT_REFLECT_RATIO 0.0
 # ifndef M_PI
 #  define M_PI 3.14159265358
 # endif
 
+/********************************* STRUCTURES *********************************/
 typedef struct s_window
 {
 	void	*mlx;
@@ -165,6 +166,7 @@ typedef struct s_minirt
 	t_vector	end;
 }			t_minirt;
 
+/*********************************** UTILS ************************************/
 /* STRING UTILS */
 int				ft_strcmp(const char *s1, const char *s2);
 double			ft_atod(char *str);
@@ -199,6 +201,7 @@ t_color			int_to_rgb(int color);
 int				rgb_to_int(int r, int g, int b);
 void			protect_colors(t_color *color);
 
+/********************************* CHECK FILE *********************************/
 /* CHECK CONFIG FILE*/
 int				check_args(int ac, char **av, int *threads);
 int				check_file(char *file);
@@ -216,6 +219,10 @@ int				check_sphere(char **data);
 int				check_cylinder(char **data);
 int				check_cone(char **data);
 
+/******************************* INITIALIZATION *******************************/
+/* INPUTS */
+int				user_input(int keycode, t_minirt *data);
+
 /* WINDOW */
 t_minirt		*set_minirt(char *file);
 int				exit_handling(t_minirt *mem);
@@ -223,9 +230,6 @@ int				init_window(t_window *win);
 void			destroy_window(t_window *win);
 int				init_image(t_image *img, t_window win);
 void			destroy_image(t_image *img, void *mlx);
-
-/* INPUTS */
-int				user_input(int keycode, t_minirt *data);
 
 /* INIT AMBIANT LIGHTNING, CAMERA AND VIEWPORT */
 t_alight		set_alight(double ratio, int color);
@@ -250,39 +254,52 @@ void			destroy_objs(t_obj **obj);
 /* DATAS STRUCTURE */
 char			**create_data_array(char *line);
 void			set_data_shapes(t_data *data, char **datas);
+t_vector		set_ray(t_vector base[3], double x, double y, double z);
 t_data			set_data(char *file);
 void			destroy_data(t_data *data);
 
-/* RAYTRACING */
-t_vector		get_obj_normal(t_obj *obj, t_vector intersection);
-t_vector		set_ray(t_vector base[3], double x, double y, double z);
+/******************************* LIGHT EFFECTS ********************************/
+/* AMBIENT LIGHTNING INTENSITY*/
+t_vector		ambient_lightning_intensity(t_alight a_light, double property);
+
+/* LIGHT INTENSITY*/
+t_vector		light_intensity(t_light light, double lambertian);
+
+/* DIFFUSE INTENSITY */
+t_vector		diffuse_intensity(t_vector normal, t_vector p_to_l, t_vector light);
+
+/* SPECULAR INTENSITY */
+t_vector		specular_intensity(t_vector p_to_l, t_vector normal, \
+		t_vector light);
+
+/* SHADOWS */
+int				is_in_shadow(t_obj *obj, t_vector point, t_light light);
+
+/* REFLECTION */
+double			get_obj_reflect_ratio(t_obj *obj);
+t_vector		reflection_dir(t_vector normal, t_vector dir);
+t_color			reflection_color(t_color color, t_color reflective, \
+		double ratio);
+
+/* LIGHT EFFECTS */
+t_color			get_obj_color(t_obj *obj);
+t_color			light_effects(t_data *data, t_vector normal, \
+		t_closest_obj current, t_ray ray);
+		
+/********************************* RAYTRACING *********************************/
+/* INTERSECTIONS */
 t_vector		intersection_point(t_ray ray, double distance);
 double			cy_intersection(t_ray ray, t_cylinder *cylinder);
 double			cone_intersection(t_ray ray, t_cone *co);
 double			obj_intersection(t_ray ray, t_obj *obj);
 t_closest_obj	closest_intersection(t_obj *objs, t_ray ray);
+int				is_on_obj(t_obj obj, t_vector point);
+
+/* NORMALS */
+t_vector		get_obj_normal(t_obj *obj, t_vector intersection, t_ray ray);
 t_color			ray_trace(t_data *data, t_ray ray, int depth);
 
-/* AMBIENT LIGHTNING */
-t_vector		ambient_lightning_intensity(t_alight a_light);
-
-/* LIGHT */
-t_vector		light_intensity(t_light light);
-
-/* LIGHT EFFECTS */
-t_color			get_obj_color(t_obj *obj);
-double			get_obj_reflect_ratio(t_obj *obj);
-t_vector		reflection_dir(t_vector normal, t_vector dir);
-t_color			reflection_color(t_color color, t_color reflective, \
-		double ratio);
-t_color			light_effects(t_data *data, t_vector normal, \
-		t_closest_obj closest, t_ray ray);
-int				is_in_shadow(t_obj *obj, t_vector point, t_light light);
-int				is_on_cone(t_cone co, t_vector p);
-double			shadow_effects(t_obj *objs, t_vector inter, \
-		t_closest_obj closest);
-
-/* RENDERING */
+/********************************* RENDERING **********************************/
 void			rendering(t_minirt *mem, int threads);
 void			draw_pixels(t_image *img, int x, int y, int color);
 

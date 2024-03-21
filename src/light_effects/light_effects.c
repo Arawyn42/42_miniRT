@@ -3,73 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   light_effects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:20:04 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/21 01:37:25 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/21 15:13:20 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /*
- *	Returns the diffuse intensity, which is the scalar product between
- *	the vector from light position to the intersection point and
- *	the normal vector at the intersection point.
-*/
-static double	diffuse_intensity(t_vector normal, t_vector p_to_l)
-{
-	double	ratio;
-
-	ratio = vect_dot(p_to_l, normal);
-	if (ratio < PRECISION)
-		return (0);
-	return (ratio);
-}
-
-/*
- *	Returns the specular intensity, which is the scalar product between
- *	the reflection vector and the vector from light position to the
- *	intersection point.
-*/
-static double	specular_intensity(t_vector p_to_l, t_vector normal, \
-	t_closest_obj closest)
-{
-	double		scalar;
-	double		power;
-	double		specular;
-
-	power = 200;
-	specular = 0.5;
-	if (closest.obj->pl)
-	{
-		power = 100;
-		specular = 0.5;
-	}
-	scalar = vect_dot(normal, p_to_l);
-	if (scalar < 0.75)
-		return (0);
-	return (pow(scalar, power) * specular);
-}
-
-/*
  *	Applies diffuse intensity and specular intensity on light ratio
  *	and returns the resulting light intensity as a vector.
 */
-static t_vector	point_intensity(t_light light, t_vector normal_dir[2], \
-	t_vector p_to_l, t_closest_obj closest)
+static t_vector	point_intensity(t_light light, t_vector normal, t_vector p_to_l)
 {
 	t_vector	intensity;
-	t_color		light_color;
-	double		ratio;
-	double		specular;
+	t_vector	l_intensity;
+	t_vector	diffuse;
+	t_vector	specular;
 
-	light_color = int_to_rgb(light.color);
-	ratio = light.ratio * diffuse_intensity(normal_dir[0], p_to_l);
-	specular = specular_intensity(p_to_l, normal_dir[0], closest);
-	intensity.x = ratio * light_color.r / light_color.sum + specular;
-	intensity.y = ratio * light_color.g / light_color.sum + specular;
-	intensity.z = ratio * light_color.b / light_color.sum + specular;
+	l_intensity = light_intensity(light, 0.8);
+	diffuse = diffuse_intensity(normal, p_to_l, l_intensity);
+	specular = specular_intensity(p_to_l, normal, l_intensity);
+	intensity = add_vect(diffuse, specular);
 	return (intensity);
 }
 
@@ -79,27 +36,24 @@ static t_vector	point_intensity(t_light light, t_vector normal_dir[2], \
 *	intensity.
 */
 static t_vector	light_effects_intensity(t_data *data, \
-	t_vector normal_dir[2], t_vector inter, t_closest_obj closest)
+	t_vector normal, t_vector point, t_closest_obj current)
 {
+	t_vector	intensity;
 	t_vector	p_intensity;
-	t_vector	l_intensity;
 	t_vector	p_to_l;
 	t_obj		*objs;
-	t_vector	intensity;
 
-	intensity = (t_vector){1, 1, 1};
+	intensity = ambient_lightning_intensity(data->a_light, 0.8);
 	objs = data->objs;
 	while (objs)
 	{
 		if (objs->light)
 		{
-			p_to_l = normalize_vect(substract_vect(objs->light->pos, inter));
-			p_intensity = add_vect(ambient_lightning_intensity(data->a_light), \
-				point_intensity(*objs->light, normal_dir, p_to_l, closest));
-			l_intensity = add_vect(ambient_lightning_intensity(data->a_light), \
-				light_intensity(*objs->light));
-			intensity = multiply_vect(intensity, \
-				divide_vect(p_intensity, l_intensity));
+			p_to_l = normalize_vect(substract_vect(objs->light->pos, point));
+			p_intensity = point_intensity(*objs->light, normal, p_to_l);
+			if (is_in_shadow(current.obj, point, *objs->light))
+				p_intensity = multiply_vect_scalar(p_intensity, 0.2);
+			intensity = add_vect(intensity, p_intensity);
 		}
 		objs = objs->next;
 	}
@@ -110,24 +64,18 @@ static t_vector	light_effects_intensity(t_data *data, \
  *	Returns the color after applying all light effects on a colored pixel.
 */
 t_color	light_effects(t_data *data, t_vector normal, \
-	t_closest_obj closest, t_ray ray)
+	t_closest_obj current, t_ray ray)
 {
 	t_color		obj_color;
 	t_color		color;
 	t_vector	intensity;
-	t_vector	normal_dir[2];
-	double		shadow;
 
-	obj_color = get_obj_color(closest.obj);
-	shadow = shadow_effects(data->objs, intersection_point(ray, \
-		closest.distance), closest);
-	normal_dir[0] = normal;
-	normal_dir[1] = substract_vect((t_vector){0, 0, 0}, ray.dir);
-	intensity = light_effects_intensity(data, normal_dir, \
-		intersection_point(ray, closest.distance), closest);
-	color.r = obj_color.r * intensity.x * shadow;
-	color.g = obj_color.g * intensity.y * shadow;
-	color.b = obj_color.b * intensity.z * shadow;
+	obj_color = get_obj_color(current.obj);
+	intensity = light_effects_intensity(data, normal, \
+		intersection_point(ray, current.distance), current);
+	color.r = obj_color.r * (intensity.x);
+	color.g = obj_color.g * (intensity.y);
+	color.b = obj_color.b * (intensity.z);
 	color.sum = color.r + color.g + color.b;
 	protect_colors(&color);
 	return (color);
