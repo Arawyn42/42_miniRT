@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:20:04 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/21 15:13:20 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:10:54 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static t_vector	light_effects_intensity(t_data *data, \
 			p_to_l = normalize_vect(substract_vect(objs->light->pos, point));
 			p_intensity = point_intensity(*objs->light, normal, p_to_l);
 			if (is_in_shadow(current.obj, point, *objs->light))
-				p_intensity = multiply_vect_scalar(p_intensity, 0.2);
+				p_intensity = multiply_vect_scalar(p_intensity, 0.3);
 			intensity = add_vect(intensity, p_intensity);
 		}
 		objs = objs->next;

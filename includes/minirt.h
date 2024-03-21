@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/21 15:12:40 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:04:02 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define SCREEN_H 810
 # define SCREEN_W 1440
 # define VIEWPORT_DIST 1
-# define DEPTH 6
+# define DEPTH 5
 # define PRECISION 0.01
 # define DEFAULT_REFLECT_RATIO 0.0
 # ifndef M_PI
