@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_effects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:20:04 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/19 05:13:29 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/20 19:58:09 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static double	specular_intensity(t_vector p_to_l, t_vector normal, \
 	reflect = reflection_dir(normal, p_to_l);
 	scalar = vect_dot(reflect, dir);
 	intensity = fabs(pow(scalar, 30) * 0.002);
+	// printf("specular = %f\n", intensity);
 	if (scalar > PRECISION && intensity > PRECISION)
 		return (intensity);
 	return (0);

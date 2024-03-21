@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   identifier.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 22:01:17 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/17 21:18:41 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/21 00:53:58 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	check_identifier(char *line)
 	char	**data;
 
 	data = create_data_array(line);
+	if (data[0][0] == '#')
+		return (free_double_array(data), 1);
 	if (!ft_strcmp(data[0], "A"))
 		return (free_double_array(data), 1);
 	else if (!ft_strcmp(data[0], "C"))

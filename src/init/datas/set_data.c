@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:58:35 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/19 04:27:44 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/21 00:49:28 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	set_line_data(char *line, t_data *data)
 	datas = create_data_array(line);
 	if (!datas)
 		return ;
-	if (!datas[0])
+	if (!datas[0] || datas[0][0] == '#')
 		return (free_double_array(datas));
 	if (!ft_strcmp(datas[0], "A"))
 		data->a_light = set_alight(ft_atod(datas[1]), \

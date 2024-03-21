@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
+/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 17:40:45 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/18 14:36:14 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/21 00:54:34 by arawyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static int	check_line(char *line)
 	if (is_empty(line))
 		return (1);
 	data = create_data_array(line);
+	if (!data)
+		return (1);
 	if (!ft_strcmp(data[0], "A") && !check_ambiant_lightning(data))
 		return (free_double_array(data), 0);
 	if (!ft_strcmp(data[0], "C") && !check_camera(data))
@@ -75,11 +77,6 @@ int	check_file(char *file)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (line[0] == '#')
-		{
-			free(line);
-			line = get_next_line(fd);
-		}
 		if ((!is_empty(line) && !check_identifier(line)) || !check_line(line))
 			return (close(fd), free(line), 0);
 		free(line);
