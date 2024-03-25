@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/21 19:45:15 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:51:22 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_camera
 	t_vector	pos;
 	t_vector	direction;
 	int			fov;
+	t_vector	base[3];
 }			t_camera;
 
 typedef struct s_viewport
@@ -89,21 +90,23 @@ typedef struct s_light
 	int				color;
 }			t_light;
 
+typedef struct s_plane
+{
+	t_vector		pos;
+	t_vector		normal;
+	int				color;
+	t_vector		base[3];
+	double			reflect;
+}			t_plane;
+
 typedef struct s_sphere
 {
 	t_vector		pos;
 	double			radius;
 	int				color;
 	double			reflect;
+	t_vector		base[3];
 }			t_sphere;
-
-typedef struct s_plane
-{
-	t_vector		pos;
-	t_vector		normal;
-	int				color;
-	double			reflect;
-}			t_plane;
 
 typedef struct s_cylinder
 {
@@ -112,6 +115,7 @@ typedef struct s_cylinder
 	double				radius;
 	double				height;
 	int					color;
+	t_vector			base[3];
 	double				reflect;
 }			t_cylinder;
 
@@ -122,6 +126,7 @@ typedef struct s_cone
 	double			radius;
 	double			height;
 	int				color;
+	t_vector		base[3];
 	double			reflect;
 }			t_cone;
 
@@ -154,7 +159,6 @@ typedef struct s_data
 	t_camera	camera;
 	t_obj		*objs;
 	t_ray		ray;
-	t_vector	base[3];
 }			t_data;
 
 typedef struct s_minirt
@@ -204,7 +208,7 @@ void			protect_colors(t_color *color);
 
 /********************************* CHECK FILE *********************************/
 /* CHECK CONFIG FILE*/
-int				check_args(int ac, char **av, int *threads);
+int				check_args(int ac, char **av, int *threads, int *anti_aliasing);
 int				check_file(char *file);
 int				check_identifier(char *line);
 int				check_int(char *n);
@@ -290,8 +294,10 @@ t_color			light_effects(t_data *data, t_vector normal, \
 /********************************* RAYTRACING *********************************/
 /* INTERSECTIONS */
 t_vector		intersection_point(t_ray ray, double distance);
-double			cy_intersection(t_ray ray, t_cylinder *cylinder);
-double			cone_intersection(t_ray ray, t_cone *co);
+double			pl_intersection(t_ray ray, t_plane pl);
+double			sp_intersection(t_ray ray, t_sphere sp);
+double			cy_intersection(t_ray ray, t_cylinder cylinder);
+double			cone_intersection(t_ray ray, t_cone co);
 double			obj_intersection(t_ray ray, t_obj *obj);
 t_closest_obj	closest_intersection(t_obj *objs, t_ray ray);
 int				is_on_obj(t_obj obj, t_vector point);
@@ -304,6 +310,6 @@ t_color			ray_trace(t_data *data, t_ray ray, int depth);
 void			draw_pixels(t_image *img, int x, int y, int color);
 t_color			get_pixel_color(t_image img, int x, int y);
 void			anti_aliasing(t_minirt *mem, double ratio);
-void			rendering(t_minirt *mem, int threads);
+void			rendering(t_minirt *mem, int threads, int a_aliasing);
 
 #endif

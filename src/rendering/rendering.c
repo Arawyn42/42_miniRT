@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:46:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/21 19:45:25 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:51:11 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	render_no_thread(t_minirt *mem)
 		display_loading("Rendering:", -SCREEN_W / 2, pixel.x, SCREEN_W / 100);
 		while (++pixel.y <= mem->end.y)
 		{
-			mem->data.ray.dir = set_ray(mem->data.base, pixel.x \
+			mem->data.ray.dir = set_ray(mem->data.camera.base, pixel.x \
 				* mem->vp.w_ratio, -pixel.y *  mem->vp.h_ratio, VIEWPORT_DIST);
 			color = ray_trace(&mem->data, mem->data.ray, DEPTH);
 			draw_pixels(&mem->img, SCREEN_W / 2 + pixel.x, SCREEN_H / 2 \
@@ -55,7 +55,7 @@ static void	*render_threads(void *args)
 				pixel.x, SCREEN_W / 100);
 		while (++pixel.y <= mem->end.y)
 		{
-			mem->data.ray.dir = set_ray(mem->data.base, pixel.x \
+			mem->data.ray.dir = set_ray(mem->data.camera.base, pixel.x \
 				* mem->vp.w_ratio, -pixel.y *  mem->vp.h_ratio, VIEWPORT_DIST);
 			color = ray_trace(&mem->data,mem->data.ray, DEPTH);
 			draw_pixels(&mem->img, SCREEN_W / 2 + pixel.x, SCREEN_H / 2 \
@@ -106,16 +106,17 @@ static void	launch_threads(t_minirt *mem, int threads)
 /*
  *	Calls the main rendering function and prints the resulting image.
 */
-void	rendering(t_minirt *mem, int threads)
+void	rendering(t_minirt *mem, int threads, int a_aliasing)
 {
 	mlx_hook(mem->win.window, 17, 0L, &exit_handling, mem);
 	mlx_hook(mem->win.window, 2, 1L << 0, &user_input, mem);
-	rotate_base(mem->data.base, mem->data.camera.direction);
+	rotate_base(mem->data.camera.base, mem->data.camera.direction);
 	if (!threads)
 		render_no_thread(mem);
 	else
 		launch_threads(mem, threads);
-	anti_aliasing(mem, ANTI_ALIASING);
+	if (a_aliasing)
+		anti_aliasing(mem, ANTI_ALIASING);
 	mlx_put_image_to_window(mem->win.mlx, \
 		mem->win.window, mem->img.image, 0, 0);
 	mlx_loop(mem->win.mlx);

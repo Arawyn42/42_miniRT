@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:50:50 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/19 04:34:48 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:05:16 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ t_sphere	*create_sphere(t_vector pos, double rcr[3])
 	sphere->radius = rcr[0];
 	sphere->color = (int)rcr[1];
 	sphere->reflect = rcr[2];
+	sphere->base[0] = (t_vector){1, 0, 0};
+	sphere->base[1] = (t_vector){0, 1, 0};
+	sphere->base[2] = (t_vector){0, 0, 1};
 	return (sphere);
 }
 

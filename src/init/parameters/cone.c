@@ -13,6 +13,28 @@
 #include "minirt.h"
 
 /*
+ *	Creates and sets a cone's base.
+*/
+static void	create_cone_base(t_cone *cone)
+{
+	t_ray	ray;
+	double	distance;
+	t_plane	plane;
+
+	ray.origin = add_vect((t_vector){cone->axis.y, cone->axis.z, \
+		cone->axis.x}, cone->pos);
+	ray.dir = cone->axis;
+	plane.pos = cone->pos;
+	plane.normal = cone->axis;
+	distance = pl_intersection(ray, plane);
+	cone->base[2] = normalize_vect(substract_vect(intersection_point(ray, \
+		distance), cone->pos));
+	cone->base[1] = cone->axis;
+	cone->base[0] = normalize_vect(vect_cross_product(cone->base[1], \
+		cone->base[2]));
+}
+
+/*
  *	Creates, sets the values and return a cone structure.
 */
 t_cone	*create_cone(t_vector pos_axis[2], double rhcr[4])
@@ -31,6 +53,7 @@ t_cone	*create_cone(t_vector pos_axis[2], double rhcr[4])
 	cone->height = rhcr[1];
 	cone->color = rhcr[2];
 	cone->reflect = rhcr[3];
+	create_cone_base(cone);
 	return (cone);
 }
 

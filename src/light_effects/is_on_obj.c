@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 10:16:26 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/21 14:25:47 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:57:24 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,18 @@ static int	is_on_cylinder(t_cylinder cylinder, t_vector point)
 */
 static int	is_on_cone(t_cone co, t_vector p)
 {
-	t_vector	c;
+	t_vector	tip;
 	double		dist;
 	double		disk_dist;
 
-	c = add_vect(co.pos, multiply_vect_scalar(co.axis, co.height));
-	if (fabs(vect_dot(substract_vect(c, p), co.axis)) < PRECISION \
-		&& vect_length(substract_vect(c, p)) <= co.radius)
+	tip = add_vect(co.pos, multiply_vect_scalar(co.axis, co.height));
+	if (fabs(vect_dot(substract_vect(co.pos, p), co.axis)) < PRECISION \
+		&& vect_length(substract_vect(co.pos, p)) <= co.radius)
 		return (1);
-	dist = vect_dot(substract_vect(p, co.pos), co.axis);
+	dist = vect_dot(substract_vect(p, tip), co.axis);
 	if (dist <= 0 || dist > co.height)
 		return (0);
-	disk_dist = vect_length(substract_vect(substract_vect(p, co.pos), \
+	disk_dist = vect_length(substract_vect(substract_vect(p, tip), \
 		multiply_vect_scalar(co.axis, dist)));
 	if (disk_dist <= dist * co.radius / co.height + PRECISION)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:59:18 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/21 15:01:58 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:31:13 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,22 @@ static t_vector	get_plane_normal(t_plane *pl, t_ray ray)
 static t_vector	get_cylinder_normal(t_cylinder *cy, t_vector point)
 {
 	t_vector	normal;
-	double		d;
-	t_vector	center_to_point;
+	t_vector	c1_to_point;
+	t_vector	c2_to_point;
+	double		s1;
+	double		s2;
 
-	center_to_point = substract_vect(point, cy->pos);
-	d = vect_dot(center_to_point, cy->axis);
-	if (fabs(fabs(d) - cy->height / 2) < PRECISION)
-	{
-		if (vect_dot(center_to_point, cy->axis) >= 0)
-			normal = cy->axis;
-		else
-			normal = substract_vect((t_vector){0, 0, 0}, cy->axis);
-	}
-	else
-		normal = substract_vect(center_to_point, \
-			multiply_vect_scalar(cy->axis, d));
-	normal = normalize_vect(normal);
+	c1_to_point = substract_vect(point, cy->pos);
+	s1 = vect_dot(c1_to_point, cy->axis);
+	if (fabs(s1) < PRECISION)
+		return (substract_vect((t_vector){0, 0, 0}, cy->axis));
+	c2_to_point = substract_vect(point, add_vect(cy->pos, \
+		multiply_vect_scalar(cy->axis, cy->height)));
+	s2 = vect_dot(c2_to_point, cy->axis);
+	if (fabs(s2) < PRECISION)
+		return (cy->axis);
+	normal = normalize_vect(substract_vect(c1_to_point, \
+			multiply_vect_scalar(cy->axis, s1)));
 	return (normal);
 }
 
@@ -61,17 +61,18 @@ static t_vector	get_cylinder_normal(t_cylinder *cy, t_vector point)
 static t_vector	get_cone_normal(t_cone *co, t_vector point)
 {
 	t_vector	normal;
-	t_vector	c;
+	t_vector	tip;
 	t_vector	proj;
 	double		tan2;
 	double		d;
 
-	c = add_vect(co->pos, multiply_vect_scalar(co->axis, co->height));
-	if (fabs(vect_dot(substract_vect(c, point), co->axis)) < PRECISION)
-		return (co->axis);
+	tip = add_vect(co->pos, multiply_vect_scalar(co->axis, co->height));
+	if (fabs(vect_dot(substract_vect(co->pos, point), co->axis)) < PRECISION)
+		return (substract_vect((t_vector){0, 0, 0}, co->axis));
 	tan2 = co->radius * co->radius / (co->height * co->height);
-	d = vect_length(substract_vect(point, co->pos)) * sqrt(1 + tan2);
-	proj = add_vect(co->pos, multiply_vect_scalar(co->axis, d));
+	d = vect_length(substract_vect(point, tip)) * sqrt(1 + tan2);
+	proj = add_vect(tip, multiply_vect_scalar( \
+		substract_vect((t_vector){0, 0, 0}, co->axis), d));
 	normal = normalize_vect(substract_vect(point, proj));
 	return (normal);
 }

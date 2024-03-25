@@ -6,11 +6,33 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:54:10 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/19 04:36:02 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:16:16 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/*
+ *	Creates and sets a cylinder's base.
+*/
+static void	create_cylinder_base(t_cylinder *cylinder)
+{
+	t_ray	ray;
+	double	distance;
+	t_plane	plane;
+
+	ray.origin = add_vect((t_vector){cylinder->axis.y, cylinder->axis.z, \
+		cylinder->axis.x}, cylinder->pos);
+	ray.dir = cylinder->axis;
+	plane.pos = cylinder->pos;
+	plane.normal = cylinder->axis;
+	distance = pl_intersection(ray, plane);
+	cylinder->base[2] = normalize_vect(substract_vect(intersection_point(ray, \
+		distance), cylinder->pos));
+	cylinder->base[1] = cylinder->axis;
+	cylinder->base[0] = normalize_vect(vect_cross_product(cylinder->base[1], \
+		cylinder->base[2]));
+}
 
 /*
  *	Creates, sets the values and returns a cylinder structure.
@@ -31,6 +53,7 @@ t_cylinder	*create_cylinder(t_vector pos_axis[2], double dhcr[4])
 	cylinder->height = dhcr[1];
 	cylinder->color = (int)dhcr[2];
 	cylinder->reflect = dhcr[3];
+	create_cylinder_base(cylinder);
 	return (cylinder);
 }
 

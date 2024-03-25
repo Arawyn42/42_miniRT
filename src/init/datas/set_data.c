@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:58:35 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/21 00:49:28 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/25 15:31:04 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static void	init_data(t_data *data)
 	data->a_light.ratio = 1;
 	data->camera.pos = (t_vector){0, 0, 0};
 	data->camera.direction = (t_vector){0, 0, 1};
+	data->camera.base[0] = (t_vector){1, 0, 0};
+	data->camera.base[1] = (t_vector){0, 1, 0};
+	data->camera.base[2] = (t_vector){0, 0, 1};
 	data->camera.fov = 150;
 	data->objs = NULL;
-	data->base[0] = (t_vector){1, 0, 0};
-	data->base[1] = (t_vector){0, 1, 0};
-	data->base[2] = (t_vector){0, 0, 1};
 }
 
 /*
