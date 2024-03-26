@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:54:10 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/25 15:16:16 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:24:16 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static void	create_cylinder_base(t_cylinder *cylinder)
 	plane.pos = cylinder->pos;
 	plane.normal = cylinder->axis;
 	distance = pl_intersection(ray, plane);
+	cylinder->base[1] = cylinder->axis;
 	cylinder->base[2] = normalize_vect(substract_vect(intersection_point(ray, \
 		distance), cylinder->pos));
-	cylinder->base[1] = cylinder->axis;
 	cylinder->base[0] = normalize_vect(vect_cross_product(cylinder->base[1], \
 		cylinder->base[2]));
 }
@@ -37,7 +37,7 @@ static void	create_cylinder_base(t_cylinder *cylinder)
 /*
  *	Creates, sets the values and returns a cylinder structure.
 */
-t_cylinder	*create_cylinder(t_vector pos_axis[2], double dhcr[4])
+t_cylinder	*create_cylinder(t_vector pos_axis[2], double dhcr[4], char *map[2])
 {
 	t_cylinder	*cylinder;
 
@@ -54,6 +54,8 @@ t_cylinder	*create_cylinder(t_vector pos_axis[2], double dhcr[4])
 	cylinder->color = (int)dhcr[2];
 	cylinder->reflect = dhcr[3];
 	create_cylinder_base(cylinder);
+	cylinder->normal_map = create_map(map[0]);
+	cylinder->texture = create_map(map[1]);
 	return (cylinder);
 }
 

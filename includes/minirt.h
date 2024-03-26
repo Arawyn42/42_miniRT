@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/25 23:32:52 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:47:47 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,8 @@ t_vector		multiply_vect_matrix(t_vector v, t_vector m[3]);
 void			transpose_matrix(t_vector m[3]);
 void			inverse_matrix(t_vector m[3]);
 t_vector		sphere_tangent(double radius, double theta, double phi);
+t_vector		cylinder_tangent(t_cylinder cylinder, \
+		t_vector point, double theta);
 
 /* COLORS UTILS */
 int				format_color(char *colors_str);
@@ -271,9 +273,9 @@ t_plane			*create_plane(t_vector pos_normal[2], double cr[2], char *map[2]);
 void			add_plane(t_data *data, t_plane *plane);
 t_sphere		*create_sphere(t_vector pos, double rcr[3], char *map[2]);
 void			add_sphere(t_data *data, t_sphere *sphere);
-t_cylinder		*create_cylinder(t_vector pos_axis[2], double dhcr[4]);
+t_cylinder		*create_cylinder(t_vector pos_axis[2], double dhcr[4], char *map[2]);
 void			add_cylinder(t_data *data, t_cylinder *cylinder);
-t_cone			*create_cone(t_vector pos_axis[2], double rhcr[4]);
+t_cone			*create_cone(t_vector pos_axis[2], double rhcr[4], char *map[2]);
 void			add_cone(t_data *data, t_cone *cone);
 void			destroy_objs(t_obj **obj);
 
@@ -318,8 +320,11 @@ t_color			light_effects(t_data *data, t_vector normal, \
 
 /******************************** BUMP MAPPING ********************************/
 /* MAPPING */
-t_color			plane_mapping(t_plane plane, t_map map, t_vector point);
+t_color			plane_mapping(t_plane plane, t_map map, \
+		t_vector point, int ratio);
 t_color			sphere_mapping(t_sphere sphere, t_map map, t_vector normal);
+t_color			cylinder_mapping(t_cylinder cylinder, t_map map, \
+		t_vector point, t_vector normal);
 
 /* BUMP NORMALS */
 t_vector		bump_normal(t_obj *obj, t_vector point, t_vector normal);

@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:34:53 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/25 23:47:46 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:11:12 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,16 @@ t_color	int_to_rgb(int color)
 t_color	get_obj_color(t_obj *obj, t_vector point, t_vector normal)
 {
 	if (obj->pl && obj->pl->texture.color)
-		return (plane_mapping(*obj->pl, obj->pl->texture, point));
+		return (plane_mapping(*obj->pl, obj->pl->texture, point, 30));
 	else if (obj->pl)
 		return (int_to_rgb(obj->pl->color));
 	if (obj->sp && obj->sp->texture.color)
 		return (sphere_mapping(*obj->sp, obj->sp->texture, normal));
 	else if (obj->sp)
 		return (int_to_rgb(obj->sp->color));
-	if (obj->cy)
+	if (obj->cy && obj->cy->texture.color)
+		return (cylinder_mapping(*obj->cy, obj->cy->texture, point, normal));
+	else if (obj->cy)
 		return (int_to_rgb(obj->cy->color));
 	if (obj->co)
 		return (int_to_rgb(obj->co->color));

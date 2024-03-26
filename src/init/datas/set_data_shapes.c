@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:08:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/25 23:57:28 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:21:50 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static void	set_data_cylinder(t_data *data, char **datas)
 {
 	t_vector	pos_axis[2];
 	double		dhcr[5];
+	char		*map[2];
 
 	pos_axis[0] = str_to_vect(datas[1]);
 	pos_axis[1] = normalize_vect(str_to_vect(datas[2]));
@@ -76,7 +77,13 @@ static void	set_data_cylinder(t_data *data, char **datas)
 	dhcr[3] = DEFAULT_REFLECT_RATIO;
 	if (datas[6])
 		dhcr[3] = ft_atod(datas[6]);
-	add_cylinder(data, create_cylinder(pos_axis, dhcr));
+	map[0] = NULL;
+	if (datas[6] && datas[7])
+		map[0] = datas[7];
+	map[1] = NULL;
+	if (datas[6] && datas[7] && datas[8])
+		map[1] = datas[8];
+	add_cylinder(data, create_cylinder(pos_axis, dhcr, map));
 }
 
 /*
@@ -86,6 +93,7 @@ static void	set_data_cone(t_data *data, char **datas)
 {
 	t_vector	pos_axis[2];
 	double		rhcr[4];
+	char		*map[2];
 
 	pos_axis[0] = str_to_vect(datas[1]);
 	pos_axis[1] = normalize_vect(str_to_vect(datas[2]));
@@ -95,7 +103,13 @@ static void	set_data_cone(t_data *data, char **datas)
 	rhcr[3] = DEFAULT_REFLECT_RATIO;
 	if (datas[6])
 		rhcr[3] = ft_atod(datas[6]);
-	add_cone(data, create_cone(pos_axis, rhcr));
+	map[0] = NULL;
+	if (datas[6] && datas[7])
+		map[0] = datas[7];
+	map[1] = NULL;
+	if (datas[6] && datas[7] && datas[8])
+		map[1] = datas[8];
+	add_cone(data, create_cone(pos_axis, rhcr, map));
 }
 
 /*

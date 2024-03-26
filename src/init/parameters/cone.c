@@ -27,9 +27,9 @@ static void	create_cone_base(t_cone *cone)
 	plane.pos = cone->pos;
 	plane.normal = cone->axis;
 	distance = pl_intersection(ray, plane);
+	cone->base[1] = cone->axis;
 	cone->base[2] = normalize_vect(substract_vect(intersection_point(ray, \
 		distance), cone->pos));
-	cone->base[1] = cone->axis;
 	cone->base[0] = normalize_vect(vect_cross_product(cone->base[1], \
 		cone->base[2]));
 }
@@ -37,7 +37,7 @@ static void	create_cone_base(t_cone *cone)
 /*
  *	Creates, sets the values and return a cone structure.
 */
-t_cone	*create_cone(t_vector pos_axis[2], double rhcr[4])
+t_cone	*create_cone(t_vector pos_axis[2], double rhcr[4], char *map[2])
 {
 	t_cone	*cone;
 
@@ -54,6 +54,8 @@ t_cone	*create_cone(t_vector pos_axis[2], double rhcr[4])
 	cone->color = rhcr[2];
 	cone->reflect = rhcr[3];
 	create_cone_base(cone);
+	cone->normal_map = create_map(map[0]);
+	cone->texture = create_map(map[1]);
 	return (cone);
 }
 

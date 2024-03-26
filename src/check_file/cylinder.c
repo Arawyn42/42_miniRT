@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:13:12 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/16 12:41:51 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:21:06 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	check_cylinder(char **data)
 	int	len;
 
 	len = double_array_len(data);
-	if (len < 6 || len > 7)
-		return (print_error("Error: Cylinder needs 5 or 6 arguments.\n"));
+	if (len < 6 || len > 9)
+		return (print_error("Error: Cylinder needs 5 to 8 arguments.\n"));
 	if (!check_coordinates(data[1]))
 		return (print_error("Error: Cylinder: Wrong coordinates.\n"));
 	if (!check_orientation_vector(data[2]))

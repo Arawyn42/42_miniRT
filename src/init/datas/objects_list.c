@@ -6,11 +6,26 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:45:13 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/26 00:12:49 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:31:23 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/*
+ *	Second part of the destroy_one_obj function.
+*/
+static void	destroy_one_obj2(t_obj *obj)
+{
+	if (obj->co)
+	{
+		destroy_map(&obj->co->normal_map);
+		destroy_map(&obj->co->texture);
+		free (obj->co);
+	}
+	free(obj);
+	obj = NULL;
+}
 
 /*
 *	Destroys one object.
@@ -34,11 +49,12 @@ static void	destroy_one_obj(t_obj *obj)
 		free (obj->sp);
 	}
 	if (obj->cy)
+	{
+		destroy_map(&obj->cy->normal_map);
+		destroy_map(&obj->cy->texture);
 		free (obj->cy);
-	if (obj->co)
-		free (obj->co);
-	free(obj);
-	obj = NULL;
+	}
+	destroy_one_obj2(obj);
 }
 
 /*
