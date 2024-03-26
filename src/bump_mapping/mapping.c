@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:43:28 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/26 17:53:03 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:06:30 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_color	cylinder_mapping(t_cylinder cylinder, t_map map, \
 	disk.base[2] = cylinder.base[1];
 	if (fabs(vect_dot(cy_to_p, cylinder.axis)) < PRECISION)
 		return (disk.pos = cylinder.pos, plane_mapping(disk, map, point, \
-			(int)cylinder.radius));
+			(int)1 / cylinder.radius * 100));
 	else if (vect_dot(cy_to_p, cylinder.axis) > cylinder.height - PRECISION)
 		return (disk.pos = add_vect(cylinder.pos, \
 			multiply_vect_scalar(cylinder.axis, cylinder.height)), \
@@ -80,3 +80,29 @@ t_color	cylinder_mapping(t_cylinder cylinder, t_map map, \
 	return (map.color[x][y]);
 }
 
+/*
+ *	Returns the corresponding color of a given texture for a point on a cone.
+*/
+t_color	cone_mapping(t_cone cone, t_map map, \
+		t_vector point, t_vector normal)
+{
+	t_vector	cy_to_p;
+	t_plane		disk;
+	t_vector	n;
+	int			x;
+	int			y;
+
+	cy_to_p = substract_vect(point, cone.pos);
+	disk.base[0] = cone.base[2];
+	disk.base[1] = cone.base[0];
+	disk.base[2] = cone.base[1];
+	if (fabs(vect_dot(cy_to_p, cone.axis)) < PRECISION)
+		return (disk.pos = cone.pos, plane_mapping(disk, map, point, \
+			(int)1 / cone.radius * 100));
+	n.x = vect_dot(normal, cone.base[0]);
+	n.y = vect_dot(cy_to_p, cone.base[1]);
+	n.z = vect_dot(normal, cone.base[2]);
+	x = (atan2(n.z, n.x) / (2 * M_PI) + 0.5) * (map.w - 1);
+	y = n.y / cone.height * (map.h - 1);
+	return (map.color[x][y]);
+}

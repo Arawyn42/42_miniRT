@@ -20,7 +20,7 @@ static int	check_cone2(char **data)
 	if (data[6] && (!check_double(data[6]) \
 		|| ft_atod(data[6]) < 0.0 || ft_atod(data[6]) > 1.0))
 	{
-		print_error("Error: Cylinder: Reflect ratio must be in range ");
+		print_error("Error: Cone: Reflect ratio must be in range ");
 		print_error("[0.0,1.0]. Example: 0.6\n");
 		return (0);
 	}
@@ -36,8 +36,8 @@ int	check_cone(char **data)
 	int	len;
 
 	len = double_array_len(data);
-	if (len < 6 || len > 7)
-		return (print_error("Error: Cone needs 5 or 6 arguments.\n"));
+	if (len < 6 || len > 9)
+		return (print_error("Error: Cone needs 5 to 8 arguments.\n"));
 	if (!check_coordinates(data[1]))
 		return (print_error("Error: Cone: Wrong coordinates.\n"));
 	if (!check_orientation_vector(data[2]))

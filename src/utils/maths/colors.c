@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:34:53 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/26 17:11:12 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:58:51 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ t_color	get_obj_color(t_obj *obj, t_vector point, t_vector normal)
 		return (cylinder_mapping(*obj->cy, obj->cy->texture, point, normal));
 	else if (obj->cy)
 		return (int_to_rgb(obj->cy->color));
-	if (obj->co)
+	if (obj->co && obj->co->texture.color)
+		return (cone_mapping(*obj->co, obj->co->texture, point, normal));
+	else if (obj->co)
 		return (int_to_rgb(obj->co->color));
 	if (obj->light)
 		return (int_to_rgb(obj->light->color));

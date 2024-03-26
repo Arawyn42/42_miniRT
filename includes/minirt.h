@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/26 16:47:47 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:12:22 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,7 @@ void			inverse_matrix(t_vector m[3]);
 t_vector		sphere_tangent(double radius, double theta, double phi);
 t_vector		cylinder_tangent(t_cylinder cylinder, \
 		t_vector point, double theta);
+t_vector		cone_tangent(t_cone cone, t_vector point, double theta);
 
 /* COLORS UTILS */
 int				format_color(char *colors_str);
@@ -324,6 +325,8 @@ t_color			plane_mapping(t_plane plane, t_map map, \
 		t_vector point, int ratio);
 t_color			sphere_mapping(t_sphere sphere, t_map map, t_vector normal);
 t_color			cylinder_mapping(t_cylinder cylinder, t_map map, \
+		t_vector point, t_vector normal);
+t_color			cone_mapping(t_cone cone, t_map map, \
 		t_vector point, t_vector normal);
 
 /* BUMP NORMALS */

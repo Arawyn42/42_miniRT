@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:13:19 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/26 16:47:54 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:12:48 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,35 @@ static t_vector	cylinder_bump(t_cylinder cylinder, \
 	return (normalize_vect(multiply_vect_matrix(v, m)));
 }
 
+static t_vector	cone_bump(t_cone cone, \
+		t_vector point, t_vector normal)
+{
+	t_color		color;
+	t_vector	m[3];
+	t_vector	v;
+	t_vector	n;
+
+	if (!cone.normal_map.color)
+		return ((t_vector){0, 0, 0});
+	color = cone_mapping(cone, cone.normal_map, point, normal);
+	v = substract_vect(multiply_vect_scalar((t_vector) {color.r, color.g,
+		color.b}, 3.0 / 255), (t_vector){1.0, 1.0, 1.0});
+	v.x = -v.x;
+	v.y = -v.y;
+	v.z = -v.z;
+	n.x = vect_dot(normal, cone.base[0]);
+	n.y = vect_dot(normal, cone.base[1]);
+	n.z = vect_dot(normal, cone.base[2]);
+	n = normalize_vect(n);
+	m[0] = cone_tangent(cone, 
+	substract_vect(point, cone.pos), atan2(n.z, n.x));
+	m[2] = normalize_vect(n);
+	m[1] = normalize_vect(vect_cross_product(m[0], m[2]));
+	inverse_matrix(m);
+	transpose_matrix(m);
+	return (normalize_vect(multiply_vect_matrix(v, m)));
+}
+
 t_vector	bump_normal(t_obj *obj, t_vector point, t_vector normal)
 {
 	(void) normal;
@@ -100,5 +129,7 @@ t_vector	bump_normal(t_obj *obj, t_vector point, t_vector normal)
 		return (sphere_bump(*obj->sp, normal));
 	else if (obj->cy)
 		return (cylinder_bump(*obj->cy, point, normal));
+	else if (obj->co)
+		return (cone_bump(*obj->co, point, normal));
 	return ((t_vector){0, 0, 0});
 }

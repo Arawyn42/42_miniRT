@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 23:25:57 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/26 14:50:53 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:17:32 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,20 @@ t_vector	cylinder_tangent(t_cylinder cylinder, t_vector point, double theta)
 	}
 	n = (t_vector){-cylinder.radius * sin(theta), 0, \
 		cylinder.radius * cos(theta)};
+	return (normalize_vect(n));
+}
+
+t_vector	cone_tangent(t_cone cone, t_vector point, double theta)
+{
+	t_vector	co_to_p;
+	t_vector	n;
+	double		radius;
+
+	co_to_p = substract_vect(point, cone.pos);
+	if (fabs(vect_dot(co_to_p, cone.axis)) < PRECISION)
+		return (normalize_vect(co_to_p));
+	radius = vect_length(substract_vect(co_to_p, multiply_vect_scalar(cone.axis, vect_dot(co_to_p, cone.axis))));
+	n = (t_vector){-radius * sin(theta), 0, \
+		cone.radius * cos(theta)};
 	return (normalize_vect(n));
 }
