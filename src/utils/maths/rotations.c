@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotations.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:30:15 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/13 21:08:11 by arawyn           ###   ########.fr       */
+/*   Updated: 2024/03/26 00:26:09 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ double	vect_sin(t_vector v1, t_vector v2)
 
 	sinus = vect_length(vect_cross_product(v1, v2)) \
 		/ (vect_length(v1) * vect_length(v2));
-	if (vect_dot(v1, v2) >= 0)
-		return (sinus);
-	return (-sinus);
+	return (sinus);
 }
 
 /*

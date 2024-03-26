@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:20:04 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/21 16:10:54 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/25 22:31:01 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static t_vector	light_effects_intensity(t_data *data, \
 			p_to_l = normalize_vect(substract_vect(objs->light->pos, point));
 			p_intensity = point_intensity(*objs->light, normal, p_to_l);
 			if (is_in_shadow(current.obj, point, *objs->light))
-				p_intensity = multiply_vect_scalar(p_intensity, 0.3);
+				p_intensity = multiply_vect_scalar(p_intensity, 0.2);
 			intensity = add_vect(intensity, p_intensity);
 		}
 		objs = objs->next;
@@ -66,13 +66,16 @@ static t_vector	light_effects_intensity(t_data *data, \
 t_color	light_effects(t_data *data, t_vector normal, \
 	t_closest_obj current, t_ray ray)
 {
+	t_vector	point;
 	t_color		obj_color;
 	t_color		color;
 	t_vector	intensity;
 
-	obj_color = get_obj_color(current.obj);
-	intensity = light_effects_intensity(data, normal, \
-		intersection_point(ray, current.distance), current);
+	point = intersection_point(ray, current.distance);
+	obj_color = get_obj_color(current.obj, point, normal);
+	normal = normalize_vect(add_vect(normal, \
+		bump_normal(current.obj, point, normal)));
+	intensity = light_effects_intensity(data, normal, point, current);
 	color.r = obj_color.r * (intensity.x);
 	color.g = obj_color.g * (intensity.y);
 	color.b = obj_color.b * (intensity.z);

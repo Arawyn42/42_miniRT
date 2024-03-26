@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:45:13 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/19 04:39:20 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 00:12:49 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,17 @@ static void	destroy_one_obj(t_obj *obj)
 	if (obj->light)
 		free (obj->light);
 	if (obj->pl)
+	{
+		destroy_map(&obj->pl->normal_map);
+		destroy_map(&obj->pl->texture);
 		free (obj->pl);
+	}
 	if (obj->sp)
+	{
+		destroy_map(&obj->sp->normal_map);
+		destroy_map(&obj->sp->texture);
 		free (obj->sp);
+	}
 	if (obj->cy)
 		free (obj->cy);
 	if (obj->co)

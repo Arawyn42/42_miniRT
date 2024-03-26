@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 13:50:50 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/25 15:05:16 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:09:41 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	Creates, sets the values and returns a sphere structure.
 */
-t_sphere	*create_sphere(t_vector pos, double rcr[3])
+t_sphere	*create_sphere(t_vector pos, double rcr[3], char *map[2])
 {
 	t_sphere	*sphere;
 
@@ -32,6 +32,8 @@ t_sphere	*create_sphere(t_vector pos, double rcr[3])
 	sphere->base[0] = (t_vector){1, 0, 0};
 	sphere->base[1] = (t_vector){0, 1, 0};
 	sphere->base[2] = (t_vector){0, 0, 1};
+	sphere->normal_map = create_map(map[0]);
+	sphere->texture = create_map(map[1]);
 	return (sphere);
 }
 

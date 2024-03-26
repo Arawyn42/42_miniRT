@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:01:28 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/17 15:00:04 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:10:35 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	check_sphere(char **data)
 	int	len;
 
 	len = double_array_len(data);
-	if (len < 4 || len > 5)
-		return (print_error("Error: Sphere needs 3 or 4 arguments.\n"));
+	if (len < 4 || len > 7)
+		return (print_error("Error: Sphere needs 3 to 6 arguments.\n"));
 	if (!check_coordinates(data[1]))
 		return (print_error("Error: Sphere: Wrong coordinates.\n"));
 	if (!check_double(data[2]) || ft_atod(data[2]) < 0.0)

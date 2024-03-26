@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/25 18:51:22 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:32:52 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,23 @@ typedef struct s_light
 	int				color;
 }			t_light;
 
+typedef struct s_map
+{
+	t_color	**color;
+	int		w;
+	int		h;
+}			t_map;
+
+
 typedef struct s_plane
 {
 	t_vector		pos;
 	t_vector		normal;
 	int				color;
-	t_vector		base[3];
 	double			reflect;
+	t_vector		base[3];
+	t_map			normal_map;
+	t_map			texture;
 }			t_plane;
 
 typedef struct s_sphere
@@ -106,6 +116,8 @@ typedef struct s_sphere
 	int				color;
 	double			reflect;
 	t_vector		base[3];
+	t_map			normal_map;
+	t_map			texture;
 }			t_sphere;
 
 typedef struct s_cylinder
@@ -115,8 +127,10 @@ typedef struct s_cylinder
 	double				radius;
 	double				height;
 	int					color;
-	t_vector			base[3];
 	double				reflect;
+	t_vector			base[3];
+	t_map				normal_map;
+	t_map				texture;
 }			t_cylinder;
 
 typedef struct s_cone
@@ -126,8 +140,10 @@ typedef struct s_cone
 	double			radius;
 	double			height;
 	int				color;
-	t_vector		base[3];
 	double			reflect;
+	t_vector		base[3];
+	t_map			normal_map;
+	t_map			texture;
 }			t_cone;
 
 typedef struct s_obj
@@ -197,6 +213,11 @@ t_vector		rotate_vect(t_vector vector, t_vector axis, \
 		double cos, double sin);
 void			rotate_base(t_vector base[3], t_vector direction);
 double			quadratic(double a, double b, double c, int sol);
+double			matrix_det(t_vector m[3]);
+t_vector		multiply_vect_matrix(t_vector v, t_vector m[3]);
+void			transpose_matrix(t_vector m[3]);
+void			inverse_matrix(t_vector m[3]);
+t_vector		sphere_tangent(double radius, double theta, double phi);
 
 /* COLORS UTILS */
 int				format_color(char *colors_str);
@@ -246,15 +267,19 @@ t_obj			*create_new_obj(void);
 t_obj			*get_last_obj(t_obj *obj);
 t_light			*create_light(t_vector pos, double ratio, int color);
 void			add_light(t_data *data, t_light *light);
-t_plane			*create_plane(t_vector pos_normal[2], double cr[2]);
+t_plane			*create_plane(t_vector pos_normal[2], double cr[2], char *map[2]);
 void			add_plane(t_data *data, t_plane *plane);
-t_sphere		*create_sphere(t_vector pos, double rcr[3]);
+t_sphere		*create_sphere(t_vector pos, double rcr[3], char *map[2]);
 void			add_sphere(t_data *data, t_sphere *sphere);
 t_cylinder		*create_cylinder(t_vector pos_axis[2], double dhcr[4]);
 void			add_cylinder(t_data *data, t_cylinder *cylinder);
 t_cone			*create_cone(t_vector pos_axis[2], double rhcr[4]);
 void			add_cone(t_data *data, t_cone *cone);
 void			destroy_objs(t_obj **obj);
+
+/* INIT BUMP MAPPING */
+t_map			create_map(char *file_path);
+void			destroy_map(t_map *map);
 
 /* DATAS STRUCTURE */
 char			**create_data_array(char *line);
@@ -287,10 +312,18 @@ t_color			reflection_color(t_color color, t_color reflective, \
 		double ratio, double cap);
 
 /* LIGHT EFFECTS */
-t_color			get_obj_color(t_obj *obj);
+t_color			get_obj_color(t_obj *obj, t_vector point, t_vector normal);
 t_color			light_effects(t_data *data, t_vector normal, \
 		t_closest_obj current, t_ray ray);
-		
+
+/******************************** BUMP MAPPING ********************************/
+/* MAPPING */
+t_color			plane_mapping(t_plane plane, t_map map, t_vector point);
+t_color			sphere_mapping(t_sphere sphere, t_map map, t_vector normal);
+
+/* BUMP NORMALS */
+t_vector		bump_normal(t_obj *obj, t_vector point, t_vector normal);
+
 /********************************* RAYTRACING *********************************/
 /* INTERSECTIONS */
 t_vector		intersection_point(t_ray ray, double distance);

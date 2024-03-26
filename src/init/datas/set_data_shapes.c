@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:08:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/19 04:21:08 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:57:28 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	set_data_plane(t_data *data, char **datas)
 {
 	t_vector	pos_normal[2];
 	double		cr[2];
+	char		*map[2];
 
 	pos_normal[0] = str_to_vect(datas[1]);
 	pos_normal[1] = str_to_vect(datas[2]);
@@ -26,7 +27,13 @@ static void	set_data_plane(t_data *data, char **datas)
 	cr[1] = DEFAULT_REFLECT_RATIO;
 	if (datas[4])
 		cr[1] = ft_atod(datas[4]);
-	add_plane(data, create_plane(pos_normal, cr));
+	map[0] = NULL;
+	if (datas[4] && datas[5])
+		map[0] = datas[5];
+	map[1] = NULL;
+	if (datas[4] && datas[5] && datas[6])
+		map[1] = datas[6];
+	add_plane(data, create_plane(pos_normal, cr, map));
 }
 
 /*
@@ -36,6 +43,7 @@ static void	set_data_sphere(t_data *data, char **datas)
 {
 	t_vector	pos;
 	double		rcs[4];
+	char		*map[2];
 
 	pos = str_to_vect(datas[1]);
 	rcs[0] = ft_atod(datas[2]) / 2;
@@ -43,7 +51,13 @@ static void	set_data_sphere(t_data *data, char **datas)
 	rcs[2] = DEFAULT_REFLECT_RATIO;
 	if (datas[4])
 		rcs[2] = ft_atod(datas[4]);
-	add_sphere(data, create_sphere(pos, rcs));
+	map[0] = NULL;
+	if (datas[4] && datas[5])
+		map[0] = datas[5];
+	map[1] = NULL;
+	if (datas[4] && datas[5] && datas[6])
+		map[1] = datas[6];
+	add_sphere(data, create_sphere(pos, rcs, map));
 }
 
 /*

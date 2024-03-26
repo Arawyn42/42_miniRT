@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:09:21 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/17 15:00:00 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:53:25 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	check_plane(char **data)
 	int	len;
 
 	len = double_array_len(data);
-	if (len < 4 || len > 5)
-		return (print_error("Error: Plane needs 3 or 4 arguments.\n"));
+	if (len < 4 || len > 7)
+		return (print_error("Error: Plane needs 3 to 6 arguments.\n"));
 	if (!check_coordinates(data[1]))
 		return (print_error("Error: Plane: Wrong coordinates.\n"));
 	if (!check_orientation_vector(data[2]))

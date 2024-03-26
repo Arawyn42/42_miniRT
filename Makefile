@@ -6,7 +6,7 @@
 #    By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 14:42:11 by drenassi          #+#    #+#              #
-#    Updated: 2024/03/21 19:35:57 by drenassi         ###   ########.fr        #
+#    Updated: 2024/03/25 23:55:03 by drenassi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,8 @@ SRCS			= utils/str/ft_strcmp.c \
 				  utils/maths/ft_atod.c \
 				  utils/maths/vectors.c \
 				  utils/maths/vectors2.c \
+				  utils/maths/matrix.c \
+				  utils/maths/tangent.c \
 				  utils/maths/intersections.c \
 				  utils/maths/rotations.c \
 				  utils/maths/colors.c \
@@ -78,6 +80,7 @@ SRCS			= utils/str/ft_strcmp.c \
 				  init/datas/set_data.c \
 				  init/datas/set_data_shapes.c \
 				  init/datas/objects_list.c \
+				  init/datas/map.c \
 				  init/parameters/ambient_light.c \
 				  init/parameters/camera.c \
 				  init/parameters/light.c \
@@ -98,6 +101,8 @@ SRCS			= utils/str/ft_strcmp.c \
 				  light_effects/reflection.c \
 				  light_effects/is_in_shadow.c \
 				  light_effects/is_on_obj.c \
+				  bump_mapping/mapping.c \
+				  bump_mapping/bump_normal.c \
 				  rendering/draw_pixels.c \
 				  rendering/loading_display.c \
 				  rendering/anti_aliasing.c \

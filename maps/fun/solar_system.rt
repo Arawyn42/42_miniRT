@@ -1,0 +1,32 @@
+#################################################################################################
+######################################### SOLAR SYSTEM ##########################################
+#################################################################################################
+
+####################################### AMBIANT LIGHTNING #######################################
+#	ID												RATIO				COLOR					#
+	A												0.8					255,255,255
+
+############################################ CAMERA #############################################
+#	ID		POSITION			DIRECTION			FOV											#
+	C		0.0,50.0,-50.0		0.0,-1.0,0.8		80
+
+############################################ LIGHTS #############################################
+#	ID		POSITION								RATIO				COLOR					#
+	L		0.0,200,-100.0							0.3					100,100,100
+
+############################################ PLANES #############################################
+#	ID		POSITION			NORMAL									COLOR			REFLECT	#
+	pl		0.0,-10.0,0.0		0.0,1.0,0.0								122,53,37		0.0			./textures/stars1.xpm				./textures/stars1.xpm
+
+############################################ SPHERES #############################################
+#	ID		POSITION								DIAM				COLOR			REFLECT	#
+	sp		0.0,0.0,10.0							12					168,168,168		0.0			./textures/sun.xpm					./textures/sun.xpm
+	sp		-7.0,0.0,17.0							2					168,168,168		0.0			./textures/mercury.xpm				./textures/mercury.xpm
+	sp		12.0,0.0,5.0							5					168,168,168		0.0			./textures/venus.xpm				./textures/venus.xpm
+	sp		-16.0,0.0,3.0							6					168,168,168		0.0			./textures/earth1.xpm				./textures/earth1.xpm
+	sp		-6.0,0.0,-10.0							4					168,168,168		0.0			./textures/mars.xpm					./textures/mars.xpm
+	sp		12.0,0.0,-13.0							9					168,168,168		0.0			./textures/jupiter.xpm				./textures/jupiter.xpm
+	sp		38.0,0.0,19.0							7					168,168,168		0.0			./textures/saturn.xpm				./textures/saturn.xpm
+	sp		-38.0,0.0,19.0							5					168,168,168		0.0			./textures/uranus.xpm				./textures/uranus.xpm
+	sp		-38.0,0.0,-19.0							5					168,168,168		0.0			./textures/neptune.xpm				./textures/neptune.xpm
+	sp		37.0,0.0,-35.0							2					168,168,168		0.0			./textures/pluto.xpm				./textures/pluto.xpm
