@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:13:19 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/26 00:35:20 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/26 01:59:31 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,31 +62,29 @@ static t_vector	sphere_bump(t_sphere sphere, t_vector normal)
 	return (normalize_vect(multiply_vect_matrix(v, m)));
 }
 
-// static t_vector	cylinder_bump(t_cylinder cylinder, t_vector p, t_vector n)
+// static t_vector	cylinder_bump(t_cylinder cylinder, t_vector point, t_vector normal)
 // {
-// 	t_map		*map;
 // 	t_color		color;
 // 	t_vector	m[3];
-// 	t_vector	bump;
-// 	t_vector	local;
+// 	t_vector	v;
+// 	t_vector	n;
 
-// 	map = cylinder.normal_map;
 // 	if (map == NULL)
 // 		return ((t_vector){0, 0, 0});
-// 	color = cylinder_mapping(cylinder, map, p, n);
-// 	bump = (t_vector){2.0 * color.red / 255 - 1, 
-// 	2.0 * color.green / 255 - 1, -2.0 * color.blue / 255 - 1};
-// 	local.x = vect_dot(n, cylinder.base[0]);
-// 	local.y = vect_dot(n, cylinder.base[1]);
-// 	local.z = vect_dot(n, cylinder.base[2]);
-// 	local = normalize_vect(local);
-// 	m[0] = cylinder_tangeant(cylinder, 
-// 	vector_sub(p, *cylinder.coordinate), atan2(local.z, local.x));
-// 	m[1] = normalize_vect(vect_cross_product(m[0], local));
-// 	m[2] = local;
+// 	color = cylinder_mapping(cylinder, cylinder.normal_map, point, normal);
+// 	v = substract_vect(multiply_vect_scalar((t_vector) {color.r, color.g,
+// 		color.b}, 3.0 / 255), (t_vector){1.0, 1.0, 1.0});
+// 	n.x = vect_dot(normal, cylinder.base[0]);
+// 	n.y = vect_dot(normal, cylinder.base[1]);
+// 	n.z = vect_dot(normal, cylinder.base[2]);
+// 	n = normalize_vect(n);
+// 	m[0] = cylinder_tangent(cylinder, 
+// 	substract_vect(point, cylinder.pos), atan2(n.z, n.x));
+// 	m[1] = normalize_vect(vect_cross_product(m[0], n));
+// 	m[2] = n;
 // 	inverse_matrix(m);
 // 	transpose_matrix(m);
-// 	return (normalize_vect(multiply_vect_matrix(bump, m)));
+// 	return (normalize_vect(multiply_vect_matrix(v, m)));
 // }
 
 t_vector	bump_normal(t_obj *obj, t_vector point, t_vector normal)
