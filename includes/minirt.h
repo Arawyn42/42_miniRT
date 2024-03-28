@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:47:05 by nsalles           #+#    #+#             */
-/*   Updated: 2024/03/26 18:12:22 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:46:33 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct s_map
 	int		w;
 	int		h;
 }			t_map;
-
 
 typedef struct s_plane
 {
@@ -270,13 +269,16 @@ t_obj			*create_new_obj(void);
 t_obj			*get_last_obj(t_obj *obj);
 t_light			*create_light(t_vector pos, double ratio, int color);
 void			add_light(t_data *data, t_light *light);
-t_plane			*create_plane(t_vector pos_normal[2], double cr[2], char *map[2]);
+t_plane			*create_plane(t_vector pos_normal[2], \
+		double cr[2], char *map[2]);
 void			add_plane(t_data *data, t_plane *plane);
 t_sphere		*create_sphere(t_vector pos, double rcr[3], char *map[2]);
 void			add_sphere(t_data *data, t_sphere *sphere);
-t_cylinder		*create_cylinder(t_vector pos_axis[2], double dhcr[4], char *map[2]);
+t_cylinder		*create_cylinder(t_vector pos_axis[2], \
+		double dhcr[4], char *map[2]);
 void			add_cylinder(t_data *data, t_cylinder *cylinder);
-t_cone			*create_cone(t_vector pos_axis[2], double rhcr[4], char *map[2]);
+t_cone			*create_cone(t_vector pos_axis[2], \
+		double rhcr[4], char *map[2]);
 void			add_cone(t_data *data, t_cone *cone);
 void			destroy_objs(t_obj **obj);
 
@@ -299,7 +301,8 @@ t_vector		ambient_lightning_intensity(t_alight a_light, double property);
 t_vector		light_intensity(t_light light, double lambertian);
 
 /* DIFFUSE INTENSITY */
-t_vector		diffuse_intensity(t_vector normal, t_vector p_to_l, t_vector light);
+t_vector		diffuse_intensity(t_vector normal, \
+		t_vector p_to_l, t_vector light);
 
 /* SPECULAR INTENSITY */
 t_vector		specular_intensity(t_vector p_to_l, t_vector normal, \

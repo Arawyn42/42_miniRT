@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:54:49 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/25 21:04:29 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:58:17 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	transpose_matrix(t_vector m[3])
 
 void	inverse_matrix(t_vector m[3])
 {
-	double	det;
+	double		det;
 	t_vector	m0;
 	t_vector	m1;
 	t_vector	m2;

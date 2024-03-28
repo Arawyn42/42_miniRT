@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+         #
+#    By: arawyn <arawyn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 14:42:11 by drenassi          #+#    #+#              #
-#    Updated: 2024/03/25 23:55:03 by drenassi         ###   ########.fr        #
+#    Updated: 2024/03/27 18:40:06 by arawyn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@
 NAME			= miniRT
 CC 				= cc
 CFLAGS			= -Wall -Werror -Wextra
-DEBUG_FLAGS 	= -g3
+DEBUG_FLAGS 	= -g3 -O3
 MLXFLAGS		= -Imlx -lX11 -lXext
 MATH_FLAGS		= -lm
 PTHREAD_FLAGS	= -pthread

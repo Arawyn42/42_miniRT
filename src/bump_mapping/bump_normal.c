@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:13:19 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/26 18:12:48 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/27 19:00:24 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_vector	plane_bump(t_plane plane, t_vector point)
 	if (!plane.normal_map.color)
 		return ((t_vector){0, 0, 0});
 	color = plane_mapping(plane, plane.normal_map, point, 30);
-	v = substract_vect(multiply_vect_scalar((t_vector) {color.r, color.g, \
+	v = substract_vect(multiply_vect_scalar((t_vector){color.r, color.g, \
 		color.b}, 3.0 / 255), (t_vector){1.0, 1.0, 1.0});
 	v.x = -v.x;
 	v.y = -v.y;
@@ -44,7 +44,7 @@ static t_vector	sphere_bump(t_sphere sphere, t_vector normal)
 	if (!sphere.normal_map.color)
 		return ((t_vector){0, 0, 0});
 	color = sphere_mapping(sphere, sphere.normal_map, normal);
-	v = substract_vect(multiply_vect_scalar((t_vector) {color.r, color.g, \
+	v = substract_vect(multiply_vect_scalar((t_vector){color.r, color.g, \
 		color.b}, 3.0 / 255), (t_vector){1.0, 1.0, 1.0});
 	v.x = -v.x;
 	v.y = -v.y;
@@ -53,8 +53,8 @@ static t_vector	sphere_bump(t_sphere sphere, t_vector normal)
 	n.y = vect_dot(normal, sphere.base[1]);
 	n.z = vect_dot(normal, sphere.base[2]);
 	n = normalize_vect(n);
-	m[0] = sphere_tangent(sphere.radius, atan2(n.z, 
-	n.x), asin(-n.y) + M_PI / 2);
+	m[0] = sphere_tangent(sphere.radius, atan2(n.z, \
+		n.x), asin(-n.y) + M_PI / 2);
 	m[1] = normalize_vect(vect_cross_product(m[0], n));
 	m[2] = n;
 	transpose_matrix(m);
@@ -73,7 +73,7 @@ static t_vector	cylinder_bump(t_cylinder cylinder, \
 	if (!cylinder.normal_map.color)
 		return ((t_vector){0, 0, 0});
 	color = cylinder_mapping(cylinder, cylinder.normal_map, point, normal);
-	v = substract_vect(multiply_vect_scalar((t_vector) {color.r, color.g,
+	v = substract_vect(multiply_vect_scalar((t_vector){color.r, color.g, \
 		color.b}, 3.0 / 255), (t_vector){1.0, 1.0, 1.0});
 	v.x = -v.x;
 	v.y = -v.y;
@@ -82,8 +82,8 @@ static t_vector	cylinder_bump(t_cylinder cylinder, \
 	n.y = vect_dot(normal, cylinder.base[1]);
 	n.z = vect_dot(normal, cylinder.base[2]);
 	n = normalize_vect(n);
-	m[0] = cylinder_tangent(cylinder, 
-	substract_vect(point, cylinder.pos), atan2(n.z, n.x));
+	m[0] = cylinder_tangent(cylinder, \
+		substract_vect(point, cylinder.pos), atan2(n.z, n.x));
 	m[2] = normalize_vect(n);
 	m[1] = normalize_vect(vect_cross_product(m[0], m[2]));
 	inverse_matrix(m);
@@ -102,7 +102,7 @@ static t_vector	cone_bump(t_cone cone, \
 	if (!cone.normal_map.color)
 		return ((t_vector){0, 0, 0});
 	color = cone_mapping(cone, cone.normal_map, point, normal);
-	v = substract_vect(multiply_vect_scalar((t_vector) {color.r, color.g,
+	v = substract_vect(multiply_vect_scalar((t_vector){color.r, color.g, \
 		color.b}, 3.0 / 255), (t_vector){1.0, 1.0, 1.0});
 	v.x = -v.x;
 	v.y = -v.y;
@@ -111,8 +111,8 @@ static t_vector	cone_bump(t_cone cone, \
 	n.y = vect_dot(normal, cone.base[1]);
 	n.z = vect_dot(normal, cone.base[2]);
 	n = normalize_vect(n);
-	m[0] = cone_tangent(cone, 
-	substract_vect(point, cone.pos), atan2(n.z, n.x));
+	m[0] = cone_tangent(cone, \
+		substract_vect(point, cone.pos), atan2(n.z, n.x));
 	m[2] = normalize_vect(n);
 	m[1] = normalize_vect(vect_cross_product(m[0], m[2]));
 	inverse_matrix(m);

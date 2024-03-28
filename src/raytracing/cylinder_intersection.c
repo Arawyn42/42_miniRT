@@ -48,7 +48,7 @@ static int	check_radius(t_ray ray, t_cylinder cy, double distance, int inter)
 {
 	t_vector	center_to_point;
 	t_vector	center;
-	double	radius;
+	double		radius;
 
 	center = cy.pos;
 	if (inter == 2)

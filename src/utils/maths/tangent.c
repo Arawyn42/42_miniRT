@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 23:25:57 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/26 18:17:32 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:58:12 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_vector	cylinder_tangent(t_cylinder cylinder, t_vector point, double theta)
 
 	cy_to_p = substract_vect(point, cylinder.pos);
 	scalar = vect_dot(cy_to_p, cylinder.axis);
-	if (fabs(scalar) < PRECISION ||  scalar > cylinder.height - PRECISION)
+	if (fabs(scalar) < PRECISION || scalar > cylinder.height - PRECISION)
 	{
 		n = substract_vect(cy_to_p, multiply_vect_scalar(cylinder.axis, \
 			vect_dot(cy_to_p, cylinder.axis)));
@@ -54,7 +54,8 @@ t_vector	cone_tangent(t_cone cone, t_vector point, double theta)
 	co_to_p = substract_vect(point, cone.pos);
 	if (fabs(vect_dot(co_to_p, cone.axis)) < PRECISION)
 		return (normalize_vect(co_to_p));
-	radius = vect_length(substract_vect(co_to_p, multiply_vect_scalar(cone.axis, vect_dot(co_to_p, cone.axis))));
+	radius = vect_length(substract_vect(co_to_p, \
+		multiply_vect_scalar(cone.axis, vect_dot(co_to_p, cone.axis))));
 	n = (t_vector){-radius * sin(theta), 0, \
 		cone.radius * cos(theta)};
 	return (normalize_vect(n));

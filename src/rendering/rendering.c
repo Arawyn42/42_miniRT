@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:46:47 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/25 18:51:11 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/27 19:02:48 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	render_no_thread(t_minirt *mem)
 		while (++pixel.y <= mem->end.y)
 		{
 			mem->data.ray.dir = set_ray(mem->data.camera.base, pixel.x \
-				* mem->vp.w_ratio, -pixel.y *  mem->vp.h_ratio, VIEWPORT_DIST);
+				* mem->vp.w_ratio, -pixel.y * mem->vp.h_ratio, VIEWPORT_DIST);
 			color = ray_trace(&mem->data, mem->data.ray, DEPTH);
 			draw_pixels(&mem->img, SCREEN_W / 2 + pixel.x, SCREEN_H / 2 \
 				+ pixel.y, rgb_to_int(color.r, color.g, color.b));
@@ -56,8 +56,8 @@ static void	*render_threads(void *args)
 		while (++pixel.y <= mem->end.y)
 		{
 			mem->data.ray.dir = set_ray(mem->data.camera.base, pixel.x \
-				* mem->vp.w_ratio, -pixel.y *  mem->vp.h_ratio, VIEWPORT_DIST);
-			color = ray_trace(&mem->data,mem->data.ray, DEPTH);
+				* mem->vp.w_ratio, -pixel.y * mem->vp.h_ratio, VIEWPORT_DIST);
+			color = ray_trace(&mem->data, mem->data.ray, DEPTH);
 			draw_pixels(&mem->img, SCREEN_W / 2 + pixel.x, SCREEN_H / 2 \
 				+ pixel.y, rgb_to_int(color.r, color.g, color.b));
 		}

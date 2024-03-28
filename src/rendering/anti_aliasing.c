@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:32:12 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/21 19:43:04 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/27 19:01:33 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_color	get_average_color(t_image img, int x, int y)
 	avg.g = (2 * (color[0].g + color[1].g + color[2].g + color[3].g) / 4 \
 		+ (color[4].g + color[5].g + color[6].g + color[7].g) / 4) / 3;
 	avg.b = (2 * (color[0].b + color[1].b + color[2].b + color[3].b) / 4 \
-		+ (color[4].b + color[5].b + color[6].b + color[7].b) / 4) / 3	;
+		+ (color[4].b + color[5].b + color[6].b + color[7].b) / 4) / 3;
 	protect_colors(&avg);
 	avg.sum = avg.r + avg.g + avg.b;
 	return (avg);
@@ -48,7 +48,6 @@ void	anti_aliasing(t_minirt *mem, double ratio)
 	int		y;
 	t_color	clr;
 	t_color	avg;
-
 
 	x = mem->start.x + 1;
 	while (x < mem->end.x)

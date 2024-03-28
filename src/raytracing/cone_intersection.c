@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:31:00 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/25 15:42:15 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/27 19:05:33 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ static double	cone_disc_intersection(t_ray ray, t_cone co)
 	double		s;
 	double		r;
 	t_vector	ray_to_co;
-	// t_vector	tip;
 
-	s= vect_dot(ray.dir, co.axis);
+	s = vect_dot(ray.dir, co.axis);
 	if (fabs(s) < PRECISION)
 		return (INFINITY);
-	// tip = add_vect(co.pos, multiply_vect_scalar(co.axis, co.height));
 	ray_to_co = substract_vect(co.pos, ray.origin);
 	t = vect_dot(co.axis, ray_to_co) / s;
 	r = vect_length(substract_vect(intersection_point(ray, t), co.pos));

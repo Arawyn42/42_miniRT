@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:59:18 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/25 17:31:13 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/27 19:06:25 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static t_vector	get_cone_normal(t_cone *co, t_vector point)
 		return (substract_vect((t_vector){0, 0, 0}, co->axis));
 	tan2 = co->radius * co->radius / (co->height * co->height);
 	d = vect_length(substract_vect(point, tip)) * sqrt(1 + tan2);
-	proj = add_vect(tip, multiply_vect_scalar( \
+	proj = add_vect(tip, multiply_vect_scalar(\
 		substract_vect((t_vector){0, 0, 0}, co->axis), d));
 	normal = normalize_vect(substract_vect(point, proj));
 	return (normal);

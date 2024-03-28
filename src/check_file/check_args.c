@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:39:06 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/25 18:49:29 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/27 19:04:19 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	Second part of the check_args function.
 */
-static int	check_args2(int ac, char ** av, int *anti_aliasing)
+static int	check_args2(int ac, char **av, int *anti_aliasing)
 {
 	if (ac == 4)
 	{
@@ -48,10 +48,11 @@ int	check_args(int ac, char **av, int *threads, int *anti_aliasing)
 	}
 	if (ac >= 3)
 	{
-		if (!check_int(av[2]) || ft_atoi(av[2]) < 0 || ft_atoi(av[2]) > SCREEN_H)
+		if (!check_int(av[2]) || ft_atoi(av[2]) < 0 \
+			|| ft_atoi(av[2]) > SCREEN_H)
 		{
-			print_error("Error: Second argument must be a positive integer.");
-			print_error(" There can't be more threads than the screen height.\n");
+			print_error("Error: Second argument must be a positive integer. T");
+			print_error("here can't be more threads than the screen height.\n");
 			return (0);
 		}
 		*threads = ft_atoi(av[2]);

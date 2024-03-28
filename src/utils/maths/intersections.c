@@ -6,7 +6,7 @@
 /*   By: drenassi <@student.42perpignan.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:41:55 by drenassi          #+#    #+#             */
-/*   Updated: 2024/03/18 00:46:13 by drenassi         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:58:14 by drenassi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static double	quadratic_return(double x, double y, int sol)
  *	Returns the minimum solution of the quadratic equation, or min if both
  *	values are smaller.
 */
-double	quadratic(double a, double b, double c, int	sol)
+double	quadratic(double a, double b, double c, int sol)
 {
 	double	x;
 	double	y;
