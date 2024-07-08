@@ -70,7 +70,7 @@ You can find this in [model.rt](maps/model.rt)</a>
 ## Usage
 Clone `miniRT` and enter in the repository:
 ```sh
-git clone https://github.com/Arawyn42/42_miniRT && cd 42-miniRT
+git clone https://github.com/Arawyn42/42_miniRT && cd 42_miniRT
 ```
 
 - For linux users, you will need to install the following packages:
