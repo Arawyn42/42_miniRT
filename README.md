@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>⚙️ miniRT (a [42](https://42perpignan.fr/) project) ⚙️</h1>
+  <h1>⚙️ miniRT (a <a href="https://42perpignan.fr/">42</a> project) ⚙️</h1>
   <img src="examples/reflective_room.png" alt="Preview">
   <p>Subject: <a href="subject/en.subject.pdf">en.subject.pdf</a></p>
 </div>
