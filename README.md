@@ -102,7 +102,7 @@ Replace:
 - *[ANTI_ALIASING]* with 1 if you want to set it ON, or 0 if you want to set it OFF. This parameter is optional. **By default, anti-aliasing is set on OFF**.
 <br><br>
 
-## <div align="center">Examples</div>
+## <div align="center">📂 Examples</div>
 ![Reflective](examples/reflective.png)
 
 ![Reflective 2](examples/reflective2.png)
