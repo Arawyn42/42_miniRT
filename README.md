@@ -1,26 +1,32 @@
-# <div align="center">⚙️ miniRT (a [42](https://42perpignan.fr/) project) ⚙️</div>
+<div align="center">
+  <h1>⚙️ miniRT (a [42](https://42perpignan.fr/) project) ⚙️</h1>
+  <img src="examples/reflective_room.png" alt="Preview">
+  <p>Subject: <a href="subject/en.subject.pdf">en.subject.pdf</a></p>
+</div>
 
-Subject : [en.miniRT_subject.pdf](subject/en.subject.pdf)
+<div align="center">
+  <h2>✅ Grade</h2>
+  <img src="grade.png" alt="Grade">
+</div><br>
 
-## Grade
-[![drenassi's 42 miniRT Score](https://badge42.coday.fr/api/v2/clph33bao098101t6vnzqbe17/project/3531971)](https://github.com/Coday-meric/badge42)
-
-## Introduction
+## <div align="center">📄 Introduction</div>
 This project consists in creating a small **raytracer** in C language using CPU. For this reason, its features are limited. We also had to use the miniLibX as graphic library.
 
 For this project, we had to work in team with another student. Special thanks to [Nico](https://github.com/Floperatok) who has been the perfect teammate again, as it was our second project together. We decided to do 2 versions of the program, in order to learn 100% of the project each one. You can find his beautiful version of miniRT on [his github profil](https://github.com/Floperatok/42-miniRT).
 
 This project was done during 42 cursus at 42 Perpignan in March of 2024 with bonus.
+<br><br>
 
-## Bonus
+## <div align="center">⭐ Bonus</div>
 All bonuses have been done. It consisted in adding the following features:
 - Specular reflection
 - Color disruption: checkerboard
 - Colored and multi-spot lights
 - One other second degree object: Cone, Hyperboloid, Paraboloid...
 - Handle bump map textures
+<br><br>
 
-## Maps
+## <div align="center">🗺️ Maps</div>
 As parameter, the program takes **.rt** maps. It handles comment lines (the line must starts with **#**).
 Here is a global model that you can use to create and test your maps:
 
@@ -52,8 +58,9 @@ Here is a global model that you can use to create and test your maps:
 ```
 
 You can find this in [model.rt](maps/model.rt)</a>
+<br><br>
 
-## Features
+## <div align="center">🛠️ Features</div>
 - **Multiple objects:**
     - Planes
     - Spheres
@@ -66,8 +73,9 @@ You can find this in [model.rt](maps/model.rt)</a>
 - **Textures mapping**
 - **Multi-threading**
 - **Small and very basic anti-aliasing**
+<br><br>
 
-## Usage
+## <div align="center">💻 Usage</div>
 Clone `miniRT` and enter in the repository:
 ```sh
 git clone https://github.com/Arawyn42/42_miniRT && cd 42_miniRT
@@ -92,8 +100,9 @@ Replace:
 - *[MAP]* with the path of the map of your choice
 - *[NUMBER_OF_THREADS]* with the number of threads you want to run in parallel. The program will be faster with a number of threads around the window's height (810 by default; the resolution can be changed in the [minirt.h](includes/minirt.h) header). This parameter is optional. **By default, there will be no thread**.
 - *[ANTI_ALIASING]* with 1 if you want to set it ON, or 0 if you want to set it OFF. This parameter is optional. **By default, anti-aliasing is set on OFF**.
+<br><br>
 
-## Examples
+## <div align="center">Examples</div>
 ![Reflective](examples/reflective.png)
 
 ![Reflective 2](examples/reflective2.png)
