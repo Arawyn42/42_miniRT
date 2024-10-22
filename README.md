@@ -1,12 +1,12 @@
 <div align="center">
   <h1>⚙️ miniRT (a <a href="https://42perpignan.fr/">42</a> project) ⚙️</h1>
-  <img src="examples/reflective_room.png" alt="Preview">
-  <p>Subject: <a href="subject/en.subject.pdf">en.subject.pdf</a></p>
+  <img src="ressources/examples/reflective_room.png" alt="Preview">
+  <p>Subject: <a href="ressources/en.subject.pdf">en.subject.pdf</a></p>
 </div>
 
 <div align="center">
   <h2>✅ Grade</h2>
-  <img src="grade.png" alt="Grade">
+  <img src="ressources/grade.png" alt="Grade">
 </div><br>
 
 ## <div align="center">📄 Introduction</div>
@@ -103,14 +103,14 @@ Replace:
 <br><br>
 
 ## <div align="center">📂 Examples</div>
-![Reflective](examples/reflective.png)
+![Reflective](ressources/examples/reflective.png)
 
-![Reflective 2](examples/reflective2.png)
+![Reflective 2](ressources/examples/reflective2.png)
 
-![Wood Cylinder](examples/wood.png)
+![Wood Cylinder](ressources/examples/wood.png)
 
-![Man](examples/man.png)
+![Man](ressources/examples/man.png)
 
-![Solar System](examples/solar_system.png)
+![Solar System](ressources/examples/solar_system.png)
 
-![Reflective room](examples/reflective_room.png)
+![Reflective room](ressources/examples/reflective_room.png)
